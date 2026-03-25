@@ -1903,6 +1903,14 @@ body {
   .ship-card,
   .cp-error-card {
     padding: 18px 16px;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .create-layout,
+  .form-col,
+  .input-row > * {
+    min-width: 0;
   }
 
   .ship-card h3,
