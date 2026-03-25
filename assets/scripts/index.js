@@ -4,7 +4,7 @@
  */
 
 // --- HEADER SWIPER ---
-if (document.querySelector('.swiper')) {
+if (document.querySelector('.swiper') && typeof Swiper === 'function') {
     const swiper = new Swiper(".swiper", {
         loop: true,
         slidesPerView: 1,
