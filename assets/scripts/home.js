@@ -3,6 +3,31 @@
  * Handles Service Tabs and Important Updates Accordion
  */
 document.addEventListener('DOMContentLoaded', () => {
+    const HERO_SLIDE_DELAY_MS = 5000;
+
+    if (document.querySelector('.swiper') && typeof Swiper === 'function') {
+        new Swiper('.swiper', {
+            loop: true,
+            slidesPerView: 1,
+            autoplay: {
+                delay: HERO_SLIDE_DELAY_MS,
+                disableOnInteraction: false,
+            },
+        });
+    }
+
+    if (!window.__headerNavBound) {
+        const body = document.body;
+        const nav = document.querySelector('header .container .left nav');
+        const menuToggleBtn = document.querySelector('header #menuToggleBtn');
+        if (menuToggleBtn && nav && body) {
+            menuToggleBtn.addEventListener('click', () => {
+                menuToggleBtn.classList.toggle('active');
+                body.classList.toggle('active-nav');
+                nav.classList.toggle('active');
+            });
+        }
+    }
     
     // --- SECTION 1: BUSINESS/PERSONAL TOGGLE ---
     const toggle = document.querySelector('.services-alt .toggle');
@@ -82,6 +107,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
-
 
