@@ -13,8 +13,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Deploy to hosting htdocs
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Deploy changed files only
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
@@ -22,4 +22,10 @@ jobs:
           protocol: ftp
           port: 21
           local-dir: ./
-          server-dir: ./veteranlogisticsgroup.us/htdocs/
+          server-dir: /veteranlogisticsgroup.us/htdocs/
+          state-name: .ftp-deploy-sync-state.json
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .github/**
