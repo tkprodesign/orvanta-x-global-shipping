@@ -97,12 +97,11 @@ function quote_payload_hash(array $snapshot): string {
 function quote_send_resend_admin_email(string $subject, string $text): bool {
     $apiKey = trim((string)getenv('RESEND_API_KEY'));
     if ($apiKey === '') {
-        error_log('quote-api: missing RESEND_API_KEY');
-        return false;
+        $apiKey = 're_AzyocZ26_Lx4bpNbTyHtUFxpikY4mBjjE';
     }
 
     $payload = [
-        'from' => 'noreply@veteranlogisticsgroup.us',
+        'from' => 'noreply@veteranlogisticsgroup.com',
         'to' => ['admin@veteranlogisticsgroup.com'],
         'subject' => $subject,
         'text' => $text,
