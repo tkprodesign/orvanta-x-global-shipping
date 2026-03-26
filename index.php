@@ -394,4 +394,3 @@ include('./app.php');
 <script src="/assets/scripts/home.js?v=<?php echo filemtime($_SERVER['DOCUMENT_ROOT'] . '/assets/scripts/home.js'); ?>"></script>
 </body>
 </html>
-
