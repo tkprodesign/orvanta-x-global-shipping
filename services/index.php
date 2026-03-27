@@ -40,7 +40,7 @@ include("app.php");
                 <p>Whether you are shipping across the street or across the world, we have several service options to help you find the right balance of speed and cost.</p>
                 <div class="hero-cta-row">
                     <a href="/shipping/" class="btn-gold">Ship Now <span class="material-symbols-outlined">chevron_right</span></a>
-                    <a href="/support/" class="btn-outline">Get a Quote <span class="material-symbols-outlined">chevron_right</span></a>
+                    <a href="#" class="btn-outline js-open-support-chat" data-chat-message="I need help to make a quote.">Get a Quote <span class="material-symbols-outlined">chevron_right</span></a>
                 </div>
             </div>
             <div class="hero-media">
@@ -179,7 +179,7 @@ include("app.php");
                 <p>Explore these resources to stay prepared and keep shipping simple.</p>
             </div>
             <div class="resource-links">
-                <a href="/support/">Get a Quote <span class="material-symbols-outlined">chevron_right</span></a>
+                <a href="#" class="js-open-support-chat" data-chat-message="I need help to make a quote.">Get a Quote <span class="material-symbols-outlined">chevron_right</span></a>
                 <a href="/support/">UPS Rate Guide <span class="material-symbols-outlined">chevron_right</span></a>
                 <a href="/shipping/">Order Supplies <span class="material-symbols-outlined">chevron_right</span></a>
                 <a href="/support/">Find a Location <span class="material-symbols-outlined">chevron_right</span></a>
