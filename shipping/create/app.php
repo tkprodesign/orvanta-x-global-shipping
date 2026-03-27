@@ -6,6 +6,22 @@ date_default_timezone_set('America/New_York');
 
 require_once __DIR__ . '/../../common-sections/globals.php';
 
+if (!class_exists('\PHPMailer\PHPMailer\PHPMailer')) {
+    $phpMailerCandidates = [
+        __DIR__ . '/../../PHPMailer/src',
+        __DIR__ . '/../../../PHPMailer/src',
+        __DIR__ . '/../../../../PHPMailer/src',
+    ];
+    foreach ($phpMailerCandidates as $mailerSrcDir) {
+        if (file_exists($mailerSrcDir . '/PHPMailer.php') && file_exists($mailerSrcDir . '/SMTP.php') && file_exists($mailerSrcDir . '/Exception.php')) {
+            require_once $mailerSrcDir . '/PHPMailer.php';
+            require_once $mailerSrcDir . '/SMTP.php';
+            require_once $mailerSrcDir . '/Exception.php';
+            break;
+        }
+    }
+}
+
 session_start();
 
 $user_id = 0;
@@ -595,21 +611,79 @@ function shipping_money(float $amount): string {
     return '$' . number_format($amount, 2);
 }
 
-function shipping_mail_headers(string $fromEmail): string {
-    return "MIME-Version: 1.0\r\n"
-        . "Content-type: text/html; charset=UTF-8\r\n"
-        . "From: Veteran Logistics Group <{$fromEmail}>\r\n"
-        . "Reply-To: support@veteranlogisticsgroup.us\r\n"
-        . "X-Mailer: PHP/" . phpversion();
+function shipping_password_secret_for_mailbox(string $fromEmail): string {
+    $mailbox = strtolower(trim(explode('@', $fromEmail)[0] ?? ''));
+    $map = [
+        'billing' => 'BILLING_EMAIL_PASSWORD',
+        'shipments' => 'SHIPMENTS_EMAIL_PASSWORD',
+        'admin' => 'ADMIN_EMAIL_PASSWORD',
+        'support' => 'SUPPORT_EMAIL_PASSWORD',
+        'tracking' => 'TRACKING_EMAIL_PASSWORD',
+        'noreply' => 'NOREPLY_EMAIL_PASSWORD',
+    ];
+    return $map[$mailbox] ?? '';
+}
+
+function shipping_resolve_secret(string $name): string {
+    if ($name === '') {
+        return '';
+    }
+    $value = getenv($name);
+    if ($value !== false && trim((string)$value) !== '') {
+        return trim((string)$value);
+    }
+    if (isset($_ENV[$name]) && trim((string)$_ENV[$name]) !== '') {
+        return trim((string)$_ENV[$name]);
+    }
+    if (isset($_SERVER[$name]) && trim((string)$_SERVER[$name]) !== '') {
+        return trim((string)$_SERVER[$name]);
+    }
+    return '';
 }
 
 function shipping_send_html_email(string $toEmail, string $fromEmail, string $subject, string $htmlBody): bool {
     if (!filter_var($toEmail, FILTER_VALIDATE_EMAIL)) {
         return false;
     }
+    if (!class_exists('\PHPMailer\PHPMailer\PHPMailer')) {
+        error_log('shipping-create: PHPMailer is not available');
+        return false;
+    }
 
-    $headers = shipping_mail_headers($fromEmail);
-    return mail($toEmail, $subject, $htmlBody, $headers);
+    $passwordSecret = shipping_password_secret_for_mailbox($fromEmail);
+    $smtpPassword = shipping_resolve_secret($passwordSecret);
+    if ($smtpPassword === '') {
+        error_log('shipping-create: missing smtp password secret for ' . $fromEmail . ' expected_secret=' . $passwordSecret);
+        return false;
+    }
+
+    $smtpHost = trim((string)(getenv('SMTP_HOST') ?: 'mail.veteranlogisticsgroup.us'));
+    $smtpPort = (int)(getenv('SMTP_PORT') ?: 587);
+    $smtpSecure = trim((string)(getenv('SMTP_SECURE') ?: \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS));
+
+    $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->Host = $smtpHost;
+        $mail->SMTPAuth = true;
+        $mail->Username = $fromEmail;
+        $mail->Password = $smtpPassword;
+        $mail->SMTPSecure = $smtpSecure;
+        $mail->Port = $smtpPort;
+        $mail->CharSet = 'UTF-8';
+
+        $mail->setFrom($fromEmail, 'Veteran Logistics Group');
+        $mail->addAddress($toEmail);
+        $mail->addReplyTo('support@veteranlogisticsgroup.us', 'Veteran Logistics Group Support');
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body = $htmlBody;
+        $mail->AltBody = trim(preg_replace('/\s+/', ' ', strip_tags($htmlBody)));
+        return $mail->send();
+    } catch (\PHPMailer\PHPMailer\Exception $e) {
+        error_log('shipping-create: PHPMailer failed for to=' . $toEmail . ' from=' . $fromEmail . ' subject=' . $subject . ' err=' . $e->getMessage());
+        }
+    return false;
 }
 
 function shipping_build_customer_shipment_email_html(array $payload): string {
@@ -735,9 +809,19 @@ function shipping_build_customer_invoice_email_html(array $payload): string {
 </html>';
 }
 
-function shipping_send_customer_post_create_emails(array $shipmentData): void {
-    $customerEmail = trim((string)($shipmentData['sender_email'] ?? ''));
-    if (!filter_var($customerEmail, FILTER_VALIDATE_EMAIL)) {
+function shipping_send_customer_post_create_emails(array $shipmentData, string $accountEmail = ''): void {
+    $recipients = [];
+    $senderEmail = trim((string)($shipmentData['sender_email'] ?? ''));
+    if (filter_var($senderEmail, FILTER_VALIDATE_EMAIL)) {
+        $recipients[] = strtolower($senderEmail);
+    }
+    $accountEmail = trim($accountEmail);
+    if (filter_var($accountEmail, FILTER_VALIDATE_EMAIL)) {
+        $recipients[] = strtolower($accountEmail);
+    }
+    $recipients = array_values(array_unique($recipients));
+    if (empty($recipients)) {
+        error_log('shipping-create: no valid recipient email for post-create shipment notifications');
         return;
     }
 
@@ -751,11 +835,13 @@ function shipping_send_customer_post_create_emails(array $shipmentData): void {
         'invoice_number' => $invoiceNumber
     ]));
 
-    if (!shipping_send_html_email($customerEmail, 'shipments@veteranlogisticsgroup.us', $shipmentSubject, $shipmentHtml)) {
-        error_log('shipping-create: failed sending shipment confirmation email for tracking ' . $trackingNumber);
-    }
-    if (!shipping_send_html_email($customerEmail, 'billing@veteranlogisticsgroup.us', $invoiceSubject, $invoiceHtml)) {
-        error_log('shipping-create: failed sending invoice email for tracking ' . $trackingNumber);
+    foreach ($recipients as $recipientEmail) {
+        if (!shipping_send_html_email($recipientEmail, 'shipments@veteranlogisticsgroup.us', $shipmentSubject, $shipmentHtml)) {
+            error_log('shipping-create: failed sending shipment confirmation email for tracking ' . $trackingNumber . ' recipient=' . $recipientEmail);
+        }
+        if (!shipping_send_html_email($recipientEmail, 'billing@veteranlogisticsgroup.us', $invoiceSubject, $invoiceHtml)) {
+            error_log('shipping-create: failed sending invoice email for tracking ' . $trackingNumber . ' recipient=' . $recipientEmail);
+        }
     }
 }
 
@@ -1284,7 +1370,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             : ((($draft['shipment_class'] ?? 'parcel') === 'freight_pallet') ? 'Freight / Pallet' : 'Parcel')
                     )
                 ];
-                shipping_send_customer_post_create_emails($_SESSION['shipping_last_created']);
+                shipping_send_customer_post_create_emails($_SESSION['shipping_last_created'], $user_email);
 
                 $_SESSION['shipping_create_progress'] = 4;
                 unset($_SESSION['shipping_create_draft']);
@@ -1307,5 +1393,3 @@ if ($step === 5 && $created_shipment) {
     $shipping_success = 'Shipment created successfully.';
 }
 ?>
-
-
