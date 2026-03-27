@@ -36,6 +36,33 @@ if (!class_exists('\PHPMailer\PHPMailer\PHPMailer')) {
     }
 }
 
+function signup_verify_turnstile(string $token, string $remoteIp): bool {
+    $secretKey = '0x4AAAAAACwnvIudy3lvL60Re4JVpWPk5Ks';
+    if ($token === '' || $secretKey === '') {
+        return false;
+    }
+
+    $ch = curl_init('https://challenges.cloudflare.com/turnstile/v0/siteverify');
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 12);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+        'secret' => $secretKey,
+        'response' => $token,
+        'remoteip' => $remoteIp,
+    ]));
+    $response = curl_exec($ch);
+    $httpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($response === false || $httpCode < 200 || $httpCode >= 300) {
+        return false;
+    }
+
+    $decoded = json_decode($response, true);
+    return is_array($decoded) && !empty($decoded['success']);
+}
+
 function signup_resolve_secret(string $name): string {
     global $signupEmailConfig;
     if ($name === '') {
@@ -177,6 +204,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username     = trim($_POST["username"] ?? "");
     $password     = $_POST["password"] ?? "";
     $terms        = isset($_POST["accept_terms"]);
+    $turnstileToken = trim((string)($_POST["cf-turnstile-response"] ?? ""));
+    $remoteIp = (string)($_SERVER['REMOTE_ADDR'] ?? '');
 
     /* -------------------------
        VALIDATION
@@ -208,6 +237,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($phone_number !== null && !preg_match("/^[0-9]+$/", $phone_number)) {
         $errors[] = "Phone number must contain digits only.";
+    }
+
+    if (!signup_verify_turnstile($turnstileToken, $remoteIp)) {
+        $errors[] = "Turnstile verification failed. Please try again.";
     }
 
     /* -------------------------
@@ -328,4 +361,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 signup_app_done:
 $conn->close();
 ?>
-

@@ -23,6 +23,7 @@
     
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://kit.fontawesome.com/79b279a6c9.js" crossorigin="anonymous"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 </head>
 <body>
@@ -66,6 +67,9 @@
                 <div class="input-box checkbox">
                     <input type="checkbox" name="accept_terms" required>
                     <p>I agree to the <a href="/legal/terms-and-conditions/">UPS Tariff/Terms and Conditions of Service</a> and to the <a href="/legal/website-terms-of-use/">UPS Technology Agreement</a> , which contain important terms about my shipping activity and my use of the UPS Technologies, like limiting UPSâ€™s liability and my agreement on how disputes between UPS and me will be handled. </p>
+                </div>
+                <div class="input-box">
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAACwnvMl9sbRLv3K2"></div>
                 </div>
                 <div class="input-box">
                     <button type="submit">Sign Up<span class="material-symbols-outlined">chevron_right</span></button>
