@@ -167,10 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var panels = document.querySelectorAll('.faq-panel[data-faq-panel]');
     var chatCtas = document.querySelectorAll('.js-open-support-chat');
 
-    function openSupportChat(message) {
-        if (typeof window.vlgOpenSupportChat === 'function') {
-            return window.vlgOpenSupportChat(message || '');
-        }
+    function openSupportChat() {
         if (typeof window.smartsupp === 'function') {
             window.smartsupp('chat:open');
             return true;
