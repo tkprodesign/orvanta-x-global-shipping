@@ -187,7 +187,7 @@ body {
 }
 
 .cp-btn-small {
-  min-height: 36px;
+  min-height: var(--btn-height-compact);
   padding: 8px 14px;
   font-size: 0.86rem;
 }
@@ -212,8 +212,9 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: var(--btn-height);
   padding: 10px 16px;
-  border-radius: 999px;
+  border-radius: var(--btn-radius-pill);
   background: #ffb500;
   color: #1f1f1f;
   font-weight: 700;
