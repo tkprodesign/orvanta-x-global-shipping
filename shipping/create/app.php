@@ -6,6 +6,15 @@ date_default_timezone_set('America/New_York');
 
 require_once __DIR__ . '/../../common-sections/globals.php';
 
+$shippingEmailConfig = [];
+$shippingEmailConfigPath = __DIR__ . '/../../common-sections/email-secrets.php';
+if (file_exists($shippingEmailConfigPath)) {
+    $loadedShippingEmailConfig = include $shippingEmailConfigPath;
+    if (is_array($loadedShippingEmailConfig)) {
+        $shippingEmailConfig = $loadedShippingEmailConfig;
+    }
+}
+
 if (!class_exists('\PHPMailer\PHPMailer\PHPMailer')) {
     $phpMailerCandidates = [
         __DIR__ . '/PHPMailer/src',
@@ -625,6 +634,7 @@ function shipping_password_secret_for_mailbox(string $fromEmail): string {
 }
 
 function shipping_resolve_secret(string $name): string {
+    global $shippingEmailConfig;
     if ($name === '') {
         return '';
     }
@@ -638,7 +648,28 @@ function shipping_resolve_secret(string $name): string {
     if (isset($_SERVER[$name]) && trim((string)$_SERVER[$name]) !== '') {
         return trim((string)$_SERVER[$name]);
     }
+    if (isset($shippingEmailConfig[$name]) && trim((string)$shippingEmailConfig[$name]) !== '') {
+        return trim((string)$shippingEmailConfig[$name]);
+    }
     return '';
+}
+
+function shipping_resolve_mail_setting(string $envName, string $default = ''): string {
+    global $shippingEmailConfig;
+    $value = getenv($envName);
+    if ($value !== false && trim((string)$value) !== '') {
+        return trim((string)$value);
+    }
+    if (isset($_ENV[$envName]) && trim((string)$_ENV[$envName]) !== '') {
+        return trim((string)$_ENV[$envName]);
+    }
+    if (isset($_SERVER[$envName]) && trim((string)$_SERVER[$envName]) !== '') {
+        return trim((string)$_SERVER[$envName]);
+    }
+    if (isset($shippingEmailConfig[$envName]) && trim((string)$shippingEmailConfig[$envName]) !== '') {
+        return trim((string)$shippingEmailConfig[$envName]);
+    }
+    return $default;
 }
 
 function shipping_send_html_email(string $toEmail, string $fromEmail, string $subject, string $htmlBody): bool {
@@ -657,9 +688,9 @@ function shipping_send_html_email(string $toEmail, string $fromEmail, string $su
         return false;
     }
 
-    $smtpHost = trim((string)(getenv('SMTP_HOST') ?: 'mail.veteranlogisticsgroup.us'));
-    $smtpPort = (int)(getenv('SMTP_PORT') ?: 587);
-    $smtpSecure = trim((string)(getenv('SMTP_SECURE') ?: \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS));
+    $smtpHost = shipping_resolve_mail_setting('SMTP_HOST', 'mail.veteranlogisticsgroup.us');
+    $smtpPort = (int)shipping_resolve_mail_setting('SMTP_PORT', '587');
+    $smtpSecure = shipping_resolve_mail_setting('SMTP_SECURE', \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS);
 
     $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
     try {
