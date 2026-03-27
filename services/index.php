@@ -153,7 +153,7 @@ include("app.php");
                 <div>
                     <h3>Save up to 65%* When You Ship International</h3>
                     <p>Start your discounted international shipment with this link and apply available savings.</p>
-                    <a href="/shipping/">*Terms and Conditions</a>
+                    <a href="/legal/terms-and-conditions/">*Terms and Conditions</a>
                 </div>
                 <a href="/shipping/" class="btn-gold">Ship Here to Save <span class="material-symbols-outlined">chevron_right</span></a>
             </div>
