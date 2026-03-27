@@ -433,19 +433,19 @@ body {
     flex-direction: column;
     gap: 0;
   }
-  #cp-shipments { order: 1; }
-  #cp-add-location-event { order: 2; }
-  #cp-delete-shipment { order: 3; }
+  #cp-site-users { order: 1; }
+  #cp-delete-site-user { order: 2; }
 
-  #cp-service-quotes { order: 4; }
-  #cp-edit-service-quote { order: 5; }
-  #cp-delete-service-quote { order: 6; }
+  #cp-service-quotes { order: 3; }
+  #cp-edit-service-quote { order: 4; }
+  #cp-delete-service-quote { order: 5; }
 
-  #cp-site-users { order: 7; }
-  #cp-delete-site-user { order: 8; }
+  #cp-shipments { order: 6; }
+  #cp-add-location-event { order: 7; }
+  #cp-exception-payments { order: 8; }
+  #cp-payment-proofs { order: 9; }
 
-  #cp-exception-payments { order: 9; }
-  #cp-payment-proofs { order: 10; }
+  #cp-delete-shipment { order: 10; }
   #cp-user-payment-block { order: 11; }
   #cp-support-email { order: 12; }
   .cp-card-head {
