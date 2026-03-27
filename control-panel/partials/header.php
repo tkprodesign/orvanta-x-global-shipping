@@ -6,8 +6,7 @@ $cpNavItems = [
     '/control-panel/shipments/' => 'Shipments',
     '/control-panel/service-quotes/' => 'Service Quotes',
     '/control-panel/payment-proofs/' => 'Payment Proofs',
-    '/control-panel/exception-payments/' => 'Exception Payments',
-    '/dashboard/' => 'Dashboard'
+    '/control-panel/exception-payments/' => 'Exception Payments'
 ];
 ?>
 <header>
@@ -30,10 +29,9 @@ $cpNavItems = [
         </div>
         <div class="right">
             <div class="cta">
-                <a href="/dashboard/" class="dtp">Dashboard</a>
                 <a href="/logout/?next=home" class="dtp dtp-secondary">Logout</a>
-                <a href="/dashboard/" class="mb" aria-label="Dashboard">
-                    <span class="material-symbols-outlined">account_circle</span>
+                <a href="/logout/?next=home" class="mb" aria-label="Logout">
+                    <span class="material-symbols-outlined">logout</span>
                 </a>
             </div>
         </div>

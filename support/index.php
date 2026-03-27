@@ -73,9 +73,9 @@
                 <article class="support-card">
                     <h3 class="card-title"><img src="<?= htmlspecialchars(asset_url('/assets/images/ups/3d-icons/box.png')); ?>" alt="Shipping icon"> Shipping</h3>
                     <a href="/shipping/">Shipping Cost Estimator</a>
-                    <a href="/services/">International Shipping</a>
+                    <a href="https://veteranlogisticsgroup.us/support/shipping-tools/">International Shipping</a>
                     <a href="/shipping/">Domestic Shipping</a>
-                    <a href="/services/">Freight Shipping</a>
+                    <a href="https://veteranlogisticsgroup.us/support/shipping-tools/">Freight Shipping</a>
                     <a class="js-open-support-chat" href="#">Packaging and Shipping Supplies</a>
                     <a class="btn-gold js-open-support-chat" href="#" role="button">Get Shipping Help <span class="material-symbols-outlined">chevron_right</span></a>
                 </article>
