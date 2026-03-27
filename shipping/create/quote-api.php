@@ -67,6 +67,29 @@ function quote_ensure_table(mysqli $conn): bool {
     return $conn->query($sql) === true;
 }
 
+function quote_ensure_events_table(mysqli $conn): bool {
+    $sql = "
+        CREATE TABLE IF NOT EXISTS shipment_service_quote_events (
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            quote_id BIGINT UNSIGNED NOT NULL,
+            user_id INT NOT NULL,
+            service_level ENUM('priority','express','economy') NOT NULL,
+            payload_hash CHAR(64) NOT NULL,
+            event_type ENUM('new_request','repeat_request') NOT NULL,
+            email_attempted_epoch INT UNSIGNED NOT NULL,
+            email_sent_epoch INT UNSIGNED NULL,
+            email_http_code INT NULL,
+            email_error_text TEXT NULL,
+            created_at_epoch INT UNSIGNED NOT NULL,
+            PRIMARY KEY (id),
+            KEY idx_quote_events_quote (quote_id),
+            KEY idx_quote_events_user_created (user_id, created_at_epoch),
+            KEY idx_quote_events_type_created (event_type, created_at_epoch)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+    ";
+    return $conn->query($sql) === true;
+}
+
 function quote_snapshot_from_draft(array $draft): array {
     return [
         'sender_name' => quote_clean_text((string)($draft['sender_name'] ?? '')),
@@ -199,12 +222,74 @@ function quote_send_resend_admin_email(string $subject, string $text, string $ht
     return ['ok' => true, 'http_code' => $httpCode, 'response' => (string)$response];
 }
 
+function quote_log_event(
+    mysqli $conn,
+    int $quoteId,
+    int $userId,
+    string $serviceLevel,
+    string $payloadHash,
+    string $eventType,
+    int $attemptedAt,
+    bool $sent,
+    ?int $httpCode,
+    ?string $errorText
+): void {
+    $emailSentEpoch = $sent ? $attemptedAt : null;
+    $createdAt = $attemptedAt;
+    $sql = "INSERT INTO shipment_service_quote_events
+            (quote_id, user_id, service_level, payload_hash, event_type, email_attempted_epoch, email_sent_epoch, email_http_code, email_error_text, created_at_epoch)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        error_log('quote-api: unable to prepare event insert');
+        return;
+    }
+    $stmt->bind_param(
+        'iisssiiisi',
+        $quoteId,
+        $userId,
+        $serviceLevel,
+        $payloadHash,
+        $eventType,
+        $attemptedAt,
+        $emailSentEpoch,
+        $httpCode,
+        $errorText,
+        $createdAt
+    );
+    $stmt->execute();
+    $stmt->close();
+}
+
+function quote_send_admin_notification(
+    int $quoteId,
+    int $userId,
+    string $userEmail,
+    string $serviceLevel,
+    string $payloadHash,
+    int $now
+): array {
+    $subject = "Shipment Service Processing Request #{$quoteId}";
+    $message = "A new service processing request was created.\n\n"
+        . "Request ID: {$quoteId}\n"
+        . "User ID: {$userId}\n"
+        . "User Email: {$userEmail}\n"
+        . "Service Level: {$serviceLevel}\n"
+        . "Payload Hash: {$payloadHash}\n"
+        . "Created At Epoch: {$now}\n";
+    $html = quote_build_admin_email_html($quoteId, $userId, $userEmail, $serviceLevel, $payloadHash, $now);
+    return quote_send_resend_admin_email($subject, $message, $html);
+}
+
 $user = quote_get_user($conn);
 if (!$user) {
     quote_json(['ok' => false, 'message' => 'Authentication required.'], 401);
 }
 if (!quote_ensure_table($conn)) {
     quote_json(['ok' => false, 'message' => 'Unable to initialize processing table.'], 500);
+}
+if (!quote_ensure_events_table($conn)) {
+    quote_json(['ok' => false, 'message' => 'Unable to initialize events table.'], 500);
 }
 
 $action = strtolower((string)($_REQUEST['action'] ?? ''));
@@ -236,6 +321,28 @@ if ($action === 'request') {
     if ($existing) {
         $price = $existing['price'];
         $ready = ($price !== null && (float)$price > 0);
+        $existingQuoteId = (int)$existing['id'];
+        $emailResult = quote_send_admin_notification(
+            $existingQuoteId,
+            $uid,
+            (string)$user['email'],
+            $serviceLevel,
+            $payloadHash,
+            $now
+        );
+        $emailSent = !empty($emailResult['ok']);
+        quote_log_event(
+            $conn,
+            $existingQuoteId,
+            $uid,
+            $serviceLevel,
+            $payloadHash,
+            'repeat_request',
+            $now,
+            $emailSent,
+            isset($emailResult['http_code']) ? (int)$emailResult['http_code'] : null,
+            $emailSent ? null : (string)($emailResult['error'] ?? 'Unknown email error')
+        );
         $_SESSION['shipping_create_draft']['quote_request_id'] = (int)$existing['id'];
         $_SESSION['shipping_create_draft']['quote_service_level'] = $serviceLevel;
         quote_json([
@@ -244,6 +351,9 @@ if ($action === 'request') {
             'ready' => $ready,
             'request_id' => (int)$existing['id'],
             'payload_hash' => $payloadHash,
+            'email_dispatched' => (bool)$emailSent,
+            'email_error' => $emailSent ? null : (string)($emailResult['error'] ?? 'Unknown email error'),
+            'email_http_code' => isset($emailResult['http_code']) ? (int)$emailResult['http_code'] : null,
             'record' => [
                 'id' => (int)$existing['id'],
                 'user_id' => $uid,
@@ -293,17 +403,27 @@ if ($action === 'request') {
     $_SESSION['shipping_create_draft']['quote_request_id'] = $requestId;
     $_SESSION['shipping_create_draft']['quote_service_level'] = $serviceLevel;
 
-    $subject = "Shipment Service Processing Request #{$requestId}";
-    $message = "A new service processing request was created.\n\n"
-        . "Request ID: {$requestId}\n"
-        . "User ID: {$uid}\n"
-        . "User Email: {$user['email']}\n"
-        . "Service Level: {$serviceLevel}\n"
-        . "Payload Hash: {$payloadHash}\n"
-        . "Created At Epoch: {$now}\n";
-    $html = quote_build_admin_email_html($requestId, $uid, (string)$user['email'], $serviceLevel, $payloadHash, $now);
-    $emailResult = quote_send_resend_admin_email($subject, $message, $html);
+    $emailResult = quote_send_admin_notification(
+        $requestId,
+        $uid,
+        (string)$user['email'],
+        $serviceLevel,
+        $payloadHash,
+        $now
+    );
     $emailSent = !empty($emailResult['ok']);
+    quote_log_event(
+        $conn,
+        $requestId,
+        $uid,
+        $serviceLevel,
+        $payloadHash,
+        'new_request',
+        $now,
+        $emailSent,
+        isset($emailResult['http_code']) ? (int)$emailResult['http_code'] : null,
+        $emailSent ? null : (string)($emailResult['error'] ?? 'Unknown email error')
+    );
 
     if ($emailSent) {
         $stmtMail = $conn->prepare("UPDATE shipment_service_quotes SET email_sent_epoch = ?, updated_at_epoch = ? WHERE id = ? LIMIT 1");
