@@ -11,6 +11,7 @@ include('./app.php');
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/assets/stylesheets/main.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="/assets/stylesheets/forms.css?v=<?php echo time(); ?>">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body class="login-page">
 
@@ -52,13 +53,14 @@ include('./app.php');
                 <div class="terms-box">
                     <p>
                         By continuing, I agree to the
-                        <a href="#">service terms and conditions</a>
+                        <a href="/legal/terms-and-conditions/">service terms and conditions</a>
                         and the
-                        <a href="#">platform use agreement</a>.
+                        <a href="/legal/website-terms-of-use/">platform use agreement</a>.
                     </p>
                 </div>
 
                 <div class="action-box">
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAACwnvMl9sbRLv3K2"></div>
                     <button type="submit" class="btn-primary">
                         Continue
                         <span class="material-symbols-outlined">chevron_right</span>
@@ -74,5 +76,4 @@ include('./app.php');
 
 </body>
 </html>
-
 
