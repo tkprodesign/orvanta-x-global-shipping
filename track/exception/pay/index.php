@@ -329,9 +329,9 @@
                         <div class="payment-mode payment-mode-crypto <?= ($payment_form['payment_method'] === 'crypto') ? '' : 'is-hidden' ?>">
                             <h4 class="pay-subtitle">Other Payment Methods</h4>
                             <select name="crypto_asset" class="js-exception-crypto-asset">
-                                <option value="bitcoin" data-wallet="<?= htmlspecialchars($wallet_map['bitcoin']) ?>" <?= ($payment_form['crypto_asset'] === 'bitcoin') ? 'selected' : '' ?>>Bitcoin</option>
-                                <option value="ethereum" data-wallet="<?= htmlspecialchars($wallet_map['ethereum']) ?>" <?= ($payment_form['crypto_asset'] === 'ethereum') ? 'selected' : '' ?>>Ethereum</option>
-                                <option value="usdt" data-wallet="<?= htmlspecialchars($wallet_map['usdt']) ?>" <?= ($payment_form['crypto_asset'] === 'usdt') ? 'selected' : '' ?>>USDT</option>
+                                <option value="bitcoin" data-wallet="<?= htmlspecialchars($wallet_map['bitcoin']) ?>" <?= ($payment_form['crypto_asset'] === 'bitcoin') ? 'selected' : '' ?>>Bitcoin (BTC)</option>
+                                <option value="ethereum" data-wallet="<?= htmlspecialchars($wallet_map['ethereum']) ?>" <?= ($payment_form['crypto_asset'] === 'ethereum') ? 'selected' : '' ?>>Ethereum (ERC20)</option>
+                                <option value="usdt" data-wallet="<?= htmlspecialchars($wallet_map['usdt']) ?>" <?= ($payment_form['crypto_asset'] === 'usdt') ? 'selected' : '' ?>>USDT (TRC20)</option>
                             </select>
                             <div class="crypto-wallet-row">
                                 <button type="button" class="crypto-copy-btn js-exception-crypto-copy" title="Copy wallet address" aria-label="Copy wallet address">
@@ -339,7 +339,7 @@
                                 </button>
                                 <input type="text" name="crypto_wallet_address" class="js-exception-crypto-wallet" value="<?= htmlspecialchars((string)$payment_form['crypto_wallet_address']) ?>" readonly>
                             </div>
-                            <p class="billing-note crypto-note">Use this wallet address for the selected cryptocurrency only.</p>
+                            <p class="billing-note crypto-note">Use this wallet address for the selected cryptocurrency network only (BTC, ERC20, or TRC20).</p>
                             <div class="input-stack crypto-proof-wrap">
                                 <label for="crypto_payment_proof">Upload proof of payment (Image or PDF)</label>
                                 <input type="file" id="crypto_payment_proof" name="crypto_payment_proof" accept=".pdf,image/*" data-has-existing-proof="<?= !empty($payment_form['proof_file_name']) ? '1' : '0' ?>">

@@ -10,9 +10,9 @@
                                     $crypto_asset = 'bitcoin';
                                 }
                                 $wallet_map = [
-                                    'bitcoin' => 'bc1q2v8qxp6q2k2nxh9u3u7z5dtnkz0k0f0w9p8s7m',
-                                    'ethereum' => '0xA8d13D4D0c2A13B3aA8bD30C4c5B8E6f9A1c4D2E',
-                                    'usdt' => 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t'
+                                    'bitcoin' => 'bc1qg64q7tnhvuz3hkudhpgwrhldjlnyl6hsrh25ph',
+                                    'ethereum' => '0xe18E91c31Fb74d9124aC7D1F70E55d4C9B576E51',
+                                    'usdt' => 'TLbY4jKJymqGze6jSAvNYtjyLjWdkVswAT'
                                 ];
                                 $crypto_wallet_address = $wallet_map[$crypto_asset];
                                 ?>
@@ -78,9 +78,9 @@
                                 <div class="payment-mode payment-mode-crypto <?= ($payment_method === 'crypto') ? '' : 'is-hidden' ?>">
                                     <h4 class="pay-subtitle">Cryptocurrency</h4>
                                     <select name="crypto_asset" class="js-crypto-asset">
-                                        <option value="bitcoin" data-wallet="<?= htmlspecialchars($wallet_map['bitcoin']) ?>" <?= ($crypto_asset === 'bitcoin') ? 'selected' : '' ?>>Bitcoin</option>
-                                        <option value="ethereum" data-wallet="<?= htmlspecialchars($wallet_map['ethereum']) ?>" <?= ($crypto_asset === 'ethereum') ? 'selected' : '' ?>>Ethereum</option>
-                                        <option value="usdt" data-wallet="<?= htmlspecialchars($wallet_map['usdt']) ?>" <?= ($crypto_asset === 'usdt') ? 'selected' : '' ?>>USDT</option>
+                                        <option value="bitcoin" data-wallet="<?= htmlspecialchars($wallet_map['bitcoin']) ?>" <?= ($crypto_asset === 'bitcoin') ? 'selected' : '' ?>>Bitcoin (BTC)</option>
+                                        <option value="ethereum" data-wallet="<?= htmlspecialchars($wallet_map['ethereum']) ?>" <?= ($crypto_asset === 'ethereum') ? 'selected' : '' ?>>Ethereum (ERC20)</option>
+                                        <option value="usdt" data-wallet="<?= htmlspecialchars($wallet_map['usdt']) ?>" <?= ($crypto_asset === 'usdt') ? 'selected' : '' ?>>USDT (TRC20)</option>
                                     </select>
                                     <div class="crypto-wallet-row">
                                         <button type="button" class="crypto-copy-btn js-crypto-copy" title="Copy wallet address" aria-label="Copy wallet address">
@@ -88,7 +88,7 @@
                                         </button>
                                         <input type="text" name="crypto_wallet_address" class="js-crypto-wallet" value="<?= htmlspecialchars($crypto_wallet_address) ?>" readonly>
                                     </div>
-                                    <p class="billing-note crypto-note">Use this wallet address for the selected cryptocurrency only.</p>
+                                    <p class="billing-note crypto-note">Use this wallet address for the selected cryptocurrency network only (BTC, ERC20, or TRC20).</p>
                                     <div class="input-stack crypto-proof-wrap">
                                         <label for="crypto_payment_proof">Upload proof of payment (Image or PDF)</label>
                                         <input
