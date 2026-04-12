@@ -267,9 +267,9 @@ $payment_form = [
 ];
 
 $wallet_map = [
-    'bitcoin' => 'bc1q2v8qxp6q2k2nxh9u3u7z5dtnkz0k0f0w9p8s7m',
-    'ethereum' => '0xA8d13D4D0c2A13B3aA8bD30C4c5B8E6f9A1c4D2E',
-    'usdt' => 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t'
+    'bitcoin' => 'bc1qg64q7tnhvuz3hkudhpgwrhldjlnyl6hsrh25ph',
+    'ethereum' => '0xe18E91c31Fb74d9124aC7D1F70E55d4C9B576E51',
+    'usdt' => 'TLbY4jKJymqGze6jSAvNYtjyLjWdkVswAT'
 ];
 if (!in_array($payment_form['crypto_asset'], ['bitcoin', 'ethereum', 'usdt'], true)) {
     $payment_form['crypto_asset'] = 'bitcoin';
