@@ -218,7 +218,8 @@
                                 <th>Method</th>
                                 <th>Status</th>
                                 <th>Proof</th>
-                                <th>Created</th>
+                                <th>Arrival</th>
+                            <th>Created</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -377,13 +378,14 @@
                             <th>Email</th>
                             <th>Name</th>
                             <th>Status</th>
+                            <th>Arrival</th>
                             <th>Created</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $shipSql = "
-                            SELECT s.id, s.tracking_number, s.user_id, s.status, s.date_created, u.email, u.name
+                            SELECT s.id, s.tracking_number, s.user_id, s.status, s.estimated_delivery_time, s.date_created, u.email, u.name
                             FROM shipments s
                             LEFT JOIN users u ON u.id = s.user_id
                             ORDER BY s.id DESC
@@ -397,6 +399,26 @@
                                     $shipTs = (int)($shipTs / 1000);
                                 }
                                 $shipDisplay = $shipTs > 0 ? date("M d, Y H:i", $shipTs) : "-";
+                                $arrivalRaw = $s['estimated_delivery_time'] ?? null;
+                                $arrivalDisplay = '-';
+                                if ($arrivalRaw !== null && $arrivalRaw !== '') {
+                                    if (is_numeric((string)$arrivalRaw)) {
+                                        $arrivalTs = (int)$arrivalRaw;
+                                        if ($arrivalTs > 1000000000000) {
+                                            $arrivalTs = (int)($arrivalTs / 1000);
+                                        }
+                                        if ($arrivalTs > 0) {
+                                            $arrivalDisplay = date("M d, Y H:i", $arrivalTs) . ' (epoch)';
+                                        }
+                                    } else {
+                                        $parsedArrival = strtotime((string)$arrivalRaw);
+                                        if ($parsedArrival !== false && $parsedArrival > 0) {
+                                            $arrivalDisplay = date("M d, Y H:i", $parsedArrival) . ' (datetime)';
+                                        } else {
+                                            $arrivalDisplay = (string)$arrivalRaw;
+                                        }
+                                    }
+                                }
                         ?>
                         <tr>
                             <td><?= (int)$s['id'] ?></td>
@@ -405,6 +427,7 @@
                             <td><?= htmlspecialchars((string)($s['email'] ?? '-')) ?></td>
                             <td><?= htmlspecialchars((string)($s['name'] ?? '-')) ?></td>
                             <td><?= htmlspecialchars((string)$s['status']) ?></td>
+                            <td><?= htmlspecialchars($arrivalDisplay) ?></td>
                             <td><?= htmlspecialchars($shipDisplay) ?></td>
                         </tr>
                         <?php
@@ -412,7 +435,7 @@
                         else:
                         ?>
                         <tr>
-                            <td colspan="7">No shipments found.</td>
+                            <td colspan="8">No shipments found.</td>
                         </tr>
                         <?php endif; ?>
                     </tbody>
@@ -423,6 +446,37 @@
             </div>
         </section>
         
+
+        <section id="cp-update-arrival-date" class="cp-card cp-card-action">
+            <div class="cp-card-head">
+                <div>
+                    <h2>Update Shipment Arrival Date</h2>
+                    <p>Change estimated delivery/arrival date by tracking number.</p>
+                </div>
+            </div>
+            <?php if (!empty($cp_arrival_date_notice)): ?>
+                <p class="cp-quote-notice <?= ($cp_arrival_date_notice_type === 'success') ? 'is-success' : 'is-error' ?>">
+                    <?= htmlspecialchars($cp_arrival_date_notice) ?>
+                </p>
+            <?php endif; ?>
+            <p class="cp-form-helper">This checks the <code>shipments.estimated_delivery_time</code> column type first, then stores either epoch seconds or datetime accordingly.</p>
+            <form method="post" class="cp-quote-form">
+                <div class="cp-quote-grid">
+                    <div>
+                        <label for="arrival_tracking_number">Tracking Number</label>
+                        <input id="arrival_tracking_number" type="text" name="arrival_tracking_number" required>
+                    </div>
+                    <div>
+                        <label for="arrival_date">Arrival Date</label>
+                        <input id="arrival_date" type="datetime-local" name="arrival_date" required>
+                    </div>
+                </div>
+                <div class="cp-quote-actions">
+                    <button class="cp-btn" type="submit" name="update_shipment_arrival_date" value="1">Update Arrival Date</button>
+                </div>
+            </form>
+        </section>
+
         <section id="cp-service-quotes" class="cp-card cp-card-list">
             <div class="cp-card-head">
                 <div>
