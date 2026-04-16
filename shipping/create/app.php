@@ -1185,10 +1185,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         @unlink($targetPath);
                                         $shipping_errors[] = "Table 'shipment_payment_proofs' does not exist yet. Create it first.";
                                     } else {
+                                        try {
+                                            $conn->query("ALTER TABLE shipment_payment_proofs ADD COLUMN status VARCHAR(40) NOT NULL DEFAULT 'pending_confirmation'");
+                                            $conn->query("ALTER TABLE shipment_payment_proofs ADD COLUMN confirmed_at_epoch BIGINT NULL DEFAULT NULL");
+                                            $conn->query("ALTER TABLE shipment_payment_proofs ADD COLUMN confirmed_by VARCHAR(190) NULL DEFAULT NULL");
+                                        } catch (Throwable $e) {
+                                            // Ignore duplicate-column errors.
+                                        }
                                         $uploadedAtEpoch = time();
                                         $stmtProof = $conn->prepare(
-                                            "INSERT INTO shipment_payment_proofs (user_id, name, email, file_name, uploaded_at_epoch)
-                                             VALUES (?, ?, ?, ?, ?)"
+                                            "INSERT INTO shipment_payment_proofs (user_id, name, email, file_name, uploaded_at_epoch, status, confirmed_at_epoch, confirmed_by)
+                                             VALUES (?, ?, ?, ?, ?, 'pending_confirmation', NULL, NULL)"
                                         );
                                         if (!$stmtProof) {
                                             @unlink($targetPath);

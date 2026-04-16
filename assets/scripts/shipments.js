@@ -349,6 +349,10 @@
     var cryptoProcessingDisplay = document.getElementById('crypto-processing-fee-display');
     var paymentMethodInput = document.querySelector('.js-payment-method-input');
     var paymentToggle = document.querySelector('.js-payment-toggle');
+    var paymentTotalBaseValue = document.getElementById('payment-total-base-value');
+    var paymentTotalCryptoValue = document.getElementById('payment-total-crypto-value');
+    var paymentTotalFinalValue = document.getElementById('payment-total-final-value');
+    var paymentTotalCryptoRow = document.querySelector('.js-payment-total-crypto-row');
 
     function formatUsd(amount) { return '$' + Number(amount || 0).toFixed(2); }
 
@@ -488,6 +492,10 @@
       if (cryptoProcessingDisplay) {
         cryptoProcessingDisplay.textContent = formatUsd(cryptoProcessingFee);
       }
+      if (paymentTotalBaseValue) paymentTotalBaseValue.textContent = formatUsd(amountBeforeCryptoFee);
+      if (paymentTotalCryptoRow) paymentTotalCryptoRow.hidden = cryptoProcessingFee <= 0;
+      if (paymentTotalCryptoValue) paymentTotalCryptoValue.textContent = formatUsd(cryptoProcessingFee);
+      if (paymentTotalFinalValue) paymentTotalFinalValue.textContent = formatUsd(total);
 
       totalChargeEl.textContent = formatUsd(total);
       if (mobileTotalEl) mobileTotalEl.textContent = formatUsd(total);

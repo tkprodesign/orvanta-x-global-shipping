@@ -108,6 +108,19 @@
                                         <?php endif; ?>
                                     </div>
                                 </div>
+
+                                <?php
+                                $payment_total_base_amount = (float)($amount_before_crypto_fee ?? 0);
+                                $payment_total_crypto_fee = (float)($crypto_processing_fee ?? 0);
+                                $payment_total_final_amount = (float)($total_charges ?? 0);
+                                ?>
+                                <div class="summary-card" style="margin-top:16px;">
+                                    <h4 class="pay-subtitle" style="margin-top:0;">Total Payment</h4>
+                                    <div class="sum-row"><span>Shipment Amount</span><strong id="payment-total-base-value">$<?= number_format($payment_total_base_amount, 2) ?></strong></div>
+                                    <div class="sum-row js-payment-total-crypto-row" <?= ($payment_method === 'crypto' && $payment_total_crypto_fee > 0) ? '' : 'hidden' ?>><span>Blockchain Network Processing Fee</span><strong id="payment-total-crypto-value">$<?= number_format($payment_total_crypto_fee, 2) ?></strong></div>
+                                    <div class="summary-line"></div>
+                                    <div class="sum-row"><span>Total Payment</span><strong id="payment-total-final-value">$<?= number_format($payment_total_final_amount, 2) ?></strong></div>
+                                </div>
                             </article>
 
                             <article class="ship-card terms-card">
