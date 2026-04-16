@@ -35,6 +35,9 @@
             if ($proofTableExists && function_exists('cp_ensure_shipment_payment_proof_columns')) {
                 cp_ensure_shipment_payment_proof_columns($dbconn);
             }
+            $proofHasStatusColumn = $proofTableExists && function_exists('cp_table_has_column')
+                ? cp_table_has_column($dbconn, 'shipment_payment_proofs', 'status')
+                : false;
             ?>
             <?php if (!empty($cp_shipment_proof_notice)): ?>
                 <p class="cp-quote-notice <?= ($cp_shipment_proof_notice_type === 'success') ? 'is-success' : 'is-error' ?>">
@@ -60,7 +63,9 @@
                         </thead>
                         <tbody>
                             <?php
-                            $proofSql = "SELECT id, user_id, name, email, file_name, status, uploaded_at_epoch FROM shipment_payment_proofs ORDER BY id DESC";
+                            $proofSql = $proofHasStatusColumn
+                                ? "SELECT id, user_id, name, email, file_name, status, uploaded_at_epoch FROM shipment_payment_proofs ORDER BY id DESC"
+                                : "SELECT id, user_id, name, email, file_name, uploaded_at_epoch, 'pending_confirmation' AS status FROM shipment_payment_proofs ORDER BY id DESC";
                             $proofResult = $dbconn->query($proofSql);
                             if ($proofResult && $proofResult->num_rows > 0):
                                 while ($proof = $proofResult->fetch_assoc()):
@@ -83,13 +88,15 @@
                                     <td>
                                         <?php if ($fileName !== ''): ?>
                                             <a class="cp-table-link" href="<?= htmlspecialchars($fileHref) ?>" target="_blank" rel="noopener noreferrer">View File</a>
-                                            <?php if (strtolower((string)($proof['status'] ?? 'pending_confirmation')) !== 'confirmed'): ?>
+                                            <?php if ($proofHasStatusColumn && strtolower((string)($proof['status'] ?? 'pending_confirmation')) !== 'confirmed'): ?>
                                                 <form method="post" class="cp-inline-form" style="margin-top:8px;">
                                                     <input type="hidden" name="shipment_payment_proof_id" value="<?= (int)$proof['id'] ?>">
                                                     <button class="cp-btn" type="submit" name="confirm_shipment_payment_proof" value="1">Confirm Proof</button>
                                                 </form>
-                                            <?php else: ?>
+                                            <?php elseif ($proofHasStatusColumn): ?>
                                                 <div class="cp-table-status">Confirmed</div>
+                                            <?php else: ?>
+                                                <div class="cp-table-status">Status column unavailable</div>
                                             <?php endif; ?>
                                         <?php else: ?>
                                             -
