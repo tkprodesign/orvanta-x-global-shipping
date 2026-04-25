@@ -11,6 +11,7 @@ $currentDesign = $mockDesigns[$mockDesignId];
 $mockData = cp_mock_fetch_dashboard_data($dbconn);
 $summary = $mockData['summary'];
 $recentShipments = $mockData['recent_shipments'];
+$lists = is_array($mockData['lists'] ?? null) ? $mockData['lists'] : [];
 $totalChargesDemo = max(0, (float)$summary['shipments'] * 0.01 + 52.25);
 ?>
 <!DOCTYPE html>
@@ -101,6 +102,59 @@ $totalChargesDemo = max(0, (float)$summary['shipments'] * 0.01 + 52.25);
                     <p>Each mock uses the same live metrics but applies a different mobile list pattern.</p>
                     <p>Use these pages to compare spacing, grouping, and readability before final implementation.</p>
                 </article>
+            </div>
+        </article>
+
+        <article class="mock-preview-card">
+            <h2>Live Lists Preview (10 rows each)</h2>
+            <p class="mock-muted">
+                Each list below shows real records up to 10 rows. If fewer than 10 records exist, placeholder rows fill the remaining slots so you can compare visual density across all four designs.
+            </p>
+
+            <div class="mock-list-grid">
+                <?php
+                $listTitles = [
+                    'users' => 'Site Users',
+                    'shipments' => 'Shipments',
+                    'quotes' => 'Service Quotes',
+                    'exception_payments' => 'Exception Payments',
+                ];
+                ?>
+                <?php foreach ($listTitles as $listKey => $listTitle): ?>
+                    <?php $rows = is_array($lists[$listKey] ?? null) ? $lists[$listKey] : []; ?>
+                    <section class="mock-list-card">
+                        <div class="mock-list-head">
+                            <h3><?= htmlspecialchars($listTitle) ?></h3>
+                            <span><?= count($rows) ?> rows</span>
+                        </div>
+                        <div class="mock-list-wrap">
+                            <table>
+                                <?php if (!empty($rows)): ?>
+                                    <thead>
+                                    <tr>
+                                        <?php foreach (array_keys($rows[0]) as $headerKey): ?>
+                                            <?php if ($headerKey === '_is_placeholder') continue; ?>
+                                            <th><?= htmlspecialchars((string)$headerKey) ?></th>
+                                        <?php endforeach; ?>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach ($rows as $row): ?>
+                                        <tr class="<?= !empty($row['_is_placeholder']) ? 'is-placeholder' : '' ?>">
+                                            <?php foreach ($row as $cellKey => $cellValue): ?>
+                                                <?php if ($cellKey === '_is_placeholder') continue; ?>
+                                                <td><?= htmlspecialchars((string)$cellValue) ?></td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                    </tbody>
+                                <?php else: ?>
+                                    <tbody><tr><td>No records found.</td></tr></tbody>
+                                <?php endif; ?>
+                            </table>
+                        </div>
+                    </section>
+                <?php endforeach; ?>
             </div>
         </article>
     </section>

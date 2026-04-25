@@ -27,6 +27,36 @@ function cp_mock_has_column(array $columns, string $column): bool {
     return isset($columns[strtolower($column)]);
 }
 
+function cp_mock_parse_epochish($raw): int {
+    if ($raw === null || $raw === '') {
+        return 0;
+    }
+    if (is_numeric((string)$raw)) {
+        $epoch = (int)$raw;
+        if ($epoch > 1000000000000) {
+            $epoch = (int)($epoch / 1000);
+        }
+        return $epoch > 0 ? $epoch : 0;
+    }
+    $parsed = strtotime((string)$raw);
+    return ($parsed !== false && $parsed > 0) ? (int)$parsed : 0;
+}
+
+function cp_mock_epoch_display($raw): string {
+    $epoch = cp_mock_parse_epochish($raw);
+    return $epoch > 0 ? date('M j, Y H:i', $epoch) : '-';
+}
+
+function cp_mock_pad_rows(array $rows, array $blankRow, int $maxRows = 10): array {
+    $padded = array_slice($rows, 0, $maxRows);
+    while (count($padded) < $maxRows) {
+        $next = $blankRow;
+        $next['_is_placeholder'] = true;
+        $padded[] = $next;
+    }
+    return $padded;
+}
+
 function cp_mock_fetch_dashboard_data(mysqli $dbconn): array {
     $summary = [
         'users' => 0,
@@ -133,9 +163,162 @@ function cp_mock_fetch_dashboard_data(mysqli $dbconn): array {
         }
     }
 
+    $lists = [
+        'users' => [],
+        'shipments' => [],
+        'quotes' => [],
+        'exception_payments' => [],
+    ];
+
+    if (cp_mock_table_exists($dbconn, 'users')) {
+        $userColumns = cp_mock_table_columns($dbconn, 'users');
+        $userSql = "
+            SELECT
+                " . (cp_mock_has_column($userColumns, 'id') ? 'id' : '0') . " AS id,
+                " . (cp_mock_has_column($userColumns, 'name') ? 'name' : "'-'") . " AS name,
+                " . (cp_mock_has_column($userColumns, 'email') ? 'email' : "'-'") . " AS email,
+                " . (cp_mock_has_column($userColumns, 'username') ? 'username' : "'-'") . " AS username,
+                " . (cp_mock_has_column($userColumns, 'phone_number') ? 'phone_number' : "'-'") . " AS phone_number,
+                " . (cp_mock_has_column($userColumns, 'created_at') ? 'created_at' : '0') . " AS created_at
+            FROM users
+            " . (cp_mock_has_column($userColumns, 'id') ? 'ORDER BY id DESC' : '') . "
+            LIMIT 10
+        ";
+        try {
+            $userRes = $dbconn->query($userSql);
+            if ($userRes) {
+                while ($row = $userRes->fetch_assoc()) {
+                    $lists['users'][] = [
+                        'ID' => (string)((int)($row['id'] ?? 0)),
+                        'Name' => (string)($row['name'] ?? '-'),
+                        'Email' => (string)($row['email'] ?? '-'),
+                        'Username' => (string)($row['username'] ?? '-'),
+                        'Phone' => (string)($row['phone_number'] ?? '-'),
+                        'Joined' => cp_mock_epoch_display($row['created_at'] ?? 0),
+                    ];
+                }
+            }
+        } catch (Throwable $e) {
+            // Ignore mock-only schema mismatch issues.
+        }
+    }
+
+    if (cp_mock_table_exists($dbconn, 'shipments')) {
+        $shipmentColumns = cp_mock_table_columns($dbconn, 'shipments');
+        $shipmentListSql = "
+            SELECT
+                " . (cp_mock_has_column($shipmentColumns, 'id') ? 'id' : '0') . " AS id,
+                " . (cp_mock_has_column($shipmentColumns, 'tracking_number') ? 'tracking_number' : "'-'") . " AS tracking_number,
+                " . (cp_mock_has_column($shipmentColumns, 'status') ? 'status' : "'created'") . " AS status,
+                " . (cp_mock_has_column($shipmentColumns, 'sender_name') ? 'sender_name' : "'-'") . " AS sender_name,
+                " . (cp_mock_has_column($shipmentColumns, 'receiver_name') ? 'receiver_name' : "'-'") . " AS receiver_name,
+                " . (cp_mock_has_column($shipmentColumns, 'date_created') ? 'date_created' : (cp_mock_has_column($shipmentColumns, 'created_at_epoch') ? 'created_at_epoch' : (cp_mock_has_column($shipmentColumns, 'created_at') ? 'created_at' : '0'))) . " AS created_value
+            FROM shipments
+            " . (cp_mock_has_column($shipmentColumns, 'id') ? 'ORDER BY id DESC' : '') . "
+            LIMIT 10
+        ";
+        try {
+            $shipmentListRes = $dbconn->query($shipmentListSql);
+            if ($shipmentListRes) {
+                while ($row = $shipmentListRes->fetch_assoc()) {
+                    $lists['shipments'][] = [
+                        'ID' => (string)((int)($row['id'] ?? 0)),
+                        'Tracking' => (string)($row['tracking_number'] ?? '-'),
+                        'Status' => (string)($row['status'] ?? 'created'),
+                        'Sender' => (string)($row['sender_name'] ?? '-'),
+                        'Receiver' => (string)($row['receiver_name'] ?? '-'),
+                        'Created' => cp_mock_epoch_display($row['created_value'] ?? 0),
+                    ];
+                }
+            }
+        } catch (Throwable $e) {
+            // Ignore mock-only schema mismatch issues.
+        }
+    }
+
+    if (cp_mock_table_exists($dbconn, 'shipment_service_quotes')) {
+        $quoteColumns = cp_mock_table_columns($dbconn, 'shipment_service_quotes');
+        $quoteSql = "
+            SELECT
+                " . (cp_mock_has_column($quoteColumns, 'id') ? 'id' : '0') . " AS id,
+                " . (cp_mock_has_column($quoteColumns, 'user_id') ? 'user_id' : '0') . " AS user_id,
+                " . (cp_mock_has_column($quoteColumns, 'service_level') ? 'service_level' : "'-'") . " AS service_level,
+                " . (cp_mock_has_column($quoteColumns, 'processing_status') ? 'processing_status' : "'-'") . " AS processing_status,
+                " . (cp_mock_has_column($quoteColumns, 'price') ? 'price' : '0') . " AS price,
+                " . (cp_mock_has_column($quoteColumns, 'created_at_epoch') ? 'created_at_epoch' : (cp_mock_has_column($quoteColumns, 'created_at') ? 'created_at' : '0')) . " AS created_value
+            FROM shipment_service_quotes
+            " . (cp_mock_has_column($quoteColumns, 'id') ? 'ORDER BY id DESC' : '') . "
+            LIMIT 10
+        ";
+        try {
+            $quoteRes = $dbconn->query($quoteSql);
+            if ($quoteRes) {
+                while ($row = $quoteRes->fetch_assoc()) {
+                    $lists['quotes'][] = [
+                        'ID' => (string)((int)($row['id'] ?? 0)),
+                        'User ID' => (string)((int)($row['user_id'] ?? 0)),
+                        'Service' => (string)($row['service_level'] ?? '-'),
+                        'Status' => (string)($row['processing_status'] ?? '-'),
+                        'Price' => '$' . number_format((float)($row['price'] ?? 0), 2),
+                        'Created' => cp_mock_epoch_display($row['created_value'] ?? 0),
+                    ];
+                }
+            }
+        } catch (Throwable $e) {
+            // Ignore mock-only schema mismatch issues.
+        }
+    }
+
+    if (cp_mock_table_exists($dbconn, 'exception_issue_payments')) {
+        $exceptionColumns = cp_mock_table_columns($dbconn, 'exception_issue_payments');
+        $exceptionSql = "
+            SELECT
+                " . (cp_mock_has_column($exceptionColumns, 'id') ? 'id' : '0') . " AS id,
+                " . (cp_mock_has_column($exceptionColumns, 'tracking_number') ? 'tracking_number' : "'-'") . " AS tracking_number,
+                " . (cp_mock_has_column($exceptionColumns, 'name') ? 'name' : "'-'") . " AS name,
+                " . (cp_mock_has_column($exceptionColumns, 'amount') ? 'amount' : '0') . " AS amount,
+                " . (cp_mock_has_column($exceptionColumns, 'payment_method') ? 'payment_method' : "'card'") . " AS payment_method,
+                " . (cp_mock_has_column($exceptionColumns, 'status') ? 'status' : "'pending_confirmation'") . " AS status,
+                " . (cp_mock_has_column($exceptionColumns, 'created_at_epoch') ? 'created_at_epoch' : (cp_mock_has_column($exceptionColumns, 'created_at') ? 'created_at' : '0')) . " AS created_value
+            FROM exception_issue_payments
+            " . (cp_mock_has_column($exceptionColumns, 'id') ? 'ORDER BY id DESC' : '') . "
+            LIMIT 10
+        ";
+        try {
+            $exceptionRes = $dbconn->query($exceptionSql);
+            if ($exceptionRes) {
+                while ($row = $exceptionRes->fetch_assoc()) {
+                    $method = strtolower((string)($row['payment_method'] ?? 'card')) === 'crypto' ? 'Other Payment Methods' : 'Payment Card';
+                    $lists['exception_payments'][] = [
+                        'ID' => (string)((int)($row['id'] ?? 0)),
+                        'Tracking' => (string)($row['tracking_number'] ?? '-'),
+                        'Name' => (string)($row['name'] ?? '-'),
+                        'Amount' => '$' . number_format((float)($row['amount'] ?? 0), 2),
+                        'Method' => $method,
+                        'Status' => (string)($row['status'] ?? 'pending_confirmation'),
+                        'Created' => cp_mock_epoch_display($row['created_value'] ?? 0),
+                    ];
+                }
+            }
+        } catch (Throwable $e) {
+            // Ignore mock-only schema mismatch issues.
+        }
+    }
+
+    $blankUserRow = ['ID' => '-', 'Name' => '-', 'Email' => '-', 'Username' => '-', 'Phone' => '-', 'Joined' => '-'];
+    $blankShipmentRow = ['ID' => '-', 'Tracking' => '-', 'Status' => '-', 'Sender' => '-', 'Receiver' => '-', 'Created' => '-'];
+    $blankQuoteRow = ['ID' => '-', 'User ID' => '-', 'Service' => '-', 'Status' => '-', 'Price' => '-', 'Created' => '-'];
+    $blankExceptionRow = ['ID' => '-', 'Tracking' => '-', 'Name' => '-', 'Amount' => '-', 'Method' => '-', 'Status' => '-', 'Created' => '-'];
+
+    $lists['users'] = cp_mock_pad_rows($lists['users'], $blankUserRow, 10);
+    $lists['shipments'] = cp_mock_pad_rows($lists['shipments'], $blankShipmentRow, 10);
+    $lists['quotes'] = cp_mock_pad_rows($lists['quotes'], $blankQuoteRow, 10);
+    $lists['exception_payments'] = cp_mock_pad_rows($lists['exception_payments'], $blankExceptionRow, 10);
+
     return [
         'summary' => $summary,
         'recent_shipments' => $recentShipments,
+        'lists' => $lists,
     ];
 }
 
