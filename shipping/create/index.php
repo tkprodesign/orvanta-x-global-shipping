@@ -148,7 +148,7 @@ if ($step === 5 && !empty($created_shipment) && is_array($created_shipment)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($create_page_heading) ?> | Orvanta X Global Shipping</title>
+    <title><?= htmlspecialchars($create_page_heading) ?> | OrvantaX Global Shipping</title>
     <link rel="stylesheet" href="/assets/stylesheets/main.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="/assets/stylesheets/shipping.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="/assets/images/branding/mark-only.png?v=<?php echo time(); ?>" type="image/png">
