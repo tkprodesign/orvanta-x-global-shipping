@@ -7,7 +7,7 @@ include('./app.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Veteran Logistics Group | Shipping, Tracking, Freight & Logistics Solutions</title>
+    <title>Orvanta X Global Shipping | Shipping, Tracking, Freight & Logistics Solutions</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     
     
@@ -54,8 +54,8 @@ include('./app.php');
                 <div class="container">
                     <div class="heading">
                         <!-- <p class="pre-heading">Courier & Logistics Solution</p> -->
-                        <h1 class="main-heading">Reliable Logistics. Trusted Delivery. Serving Those Who <span class="accent">Served.</span> </h1>
-                        <p class="sub-heading">Veteran Logistics Group provides secure, fast, and reliable delivery solutions for veterans, their families, and government agencies, while operating within a broader carrier support network that includes UPS.</p>
+                        <h1 class="main-heading">Global Reach. Local Precision. Built for <span class="accent">Modern Commerce.</span> </h1>
+                        <p class="sub-heading">Orvanta X Global Shipping provides secure, fast, and reliable delivery solutions for businesses and individuals with dependable domestic and international coverage.</p>
                     </div>
                     <form class="c-t-a" action="/track/" method="get">
                         <div class="input-box">
@@ -69,8 +69,8 @@ include('./app.php');
                 <div class="dark-bg"></div>
                 <div class="container">
                     <div class="heading">
-                        <h1 class="main-heading">Engineered for Precision. <span class="accent">Built for Duty.</span></h1>
-                        <p class="sub-heading">A specialized courier division delivering disciplined logistics for official operations, secure transport, and mission-critical movements.</p>
+                        <h1 class="main-heading">Engineered for Precision. <span class="accent">Built for Global Trade.</span></h1>
+                        <p class="sub-heading">A specialized logistics network supporting time-critical freight, eCommerce fulfillment, and cross-border transportation.</p>
                     </div>
                     <form class="c-t-a" action="/track/" method="get">
                         <div class="input-box">
@@ -92,22 +92,22 @@ include('./app.php');
     <div class="container">
         <div class="ups-branch-card">
             <div class="content">
-                <p class="eyebrow">UPS Network Relationship</p>
-                <h2>Veteran Logistics Group Operates as a UPS Branch Service Partner</h2>
+                <p class="eyebrow">Global Carrier Network</p>
+                <h2>Orvanta X Global Shipping Connects You to a Trusted Global Network</h2>
                 <p>
-                    Veteran Logistics Group serves as a UPS branch service partner, providing day-to-day customer support, shipment processing, and delivery coordination under UPS-aligned standards.
+                    Orvanta X Global Shipping provides day-to-day customer support, shipment processing, and delivery coordination across a vetted network of carrier and logistics partners.
                 </p>
                 <p>
-                    This gives our customers branch-level help from a dedicated team while benefiting from UPS-compatible routing, tracking visibility, and dependable delivery coverage across domestic and international lanes.
+                    This gives customers dedicated support backed by scalable routing, real-time tracking visibility, and dependable delivery coverage across domestic and international lanes.
                 </p>
                 <ul>
-                    <li>Official branch-style customer assistance for veterans, families, and agencies.</li>
-                    <li>UPS-aligned handling, tracking, and transit workflow standards.</li>
-                    <li>Reliable escalation paths through broader UPS support channels when required.</li>
+                    <li>Dedicated customer assistance for personal and business shipments.</li>
+                    <li>Consistent handling, tracking, and transit workflow standards.</li>
+                    <li>Reliable escalation and proactive exception management when required.</li>
                 </ul>
             </div>
             <div class="visual">
-                <img src="https://www.ups.com/assets/resources/webcontent/images/ups-logo.svg" alt="Official UPS logo">
+                <img src="<?= htmlspecialchars(asset_url('/assets/images/branding/logo-stacked-light.png')); ?>" alt="Orvanta X Global Shipping">
             </div>
         </div>
     </div>
@@ -118,7 +118,7 @@ include('./app.php');
     <div class="container">
         <div class="heading .heading-1">
             <h2>Precision in Motion. Deliveries You Can Count On</h2>
-            <p>From urgent parcels to secure government deliveries, Veteran Logistics Group handles every shipment with <b>care, speed, and reliability</b>. Our team turns complex logistics into <b>smooth, dependable solutions</b>, so you can focus on what matters most.</p>
+            <p>From urgent parcels to secure government deliveries, Orvanta X Global Shipping handles every shipment with <b>care, speed, and reliability</b>. Our team turns complex logistics into <b>smooth, dependable solutions</b>, so you can focus on what matters most.</p>
         </div>
         <div class="content">
             <div class="col">
@@ -175,8 +175,8 @@ include('./app.php');
 <section class="services-alt">
     <div class="container">
         <div class="heading">
-            <h2>Logistics Solutions for Veterans and Government Services</h2>
-            <p>From urgent parcels to critical government documents, Veteran Logistics Group delivers with precision, security, and discipline, with network support that includes UPS services where needed. Going the extra mile for those who served.</p>
+            <h2>Logistics Solutions for Businesses and Individuals</h2>
+            <p>From urgent parcels to freight movements, Orvanta X Global Shipping delivers with speed, security, and transparency across every lane.</p>
             <div class="toggle">
                 <button href="#" class="btn1 active">Business</button>
                 <button href="#" class="btn2">Personal</button>
@@ -207,11 +207,11 @@ include('./app.php');
                 </div>
             </div>
 
-            <!-- Personal / Veteran & Family Services -->
+            <!-- Personal Services -->
             <div class="g2">
                 <div class="col">
                     <h3>Same-Day Delivery</h3>
-                    <p>Urgency. Critical packages for veterans and families are picked up and delivered the same day.</p>
+                    <p>Urgency. Critical packages are picked up and delivered the same day.</p>
                     <a href="/shipping">Ship Today <span class="material-symbols-outlined">chevron_right</span></a>
                 </div>
                 <div class="col">
@@ -221,7 +221,7 @@ include('./app.php');
                 </div>
                 <div class="col">
                     <h3>Assisted Pickup & Delivery</h3>
-                    <p>Convenience. Pickups and deliveries for elderly or mobility-challenged veterans are supported efficiently.</p>
+                    <p>Convenience. Assisted pickups and deliveries are supported efficiently.</p>
                     <a href="/shipping">Book Pickup <span class="material-symbols-outlined">chevron_right</span></a>
                 </div>
                 <div class="col">
@@ -320,7 +320,7 @@ include('./app.php');
                     <span class="material-symbols-outlined accordion-icon">chevron_right</span>
                 </summary>
                 <div class="inner-content">
-                    <p>Read more on the <a href="https://about.ups.com/us/en/newsroom/ups-aircraft-accident.html" target="_blank" rel="noopener noreferrer">UPS aircraft accident <span class="material-symbols-outlined">open_in_new</span></a></p>
+                    <p>Read more on current network advisories in our support center and shipment alerts.</p>
                 </div>
             </details>
 
@@ -331,7 +331,7 @@ include('./app.php');
                 </summary>
                 <div class="inner-content">
                     <p>Carrier tariff, service guide, and network terms were updated effective January 26, 2026.</p>
-                    <a href="https://www.ups.com/us/en/support/shipping-support/shipping-costs-rates" target="_blank" rel="noopener noreferrer">View Guides <span class="material-symbols-outlined">open_in_new</span></a>
+                    <a href="/support/">View Guides <span class="material-symbols-outlined">chevron_right</span></a>
                 </div>
             </details>
 
@@ -341,7 +341,7 @@ include('./app.php');
                     <span class="material-symbols-outlined accordion-icon">chevron_right</span>
                 </summary>
                 <div class="inner-content">
-                    <p>Effective January 5, 2026, the U.S. Ground Domestic and the UPS Ground SaverÂ® Fuel Surcharge will change. <a href="https://assets.ups.com/adobe/assets/urn:aaid:aem:13ea22a9-bd18-49ee-a87c-c3b6f761a002/original/as/us-domestic-fuel-flyer.pdf" target="_blank" rel="noopener noreferrer">Read More About the Rate Change <span class="material-symbols-outlined">open_in_new</span></a></p>
+                    <p>Effective January 5, 2026, the U.S. Ground Domestic and the domestic ground fuel surcharge will change. <a href="https://assets.ups.com/adobe/assets/urn:aaid:aem:13ea22a9-bd18-49ee-a87c-c3b6f761a002/original/as/us-domestic-fuel-flyer.pdf" target="_blank" rel="noopener noreferrer">Read More About the Rate Change <span class="material-symbols-outlined">open_in_new</span></a></p>
                 </div>
             </details>
 
@@ -372,7 +372,7 @@ include('./app.php');
                     <span class="material-symbols-outlined accordion-icon">chevron_right</span>
                 </summary>
                 <div class="inner-content">
-                    <p>Weâ€™ll help you stay informed about the <a href="https://www.ups.com/us/en/shipping/international-shipping/tariffs" target="_blank" rel="noopener noreferrer">impacts of the new tariffs <span class="material-symbols-outlined">open_in_new</span></a></p>
+                    <p>Weâ€™ll help you stay informed about the <a href="/support/">impacts of the new tariffs <span class="material-symbols-outlined">chevron_right</span></a></p>
                 </div>
             </details>
         </div>
