@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shipping Tools | Orvanta X Global Shipping</title>
+    <title>Shipping Tools | OrvantaX Global Shipping</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     
     
@@ -50,7 +50,7 @@
     <div class="container">
         <div class="heading">
             <!-- <h2>Logistics Solutions for Veterans and Government Services</h2>
-            <p>From urgent parcels to critical government documents, Orvanta X Global Shipping delivers with precision, security, and discipline. Going the extra mile for those heroes risking it all for the betterment of the world.</p> -->
+            <p>From urgent parcels to critical government documents, OrvantaX Global Shipping delivers with precision, security, and discipline. Going the extra mile for those heroes risking it all for the betterment of the world.</p> -->
             <div class="toggle">
                 <button href="#" class="btn1 active">Prepare to Ship</button>
                 <button href="#" class="btn2">Manage Ongoing Shipments</button>

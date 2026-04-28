@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up | Orvanta X Global Shipping</title>
+    <title>Sign Up | OrvantaX Global Shipping</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     
     <link rel="stylesheet" href="/assets/stylesheets/main.css?v=<?php echo time(); ?>">
@@ -74,10 +74,10 @@
                     <input type="checkbox" name="accept_terms" required>
                     <p>
                         I agree to the
-                        <a href="/legal/terms-and-conditions/">Orvanta X Global Shipping Terms and Conditions of Service</a>
+                        <a href="/legal/terms-and-conditions/">OrvantaX Global Shipping Terms and Conditions of Service</a>
                         and the
-                        <a href="/legal/website-terms-of-use/">Orvanta X Global Shipping Website Terms of Use</a>,
-                        which contain important terms about my shipping activity and my use of Orvanta X Global Shipping services,
+                        <a href="/legal/website-terms-of-use/">OrvantaX Global Shipping Website Terms of Use</a>,
+                        which contain important terms about my shipping activity and my use of OrvantaX Global Shipping services,
                         including limitations of liability and how disputes will be handled.
                     </p>
                 </div>

@@ -7,7 +7,7 @@ include('./app.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orvanta X Global Shipping | Shipping, Tracking, Freight & Logistics Solutions</title>
+    <title>OrvantaX Global Shipping | Shipping, Tracking, Freight & Logistics Solutions</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     
     
@@ -55,7 +55,7 @@ include('./app.php');
                     <div class="heading">
                         <!-- <p class="pre-heading">Courier & Logistics Solution</p> -->
                         <h1 class="main-heading">Global Reach. Local Precision. Built for <span class="accent">Modern Commerce.</span> </h1>
-                        <p class="sub-heading">Orvanta X Global Shipping provides secure, fast, and reliable delivery solutions for businesses and individuals with dependable domestic and international coverage.</p>
+                        <p class="sub-heading">OrvantaX Global Shipping provides secure, fast, and reliable delivery solutions for businesses and individuals with dependable domestic and international coverage.</p>
                     </div>
                     <form class="c-t-a" action="/track/" method="get">
                         <div class="input-box">
@@ -93,9 +93,9 @@ include('./app.php');
         <div class="ups-branch-card">
             <div class="content">
                 <p class="eyebrow">Global Carrier Network</p>
-                <h2>Orvanta X Global Shipping Connects You to a Trusted Global Network</h2>
+                <h2>OrvantaX Global Shipping Connects You to a Trusted Global Network</h2>
                 <p>
-                    Orvanta X Global Shipping provides day-to-day customer support, shipment processing, and delivery coordination across a vetted network of carrier and logistics partners.
+                    OrvantaX Global Shipping provides day-to-day customer support, shipment processing, and delivery coordination across a vetted network of carrier and logistics partners.
                 </p>
                 <p>
                     This gives customers dedicated support backed by scalable routing, real-time tracking visibility, and dependable delivery coverage across domestic and international lanes.
@@ -107,7 +107,7 @@ include('./app.php');
                 </ul>
             </div>
             <div class="visual">
-                <img src="<?= htmlspecialchars(asset_url('/assets/images/branding/logo-stacked-light.png')); ?>" alt="Orvanta X Global Shipping">
+                <img src="<?= htmlspecialchars(asset_url('/assets/images/branding/logo-stacked-light.png')); ?>" alt="OrvantaX Global Shipping">
             </div>
         </div>
     </div>
@@ -118,7 +118,7 @@ include('./app.php');
     <div class="container">
         <div class="heading .heading-1">
             <h2>Precision in Motion. Deliveries You Can Count On</h2>
-            <p>From urgent parcels to secure government deliveries, Orvanta X Global Shipping handles every shipment with <b>care, speed, and reliability</b>. Our team turns complex logistics into <b>smooth, dependable solutions</b>, so you can focus on what matters most.</p>
+            <p>From urgent parcels to secure government deliveries, OrvantaX Global Shipping handles every shipment with <b>care, speed, and reliability</b>. Our team turns complex logistics into <b>smooth, dependable solutions</b>, so you can focus on what matters most.</p>
         </div>
         <div class="content">
             <div class="col">
@@ -176,7 +176,7 @@ include('./app.php');
     <div class="container">
         <div class="heading">
             <h2>Logistics Solutions for Businesses and Individuals</h2>
-            <p>From urgent parcels to freight movements, Orvanta X Global Shipping delivers with speed, security, and transparency across every lane.</p>
+            <p>From urgent parcels to freight movements, OrvantaX Global Shipping delivers with speed, security, and transparency across every lane.</p>
             <div class="toggle">
                 <button href="#" class="btn1 active">Business</button>
                 <button href="#" class="btn2">Personal</button>
