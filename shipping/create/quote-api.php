@@ -154,7 +154,7 @@ function quote_build_admin_email_html(
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="640" style="max-width:640px;background-color:#ffffff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;">
 <tr><td style="background-color:#0f172a;padding:16px 28px;">
 <a href="https://orvantaxglobalshipping.com/" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block;">
-<img src="https://orvantaxglobalshipping.com/assets/images/branding/logo-horizontal-dark.png" alt="Orvanta X Global Shipping" width="220" style="display:block;border:0;max-width:220px;height:auto;">
+<img src="https://orvantaxglobalshipping.com/assets/images/branding/logo-horizontal-dark.png" alt="OrvantaX Global Shipping" width="220" style="display:block;border:0;max-width:220px;height:auto;">
 </a>
 </td></tr>
 <tr><td style="padding:28px 40px 6px 40px;"><h1 style="margin:0;font-size:26px;line-height:1.3;color:#0f172a;">New service quote request</h1></td></tr>
@@ -169,7 +169,7 @@ function quote_build_admin_email_html(
 </td></tr>
 <tr><td style="padding:0 40px 24px 40px;"><a href="https://orvantaxglobalshipping.com/control-panel/page/#cp-edit-service-quote" style="display:inline-block;background-color:#1d4ed8;color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:6px;font-size:14px;font-weight:bold;">Go to Control Panel</a></td></tr>
 <tr><td style="padding:0 40px 18px 40px;"><p style="margin:0;font-size:12px;line-height:1.6;color:#6b7280;">If you did not expect this message, please contact support at support@orvantaxglobalshipping.com.</p></td></tr>
-<tr><td style="background-color:#f8fafc;border-top:1px solid #e5e7eb;padding:16px 24px;"><p style="margin:0;font-size:11px;line-height:1.5;color:#6b7280;">© 2026 Orvanta X Global Shipping. Please do not reply to this email.</p></td></tr>
+<tr><td style="background-color:#f8fafc;border-top:1px solid #e5e7eb;padding:16px 24px;"><p style="margin:0;font-size:11px;line-height:1.5;color:#6b7280;">© 2026 OrvantaX Global Shipping. Please do not reply to this email.</p></td></tr>
 </table>
 </td></tr>
 </table>

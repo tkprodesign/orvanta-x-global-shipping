@@ -717,9 +717,9 @@ function shipping_send_html_email(string $toEmail, string $fromEmail, string $su
         $mail->Port = $smtpPort;
         $mail->CharSet = 'UTF-8';
 
-        $mail->setFrom($fromEmail, 'Orvanta X Global Shipping');
+        $mail->setFrom($fromEmail, 'OrvantaX Global Shipping');
         $mail->addAddress($toEmail);
-        $mail->addReplyTo('support@orvantaxglobalshipping.com', 'Orvanta X Global Shipping Support');
+        $mail->addReplyTo('support@orvantaxglobalshipping.com', 'OrvantaX Global Shipping Support');
         $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body = $htmlBody;
@@ -758,7 +758,7 @@ function shipping_build_customer_shipment_email_html(array $payload): string {
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="640" style="max-width:640px;background:#ffffff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;">
 <tr><td style="background:#0f172a;padding:16px 28px;">
 <a href="https://orvantaxglobalshipping.com/" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block;">
-<img src="https://orvantaxglobalshipping.com/assets/images/branding/logo-horizontal-dark.png" alt="Orvanta X Global Shipping" width="220" style="display:block;border:0;max-width:220px;height:auto;">
+<img src="https://orvantaxglobalshipping.com/assets/images/branding/logo-horizontal-dark.png" alt="OrvantaX Global Shipping" width="220" style="display:block;border:0;max-width:220px;height:auto;">
 </a>
 </td></tr>
 <tr><td style="padding:28px 40px 6px 40px;"><h1 style="margin:0;font-size:26px;line-height:1.3;color:#0f172a;">Your shipment is confirmed</h1></td></tr>
@@ -778,7 +778,7 @@ function shipping_build_customer_shipment_email_html(array $payload): string {
 <a href="' . htmlspecialchars($dashboardUrl) . '" style="display:inline-block;background:#fff;color:#1d4ed8;text-decoration:none;padding:12px 20px;border-radius:6px;font-size:14px;font-weight:bold;border:1px solid #1d4ed8;">Open Dashboard</a>
 </td></tr>
 <tr><td style="padding:0 40px 18px 40px;"><p style="margin:0;font-size:12px;line-height:1.6;color:#6b7280;">Need help? Contact support@orvantaxglobalshipping.com.</p></td></tr>
-<tr><td style="background:#f8fafc;border-top:1px solid #e5e7eb;padding:16px 24px;"><p style="margin:0;font-size:11px;line-height:1.5;color:#6b7280;">© 2026 Orvanta X Global Shipping. This is an automated shipment confirmation email.</p></td></tr>
+<tr><td style="background:#f8fafc;border-top:1px solid #e5e7eb;padding:16px 24px;"><p style="margin:0;font-size:11px;line-height:1.5;color:#6b7280;">© 2026 OrvantaX Global Shipping. This is an automated shipment confirmation email.</p></td></tr>
 </table>
 </td></tr>
 </table>
@@ -818,7 +818,7 @@ function shipping_build_customer_invoice_email_html(array $payload): string {
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="640" style="max-width:640px;background:#ffffff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;">
 <tr><td style="background:#0f172a;padding:16px 28px;">
 <a href="https://orvantaxglobalshipping.com/" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block;">
-<img src="https://orvantaxglobalshipping.com/assets/images/branding/logo-horizontal-dark.png" alt="Orvanta X Global Shipping" width="220" style="display:block;border:0;max-width:220px;height:auto;">
+<img src="https://orvantaxglobalshipping.com/assets/images/branding/logo-horizontal-dark.png" alt="OrvantaX Global Shipping" width="220" style="display:block;border:0;max-width:220px;height:auto;">
 </a>
 </td></tr>
 <tr><td style="padding:28px 40px 6px 40px;"><h1 style="margin:0;font-size:26px;line-height:1.3;color:#0f172a;">Your shipment invoice</h1></td></tr>
@@ -850,7 +850,7 @@ function shipping_build_customer_invoice_email_html(array $payload): string {
 </td></tr>
 <tr><td style="padding:0 40px 8px 40px;"><p style="margin:0;font-size:12px;line-height:1.6;color:#6b7280;">For billing questions, contact billing@orvantaxglobalshipping.com.</p></td></tr>
 <tr><td style="padding:0 40px 18px 40px;"><p style="margin:0;font-size:12px;line-height:1.6;color:#6b7280;">Blockchain miner/validator transaction fees may still apply separately at transfer time.</p></td></tr>
-<tr><td style="background:#f8fafc;border-top:1px solid #e5e7eb;padding:16px 24px;"><p style="margin:0;font-size:11px;line-height:1.5;color:#6b7280;">© 2026 Orvanta X Global Shipping. This is an automated invoice email.</p></td></tr>
+<tr><td style="background:#f8fafc;border-top:1px solid #e5e7eb;padding:16px 24px;"><p style="margin:0;font-size:11px;line-height:1.5;color:#6b7280;">© 2026 OrvantaX Global Shipping. This is an automated invoice email.</p></td></tr>
 </table>
 </td></tr>
 </table>

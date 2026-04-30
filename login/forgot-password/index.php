@@ -6,7 +6,7 @@ include('./app.php'); // This contains the handler logic
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password | Orvanta X Global Shipping</title>
+    <title>Forgot Password | OrvantaX Global Shipping</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="shortcut icon" href="/assets/images/branding/mark-only.png?v=<?php echo time(); ?>" type="image/png">
     <link rel="stylesheet" href="/assets/stylesheets/main.css?v=<?php echo time(); ?>">
@@ -20,7 +20,7 @@ include('./app.php'); // This contains the handler logic
 
             <div class="heading">
                 <span class="auth-logo-wrap">
-                    <img src="/assets/images/branding/logo-stacked-light.png" alt="Orvanta X Global Shipping Logo" class="logo">
+                    <img src="/assets/images/branding/logo-stacked-light.png" alt="OrvantaX Global Shipping Logo" class="logo">
                 </span>
                 <h2>Forgot Password</h2>
                 <p>Enter your email address or username to receive reset instructions.</p>

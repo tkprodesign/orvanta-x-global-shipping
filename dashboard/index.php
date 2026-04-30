@@ -7,7 +7,7 @@ include('app.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Orvanta X Global Shipping</title>
+    <title>Dashboard | OrvantaX Global Shipping</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/assets/stylesheets/main.css?v=<?php echo time(); ?>">

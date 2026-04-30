@@ -7,7 +7,7 @@ include("app.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shipping Services | Orvanta X Global Shipping</title>
+    <title>Shipping Services | OrvantaX Global Shipping</title>
 
     <link rel="stylesheet" href="/assets/stylesheets/main.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="/assets/stylesheets/services.css?v=<?php echo time(); ?>">
@@ -36,7 +36,7 @@ include("app.php");
 
         <section class="services-hero">
             <div class="hero-copy">
-                <h1>Orvanta X Global Shipping Services</h1>
+                <h1>OrvantaX Global Shipping Services</h1>
                 <p>Whether you are shipping across the street or across the world, we have several service options to help you find the right balance of speed and cost.</p>
                 <div class="hero-cta-row">
                     <a href="/shipping/" class="btn-gold">Ship Now <span class="material-symbols-outlined">chevron_right</span></a>
@@ -54,7 +54,7 @@ include("app.php");
             <div class="service-tabs">
                 <a class="active" href="#panel-domestic" data-service-panel="panel-domestic">Domestic Shipping Services</a>
                 <a href="#panel-international" data-service-panel="panel-international">International Shipping Services</a>
-                    <a href="#panel-additional" data-service-panel="panel-additional">Additional Orvanta X Global Shipping Services</a>
+                    <a href="#panel-additional" data-service-panel="panel-additional">Additional OrvantaX Global Shipping Services</a>
             </div>
         </div>
     </section>
@@ -92,7 +92,7 @@ include("app.php");
 
             <div class="service-panel" id="panel-additional">
                 <div class="section-heading">
-                    <h2>Additional Orvanta X Global Shipping Services</h2>
+                    <h2>Additional OrvantaX Global Shipping Services</h2>
                     <p>Explore additional services that support your business beyond delivery.</p>
                 </div>
                 <div class="cards-grid three-up additional-grid">
