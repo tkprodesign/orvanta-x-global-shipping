@@ -20,7 +20,7 @@ include('./app.php'); // This contains the handler logic
 
             <div class="heading">
                 <span class="auth-logo-wrap">
-                    <img src="/assets/images/branding/logo-stacked-light.png" alt="OrvantaX Global Shipping Logo" class="logo">
+                    <img src="/assets/images/branding/logo.png" alt="OrvantaX Global Shipping Logo" class="logo">
                 </span>
                 <h2>Forgot Password</h2>
                 <p>Enter your email address or username to receive reset instructions.</p>

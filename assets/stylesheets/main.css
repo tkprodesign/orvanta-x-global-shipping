@@ -799,3 +799,7 @@ header.scrolled .right .cta .dtp-secondary {
   border-color: rgba(255, 255, 255, 0.22);
   color: #ffffff;
 }/*# sourceMappingURL=main.css.map */
+
+
+footer .footer-brand{display:flex;justify-content:center;padding:0 20px 30px;}
+footer .footer-brand img{width:min(100%,420px);height:auto;display:block;}
