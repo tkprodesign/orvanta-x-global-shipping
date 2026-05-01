@@ -21,9 +21,9 @@ footer .footer-bottom .copyright{font-size:.78rem;color:rgba(255,255,255,.35);ma
 header .container .right #menuToggleBtn{display:none !important;border:none;cursor:pointer;appearance:none;-webkit-appearance:none;outline:none}
 header .container .right #menuToggleBtn .stroke{position:absolute;left:50%;width:22px;height:2.5px;border-radius:999px;background:#13203f;transform-origin:center;transition:transform .24s ease,opacity .2s ease,top .24s ease;translate:-50% 0}
 header .container .right #menuToggleBtn .stroke.l1{top:13px}
-header .container .right #menuToggleBtn .stroke.l2{top:19px;opacity:1}
+header .container .right #menuToggleBtn .stroke.l2{top:calc(50% - 1.25px);opacity:1}
 header .container .right #menuToggleBtn .stroke.l3{top:25px}
-header .container .right #menuToggleBtn.active .stroke.l1{top:19px;transform:rotate(45deg)}
+header .container .right #menuToggleBtn.active .stroke.l1{top:calc(50% - 1.25px);transform:rotate(45deg)}
 header .container .right #menuToggleBtn.active .stroke.l2{opacity:0}
-header .container .right #menuToggleBtn.active .stroke.l3{top:19px;transform:rotate(-45deg)}
+header .container .right #menuToggleBtn.active .stroke.l3{top:calc(50% - 1.25px);transform:rotate(-45deg)}
 @media (max-width: 959px){header .container .right #menuToggleBtn{display:inline-flex !important;position:relative;width:44px;height:44px;border-radius:12px;align-items:center;justify-content:center;background:rgba(29,46,111,.08)}body.home-v2 header .container .right #menuToggleBtn{background:#00c2cb !important}body.home-v2 header .container .right #menuToggleBtn .stroke{background:#fff}}
