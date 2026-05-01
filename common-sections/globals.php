@@ -2,7 +2,7 @@
 if (!defined('COMMON_SECTIONS_GLOBALS_LOADED')) {
     define('COMMON_SECTIONS_GLOBALS_LOADED', true);
 
-    $global_db_host = getenv('DB_HOST') ?: "sqlXXX.byethost.com";
+    $global_db_host = getenv('DB_HOST') ?: "sql300.byethost18.com";
     $global_db_user = getenv('DB_USER') ?: "b18_41230477";
     $global_db_pass = getenv('DB_PASS') ?: "Wateva06@";
     $global_db_name = getenv('DB_NAME') ?: "b18_41230477_db2";
@@ -31,7 +31,7 @@ if (!defined('COMMON_SECTIONS_GLOBALS_LOADED')) {
         }
 
         if (!empty($globalConn->connect_error)) {
-            die("Connection failed: " . $globalConn->connect_error . ". Verify DB_HOST/DB_USER/DB_PASS/DB_NAME. If using ByetHost, DB_HOST is usually your sql***.byethost.com host, not localhost/127.0.0.1.");
+            die("Connection failed: " . $globalConn->connect_error . ". Verify DB_HOST/DB_USER/DB_PASS/DB_NAME. Default in this repo is sql300.byethost18.com; override with DB_HOST if your panel shows a different sql host.");
         }
     }
 
