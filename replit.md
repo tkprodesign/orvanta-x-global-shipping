@@ -9,6 +9,15 @@ A PHP-based delivery logistics web application for "OrvantaX Global Shipping" (v
 - Admin control panel
 - Shipping order creation flow
 
+## Homepage Design (2026-05)
+- **Dark aesthetic**: `body.home-v2` scope, design tokens in `assets/stylesheets/home.css`
+- **Hero**: 2-slide Swiper (fade, 6s autoplay) with full-bleed BG images and dark gradient overlay
+  - Slide 1: Tesla Semi truck (`assets/images/home/hero-ev-truck.jpg`)
+  - Slide 2: Modern courier (`assets/images/home/hero-courier.jpg`)
+  - Swiper 9 loaded from CDN; initialized inline at bottom of `index.php`
+- **Footer logo**: `filter: brightness(0) invert(1)` applied globally in `main.css` to make dark logo visible on navy footer
+- **Stats section**: removed (was generic 1M+, 150+, etc.)
+
 ## Tech Stack
 - **Backend**: PHP 8.2 (procedural, no framework)
 - **Database**: MySQL 8.0 (local, managed by `start-mysql.sh`)

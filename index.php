@@ -18,6 +18,7 @@ include('./app.php');
 
     <link rel="shortcut icon" href="<?= htmlspecialchars(asset_url('/assets/images/branding/favicon.png')); ?>" type="image/png">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -29,58 +30,54 @@ include('./app.php');
 <?php include("common-sections/header.html"); ?>
 
 <!-- ═══════════════════════════════════════════
-     HERO
+     HERO — 2-slide Swiper with full-bleed BG images
 ═══════════════════════════════════════════ -->
 <section class="hv2-hero">
-    <div class="hv2-hero__glow"></div>
-    <div class="hv2-hero__inner">
-        <img
-            src="<?= htmlspecialchars(asset_url('/assets/images/branding/seal.png')); ?>"
-            alt="OrvantaX Global Shipping"
-            class="hv2-hero__logo"
-        >
-        <h1 class="hv2-hero__headline">Shipping Excellence</h1>
-        <p class="hv2-hero__sub">
-            Global logistics. Seamless delivery. Your trusted partner for freight, cargo, and courier services worldwide.
-        </p>
-        <div class="hv2-hero__ctas">
-            <a href="#" class="js-open-support-chat hv2-btn hv2-btn--cyan" data-chat-message="I need help to make a quote.">Get a Quote</a>
-            <a href="/track/" class="hv2-btn hv2-btn--ghost">Track Shipment</a>
-        </div>
-        <form class="hv2-hero__track" action="/track/" method="get">
-            <input type="text" name="id" placeholder="Enter tracking number or InfoNotice®" autocomplete="off">
-            <button type="submit">Track <span class="material-symbols-outlined">chevron_right</span></button>
-        </form>
-    </div>
-    <a href="#hv2-stats" class="hv2-hero__scroll" aria-label="Scroll down">
-        <span class="material-symbols-outlined">keyboard_arrow_down</span>
-    </a>
-</section>
+    <div class="swiper hv2-swiper">
+        <div class="swiper-wrapper">
 
+            <!-- Slide 1: EV / Tesla delivery vehicle -->
+            <div class="swiper-slide hv2-slide" style="background-image:url('/assets/images/home/hero-ev-truck.jpg');">
+                <div class="hv2-slide__overlay"></div>
+                <div class="container hv2-slide__content">
+                    <p class="hv2-hero__eyebrow">Electric Logistics Network</p>
+                    <h1 class="hv2-hero__headline">
+                        Global Reach. Local Precision.<br>
+                        Built for <span class="hv2-accent">Modern Commerce.</span>
+                    </h1>
+                    <p class="hv2-hero__sub">OrvantaX Global Shipping provides secure, fast, and reliable delivery solutions for businesses and individuals with dependable domestic and international coverage.</p>
+                    <div class="hv2-hero__actions">
+                        <form class="hv2-hero__track" action="/track/" method="get">
+                            <input type="text" name="id" placeholder="Tracking Number or InfoNotice®" autocomplete="off">
+                            <button type="submit">Track <span class="material-symbols-outlined">chevron_right</span></button>
+                        </form>
+                        <a href="/shipping/create/" class="hv2-btn hv2-btn--ghost">Start Shipment <span class="material-symbols-outlined">chevron_right</span></a>
+                    </div>
+                </div>
+            </div>
 
-<!-- ═══════════════════════════════════════════
-     STATS
-═══════════════════════════════════════════ -->
-<section class="hv2-stats" id="hv2-stats">
-    <div class="container">
-        <div class="hv2-stats__grid">
-            <div class="hv2-stat">
-                <span class="hv2-stat__number">1M+</span>
-                <span class="hv2-stat__label">Shipments Delivered</span>
+            <!-- Slide 2: Modern courier services -->
+            <div class="swiper-slide hv2-slide" style="background-image:url('/assets/images/home/hero-courier.jpg');">
+                <div class="hv2-slide__overlay"></div>
+                <div class="container hv2-slide__content">
+                    <p class="hv2-hero__eyebrow">Courier & Freight Solutions</p>
+                    <h1 class="hv2-hero__headline">
+                        Engineered for Precision.<br>
+                        <span class="hv2-accent">Built for Global Trade.</span>
+                    </h1>
+                    <p class="hv2-hero__sub">A specialized logistics network supporting time-critical freight, eCommerce fulfillment, and cross-border transportation.</p>
+                    <div class="hv2-hero__actions">
+                        <form class="hv2-hero__track" action="/track/" method="get">
+                            <input type="text" name="id" placeholder="Tracking Number or InfoNotice®" autocomplete="off">
+                            <button type="submit">Track <span class="material-symbols-outlined">chevron_right</span></button>
+                        </form>
+                        <a href="#" class="js-open-support-chat hv2-btn hv2-btn--ghost" data-chat-message="I need help to make a quote.">Get a Quote <span class="material-symbols-outlined">chevron_right</span></a>
+                    </div>
+                </div>
             </div>
-            <div class="hv2-stat">
-                <span class="hv2-stat__number">150+</span>
-                <span class="hv2-stat__label">Countries Served</span>
-            </div>
-            <div class="hv2-stat">
-                <span class="hv2-stat__number">99.2%</span>
-                <span class="hv2-stat__label">On-Time Delivery</span>
-            </div>
-            <div class="hv2-stat">
-                <span class="hv2-stat__number">24/7</span>
-                <span class="hv2-stat__label">Customer Support</span>
-            </div>
+
         </div>
+        <div class="swiper-pagination hv2-swiper__pagination"></div>
     </div>
 </section>
 
@@ -353,7 +350,18 @@ include('./app.php');
 
 <?php include("common-sections/footer.html"); ?>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="/assets/scripts/home.js?v=<?php echo filemtime($_SERVER['DOCUMENT_ROOT'] . '/assets/scripts/home.js'); ?>"></script>
+<script>
+new Swiper('.hv2-swiper', {
+    loop: true,
+    autoplay: { delay: 6000, disableOnInteraction: false },
+    speed: 900,
+    effect: 'fade',
+    fadeEffect: { crossFade: true },
+    pagination: { el: '.hv2-swiper__pagination', clickable: true },
+});
+</script>
 <script>
 (function () {
     // Solutions toggle
