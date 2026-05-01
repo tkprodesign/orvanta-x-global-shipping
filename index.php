@@ -26,7 +26,7 @@ include('./app.php');
     <script src="https://kit.fontawesome.com/79b279a6c9.js" crossorigin="anonymous"></script>
 
 </head>
-<body class="home-premium">
+<body>
 <?php include("common-sections/header.html"); ?>
 <section class="hero">
     <!-- DESKTOP CURVE -->
