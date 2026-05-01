@@ -57,10 +57,24 @@ body.home-v2 header #menuToggleBtn {
   background: #00c2cb !important;
   border: none !important;
   border-radius: 10px !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
 }
 body.home-v2 header #menuToggleBtn:hover {
   background: #00a8b0 !important;
 }
+body.home-v2 header #menuToggleBtn span {
+  width: 18px !important;
+  left: 11px !important;
+  background: #ffffff !important;
+}
+body.home-v2 header #menuToggleBtn span.l1 { top: 13px !important; }
+body.home-v2 header #menuToggleBtn span.l2 { top: 19px !important; }
+body.home-v2 header #menuToggleBtn span.l3 { top: 25px !important; }
 body.home-v2 header #menuToggleBtn .material-symbols-outlined {
   color: #ffffff !important;
   font-size: 22px;
