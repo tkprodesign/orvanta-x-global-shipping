@@ -48,9 +48,13 @@ jobs:
               set ftp:passive-mode true;
               open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
               mirror -R --delete --verbose \
-                --exclude-glob .git* \
-                --exclude-glob .github/* \
-                --exclude-glob node_modules/* \
+                --exclude-glob .git/** \
+                --exclude-glob .git \
+                --exclude-glob .github/** \
+                --exclude-glob .github \
+                --exclude-glob .vscode/** \
+                --exclude-glob .vscode \
+                --exclude-glob node_modules/** \
                 --exclude-glob AGENTS.md \
                 . $REMOTE_DIR;
               put -O $REMOTE_DIR /tmp/$DEPLOY_MARKER;
@@ -69,9 +73,13 @@ jobs:
               set ftp:passive-mode true;
               open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
               mirror -R --delete --verbose \
-                --exclude-glob .git* \
-                --exclude-glob .github/* \
-                --exclude-glob node_modules/* \
+                --exclude-glob .git/** \
+                --exclude-glob .git \
+                --exclude-glob .github/** \
+                --exclude-glob .github \
+                --exclude-glob .vscode/** \
+                --exclude-glob .vscode \
+                --exclude-glob node_modules/** \
                 --exclude-glob AGENTS.md \
                 . $REMOTE_DIR;
               bye
@@ -101,7 +109,7 @@ jobs:
               file_path="$path_part"
             fi
 
-            if [[ "$file_path" == .git* ]] || [[ "$file_path" == .github/* ]] || [[ "$file_path" == node_modules/* ]] || [[ "$file_path" == AGENTS.md ]]; then
+            if [[ "$file_path" == .git/* ]] || [[ "$file_path" == .github/* ]] || [[ "$file_path" == .vscode/* ]] || [[ "$file_path" == node_modules/* ]] || [[ "$file_path" == AGENTS.md ]]; then
               continue
             fi
 
@@ -135,7 +143,7 @@ jobs:
           done
 
           for file_path in "${delete_list[@]}"; do
-            if [[ "$file_path" == .git* ]] || [[ "$file_path" == .github/* ]] || [[ "$file_path" == node_modules/* ]] || [[ "$file_path" == AGENTS.md ]]; then
+            if [[ "$file_path" == .git/* ]] || [[ "$file_path" == .github/* ]] || [[ "$file_path" == .vscode/* ]] || [[ "$file_path" == node_modules/* ]] || [[ "$file_path" == AGENTS.md ]]; then
               continue
             fi
 
