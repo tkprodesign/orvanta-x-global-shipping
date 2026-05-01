@@ -30,7 +30,7 @@ if (!defined('COMMON_SECTIONS_GLOBALS_LOADED')) {
         }
 
         if (!empty($globalConn->connect_error)) {
-            die("Connection failed: " . $globalConn->connect_error);
+            die("Connection failed: " . $globalConn->connect_error . ". Verify DB_HOST/DB_USER/DB_PASS/DB_NAME and run install-database.php once connected.");
         }
     }
 
