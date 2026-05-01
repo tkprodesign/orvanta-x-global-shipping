@@ -217,13 +217,15 @@
         align-items: center;
         justify-content: center;
         gap: 6px;
-        background: #ffc400;
-        color: #121212;
+        background: #00c2cb;
+        color: #ffffff;
         font-size: 14px;
         font-weight: 600;
         text-decoration: none;
         width: auto;
         align-self: center;
+        transition: background-color 0.2s ease;
+        &:hover { background: #00a8b0; }
       }
     }
   }

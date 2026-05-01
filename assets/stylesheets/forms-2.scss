@@ -9,19 +9,24 @@ $border-grey: #a8a8a8;
 $text-main: #333;
 
 body.login-page {
-    background: #fff;
+    background: linear-gradient(135deg, #0d1b3e 0%, #152554 50%, #0a1829 100%);
     font-family: 'Open Sans', sans-serif;
     margin: 0;
     display: flex;
     justify-content: center;
     padding-top: 50px;
+    min-height: 100vh;
 }
 
 .container {
-    width: 100%;
+    width: 95%;
     max-width: 400px; 
     margin: 0 auto;
     text-align: center;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 40px 32px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.35);
 
     .heading {
         margin-bottom: 30px;
@@ -99,8 +104,8 @@ body.login-page {
                 gap: 4px;
                 
                 /* Style */
-                background-color: $ups-gold;
-                color: $ups-brown;
+                background-color: #00c2cb;
+                color: #ffffff;
                 border: none;
                 border-radius: 50px;
                 padding: 14px 0;
@@ -111,12 +116,12 @@ body.login-page {
                 transition: all 0.2s ease-in-out;
 
                 .material-symbols-outlined {
-                    font-size: 22px; // Sized to match UPS style
+                    font-size: 22px;
                     transition: transform 0.2s ease;
                 }
 
                 &:hover {
-                    background-color: darken($ups-gold, 5%);
+                    background-color: #00a8b0;
                     
                     .material-symbols-outlined {
                         transform: translateX(4px); // The signature "nudge"

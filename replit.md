@@ -9,14 +9,39 @@ A PHP-based delivery logistics web application for "OrvantaX Global Shipping" (v
 - Admin control panel
 - Shipping order creation flow
 
-## Homepage Design (2026-05)
+## Site-Wide Design System (2026-05)
+### Design Tokens
+- **Primary CTA color**: `#00c2cb` (teal/cyan) — used for all primary buttons site-wide
+- **Primary CTA hover**: `#00a8b0`
+- **Decorative accents** (heading underlines): `#E1AE2A` (gold — kept as brand identity)
+- **Navy dark gradient** (form page backgrounds): `linear-gradient(135deg, #0d1b3e, #152554, #0a1829)`
+
+### CSS Compilation
+SCSS source files in `assets/stylesheets/` are compiled with `npx sass`. After editing any `.scss` file, run:
+```bash
+npx sass assets/stylesheets/<file>.scss assets/stylesheets/<file>.css --no-source-map --style=compressed
+```
+Responsive overrides in `ts/` (tablet) and `ms/` (mobile) follow the same pattern.
+
+### Homepage
 - **Dark aesthetic**: `body.home-v2` scope, design tokens in `assets/stylesheets/home.css`
 - **Hero**: 2-slide Swiper (fade, 6s autoplay) with full-bleed BG images and dark gradient overlay
   - Slide 1: Tesla Semi truck (`assets/images/home/hero-ev-truck.jpg`)
   - Slide 2: Modern courier (`assets/images/home/hero-courier.jpg`)
   - Swiper 9 loaded from CDN; initialized inline at bottom of `index.php`
-- **Footer logo**: `filter: brightness(0) invert(1)` applied globally in `main.css` to make dark logo visible on navy footer
-- **Stats section**: removed (was generic 1M+, 150+, etc.)
+- **Footer logo**: `filter: brightness(0) invert(1)` applied globally in `main.css`
+
+### Login / Signup Pages
+- **Background**: Dark navy gradient (`forms.scss` → `forms.css`)
+- **Card**: White floating card with `border-radius: 16px` and drop shadow
+- **Submit button**: Teal (`#00c2cb`) — updated from gold
+
+### Services / Support Pages
+- **Primary CTAs** (`.btn-gold`): Teal (`#00c2cb`) — updated from gold in `services.scss`, `support.scss`
+
+### Dashboard / Shipping Pages
+- **`.btn-gold`**: Teal — updated in `dashboard.scss`
+- **`.quote-btn-primary`**, **`.promo-btn-apply`**: Teal — updated in `shipping.scss`
 
 ## Tech Stack
 - **Backend**: PHP 8.2 (procedural, no framework)

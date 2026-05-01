@@ -311,7 +311,8 @@ header {
                     margin-bottom: 32px;
 
                     .pri {
-                        background: $acc;
+                        background: #00c2cb;
+                        color: #ffffff;
                         display: flex;
                         align-items: center;
                         padding: 10px 24px;
@@ -321,7 +322,7 @@ header {
                         transition: all .25s ease;
 
                         &:hover {
-                            background-color: #ffd64c;
+                            background-color: #00a8b0;
                         }
                     }
 

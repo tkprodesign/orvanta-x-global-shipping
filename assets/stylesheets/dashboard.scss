@@ -277,7 +277,8 @@ body {
 }
 
 .btn-gold {
-    background: $ups-gold;
+    background: #00c2cb;
+    color: #ffffff;
     display: flex;
     align-items: center;
     padding: 10px 24px;
@@ -286,7 +287,7 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: all .25s ease;
-    &:hover { background-color: color.adjust($ups-gold, $lightness: -5%); }
+    &:hover { background-color: #00a8b0; }
     &.w-100 { width: 100%; justify-content: center; }
 }
 
