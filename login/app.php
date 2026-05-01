@@ -12,33 +12,6 @@ require_once __DIR__ . '/../common-sections/globals.php';
 $error = "";
 $postLoginRedirect = '';
 $requiredLogin = false;
-$turnstileSecretKey = '0x4AAAAAACwnvIudy3lvL60Re4JVpWPk5Ks';
-
-function login_verify_turnstile(string $token, string $remoteIp, string $secretKey): bool {
-    if ($token === '' || $secretKey === '') {
-        return false;
-    }
-
-    $ch = curl_init('https://challenges.cloudflare.com/turnstile/v0/siteverify');
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 12);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
-        'secret' => $secretKey,
-        'response' => $token,
-        'remoteip' => $remoteIp,
-    ]));
-    $response = curl_exec($ch);
-    $httpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-
-    if ($response === false || $httpCode < 200 || $httpCode >= 300) {
-        return false;
-    }
-
-    $decoded = json_decode($response, true);
-    return is_array($decoded) && !empty($decoded['success']);
-}
 
 if (isset($_POST['redirect'])) {
     $postLoginRedirect = trim((string)$_POST['redirect']);
@@ -67,13 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $requiredLogin) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $login_input = trim($_POST['username'] ?? "");
     $password = $_POST['password'] ?? "";
-    $turnstileToken = trim((string)($_POST['cf-turnstile-response'] ?? ''));
-    $remoteIp = (string)($_SERVER['REMOTE_ADDR'] ?? '');
 
     if ($login_input === "" || $password === "") {
         $error = "Please enter your username/email and password.";
-    } elseif (!login_verify_turnstile($turnstileToken, $remoteIp, $turnstileSecretKey)) {
-        $error = "Turnstile verification failed. Please try again.";
     } else {
         $stmt = $conn->prepare(
             "SELECT id, name, email, username, password, is_verified, created_at

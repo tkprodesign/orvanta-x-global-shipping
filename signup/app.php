@@ -21,35 +21,6 @@ if (file_exists($signupEmailConfigPath)) {
 }
 
 /* -------------------------
-   TURNSTILE VERIFY
--------------------------- */
-function signup_verify_turnstile(string $token, string $remoteIp): bool {
-    $secretKey = '0x4AAAAAACwnvIudy3lvL60Re4JVpWPk5Ks';
-
-    if ($token === '') return false;
-
-    $ch = curl_init('https://challenges.cloudflare.com/turnstile/v0/siteverify');
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
-        'secret' => $secretKey,
-        'response' => $token,
-        'remoteip' => $remoteIp,
-    ]));
-
-    $response = curl_exec($ch);
-    $httpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-
-    if ($response === false || $httpCode < 200 || $httpCode >= 300) {
-        return false;
-    }
-
-    $decoded = json_decode($response, true);
-    return is_array($decoded) && !empty($decoded['success']);
-}
-
-/* -------------------------
    SECRET RESOLVER
 -------------------------- */
 function signup_resolve_secret(string $name): string {
@@ -172,9 +143,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username     = trim($_POST["username"] ?? "");
     $password     = $_POST["password"] ?? "";
     $terms        = isset($_POST["accept_terms"]);
-    $turnstileToken = trim($_POST["cf-turnstile-response"] ?? "");
-    $remoteIp = $_SERVER['REMOTE_ADDR'] ?? '';
-
     // VALIDATION
     if ($name === "") $errors[] = "Name is required.";
     if ($email === "" || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Valid email is required.";
@@ -182,10 +150,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($password === "" || strlen($password) < 8) $errors[] = "Password must be at least 8 characters.";
     if (!$terms) $errors[] = "You must accept the terms.";
     if ($phone_number !== null && !preg_match("/^[0-9]+$/", $phone_number)) $errors[] = "Phone must be digits only.";
-
-    if (!signup_verify_turnstile($turnstileToken, $remoteIp)) {
-        $errors[] = "Turnstile verification failed.";
-    }
 
     // DUPLICATE CHECK
     if (empty($errors)) {

@@ -22,7 +22,6 @@
     
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://kit.fontawesome.com/79b279a6c9.js" crossorigin="anonymous"></script>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 
 <body>
@@ -80,10 +79,6 @@
                         which contain important terms about my shipping activity and my use of OrvantaX Global Shipping services,
                         including limitations of liability and how disputes will be handled.
                     </p>
-                </div>
-
-                <div class="input-box">
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAACwnvMl9sbRLv3K2"></div>
                 </div>
 
                 <div class="input-box">
