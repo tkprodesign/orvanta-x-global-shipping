@@ -21,7 +21,7 @@ footer .footer-bottom .copyright{font-size:.78rem;color:rgba(255,255,255,.35);ma
 header .container .right #menuToggleBtn{display:none !important;border:none;cursor:pointer;appearance:none;-webkit-appearance:none;outline:none}
 header .container .right #menuToggleBtn .stroke{position:absolute;left:50%;width:22px;height:2.5px;border-radius:999px;background:#13203f;transform-origin:center;transition:transform .24s ease,opacity .2s ease,top .24s ease;translate:-50% 0}
 header .container .right #menuToggleBtn .stroke.l1{top:13px}
-header .container .right #menuToggleBtn .stroke.l2{top:50%;opacity:1;translate:-50% -50%}
+header .container .right #menuToggleBtn .stroke.l2{top:50%;opacity:1;translate:-50% 50%}
 header .container .right #menuToggleBtn .stroke.l3{top:25px}
 header .container .right #menuToggleBtn.active .stroke.l1{top:calc(50% - 1.25px);transform:rotate(45deg)}
 header .container .right #menuToggleBtn.active .stroke.l2{opacity:0}
