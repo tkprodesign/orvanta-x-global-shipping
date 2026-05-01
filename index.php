@@ -355,11 +355,14 @@ include('./app.php');
 <script>
 new Swiper('.hv2-swiper', {
     loop: true,
-    autoplay: { delay: 6000, disableOnInteraction: false },
-    speed: 900,
-    effect: 'fade',
-    fadeEffect: { crossFade: true },
+    loopedSlides: 2,
+    autoplay: { delay: 7000, disableOnInteraction: false, pauseOnMouseEnter: true },
+    speed: 800,
+    grabCursor: true,
+    allowTouchMove: true,
+    slidesPerView: 1,
     pagination: { el: '.hv2-swiper__pagination', clickable: true },
+    keyboard: { enabled: true },
 });
 </script>
 <script>

@@ -5,6 +5,12 @@ MYSQL_LOGS=/home/runner/mysql-logs
 
 mkdir -p "$MYSQL_DATA" "$MYSQL_RUN" "$MYSQL_LOGS"
 
+# Initialize data directory if empty or missing system tables
+if [ ! -f "$MYSQL_DATA/ibdata1" ]; then
+    echo "Initializing MySQL data directory..."
+    mysqld --initialize-insecure --datadir="$MYSQL_DATA" 2>>"$MYSQL_LOGS/error.log"
+fi
+
 # Remove stale socket/lock/pid files
 rm -f "$MYSQL_RUN/mysql.sock" "$MYSQL_RUN/mysql.sock.lock" "$MYSQL_RUN/mysql.pid"
 

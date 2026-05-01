@@ -41,6 +41,27 @@ body.home-v2 header #menuToggleBtn span {
   background: #1d2433;
 }
 
+/* ── Make both mobile header icon-buttons look identical ── */
+body.home-v2 header .cta .mb,
+body.home-v2 header #menuToggleBtn {
+  background: #f0f3f8 !important;
+  border: 1.5px solid #dde2ec !important;
+  color: #1d2433 !important;
+  border-radius: 10px !important;
+}
+body.home-v2 header .cta .mb:hover,
+body.home-v2 header #menuToggleBtn:hover {
+  background: #e3e8f2 !important;
+}
+body.home-v2 header .cta .mb .material-symbols-outlined,
+body.home-v2 header .cta .mb i {
+  color: #1d2e6f;
+  font-size: 20px;
+}
+body.home-v2 header #menuToggleBtn span {
+  background: #1d2433 !important;
+}
+
 /* ════════════════════════════════════════
    SHARED BUTTONS
 ════════════════════════════════════════ */
@@ -151,7 +172,12 @@ body.home-v2 header #menuToggleBtn span {
 .hv2-swiper {
   width: 100%;
   height: 100vh;
-  min-height: 560px;
+  min-height: 580px;
+}
+
+/* Swiper wrapper must fill the container height */
+.hv2-swiper .swiper-wrapper {
+  height: 100%;
 }
 
 /* Each slide: full-bleed background image */
@@ -161,10 +187,12 @@ body.home-v2 header #menuToggleBtn span {
   background-repeat: no-repeat;
   position: relative;
   display: flex !important;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
   padding-bottom: 100px;
-  width: 100% !important;
   height: 100% !important;
+  box-sizing: border-box;
 }
 
 /* Dark gradient overlay — heavier at bottom for text legibility */
@@ -703,21 +731,38 @@ body.home-v2 header #menuToggleBtn span {
   /* ── Mobile hero ── */
   .hv2-swiper {
     height: 100svh;
+    height: 100vh; /* fallback */
     min-height: 540px;
   }
+  .hv2-swiper .swiper-wrapper {
+    height: 100%;
+  }
   .hv2-slide {
-    padding-bottom: 80px;
-    align-items: flex-end;
+    padding: 0 20px 88px;
+    justify-content: flex-end;
+    height: 100% !important;
+  }
+  .hv2-slide__content {
+    padding: 0;
+    max-width: 100%;
+  }
+  .hv2-hero__eyebrow {
+    font-size: 0.65rem;
+    margin-bottom: 0.6rem;
   }
   .hv2-hero__headline {
-    font-size: clamp(2rem, 9vw, 2.8rem);
+    font-size: clamp(1.9rem, 8vw, 2.6rem);
+    margin-bottom: 0.8rem;
   }
   .hv2-hero__sub {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 1.4rem;
+    max-width: 100%;
   }
   .hv2-hero__actions {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 10px;
   }
   .hv2-hero__track {
@@ -725,6 +770,7 @@ body.home-v2 header #menuToggleBtn span {
   }
   .hv2-hero__track input {
     min-width: 0;
+    flex: 1;
   }
   .hv2-btn.hv2-btn--ghost {
     width: 100%;
@@ -732,6 +778,7 @@ body.home-v2 header #menuToggleBtn span {
   }
   .hv2-swiper__pagination {
     padding-left: 20px;
+    bottom: 20px !important;
   }
 }
 
