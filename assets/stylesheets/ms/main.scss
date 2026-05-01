@@ -31,9 +31,12 @@ header{
 
             .cta {
                 .mb {
-                    width: 36px;
-                    height: 36px;
+                    width: 38px;
+                    height: 38px;
                     border-radius: 10px;
+                    background: #f0f3f8;
+                    color: #1d2e6f;
+                    border: 1px solid #dde2ec;
 
                     .material-symbols-outlined,
                     i {
@@ -44,24 +47,26 @@ header{
             }
 
             #menuToggleBtn {
-                width: 36px;
-                height: 36px;
+                width: 38px;
+                height: 38px;
                 border-radius: 10px;
+                background: #00c2cb;
 
                 span {
                     width: 16px;
-                    left: 10px;
+                    left: 11px;
+                    background: #ffffff;
 
                     &.l1 {
                         top: 12px;
                     }
 
                     &.l2 {
-                        top: 18px;
+                        top: 19px;
                     }
 
                     &.l3 {
-                        top: 24px;
+                        top: 26px;
                     }
                 }
             }

@@ -730,17 +730,18 @@ body.home-v2 header #menuToggleBtn span {
 
   /* ── Mobile hero ── */
   .hv2-swiper {
-    height: 100svh;
-    height: 100vh; /* fallback */
-    min-height: 540px;
+    height: 620px;
+    min-height: 480px;
   }
   .hv2-swiper .swiper-wrapper {
     height: 100%;
   }
   .hv2-slide {
-    padding: 0 20px 88px;
+    padding: 0 20px 72px;
     justify-content: flex-end;
     height: 100% !important;
+    background-size: cover;
+    background-position: center;
   }
   .hv2-slide__content {
     padding: 0;
