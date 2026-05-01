@@ -240,7 +240,7 @@ header .container .right {
   position: relative;
 }
 header .container .right .cta .dtp {
-  background: #1D2E6F;
+  background: #00c2cb;
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -249,7 +249,7 @@ header .container .right .cta .dtp {
   transition: all 0.25s ease;
 }
 header .container .right .cta .dtp:hover {
-  background-color: #152457;
+  background-color: #00a8b0;
 }
 header .container .right .cta .mb {
   display: none;
@@ -689,8 +689,8 @@ header.is-scrolled #menuToggleBtn span {
 }
 
 header.is-scrolled .container .right .cta .dtp {
-  background: #e1ae2a;
-  color: #10204c;
+  background: #00a8b0;
+  color: #ffffff;
 }
 
 header .container .right .cta .dtp {

@@ -254,7 +254,7 @@ header {
 
             .cta {
                 .dtp {
-                    background: $accent-color-2;
+                    background: #00c2cb;
                     color: $wh;
                     display: flex;
                     align-items: center;
@@ -263,7 +263,7 @@ header {
                     transition: all .25s ease;
 
                     &:hover {
-                        background-color: $accent-color-3;
+                        background-color: #00a8b0;
                     }
                 }
 
@@ -764,8 +764,8 @@ header.is-scrolled #menuToggleBtn span {
 }
 
 header.is-scrolled .container .right .cta .dtp {
-    background: #e1ae2a;
-    color: #10204c;
+    background: #00a8b0;
+    color: #ffffff;
 }
 
 header .container .right .cta .dtp {
