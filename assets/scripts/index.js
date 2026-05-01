@@ -81,6 +81,8 @@ if (menuToggleBtn && nav && body) {
 
     menuToggleBtn.addEventListener('click', () => {
         menuToggleBtn.classList.toggle('active');
+        const isOpen = menuToggleBtn.classList.contains('active');
+        menuToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         body.classList.toggle('active-nav');
         nav.classList.toggle('active');
     });
@@ -88,6 +90,7 @@ if (menuToggleBtn && nav && body) {
     nav.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', () => {
             menuToggleBtn.classList.remove('active');
+            menuToggleBtn.setAttribute('aria-expanded', 'false');
             body.classList.remove('active-nav');
             nav.classList.remove('active');
         });
@@ -96,6 +99,7 @@ if (menuToggleBtn && nav && body) {
     window.addEventListener('resize', () => {
         if (window.innerWidth >= 960) {
             menuToggleBtn.classList.remove('active');
+            menuToggleBtn.setAttribute('aria-expanded', 'false');
             body.classList.remove('active-nav');
             nav.classList.remove('active');
         }
