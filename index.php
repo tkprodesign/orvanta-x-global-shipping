@@ -8,9 +8,7 @@ include('./app.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OrvantaX Global Shipping | Shipping, Tracking, Freight & Logistics Solutions</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-    
-    
+
     <link rel="stylesheet" href="/assets/stylesheets/main.css?v=<?php echo filemtime($_SERVER['DOCUMENT_ROOT'] . '/assets/stylesheets/main.css'); ?>">
     <link rel="stylesheet" href="/assets/stylesheets/home.css?v=<?php echo filemtime($_SERVER['DOCUMENT_ROOT'] . '/assets/stylesheets/home.css'); ?>">
     <link rel="stylesheet" href="/assets/stylesheets/ts/main.css?v=<?php echo filemtime($_SERVER['DOCUMENT_ROOT'] . '/assets/stylesheets/ts/main.css'); ?>" media="screen and (max-width: 1120px)">
@@ -20,378 +18,367 @@ include('./app.php');
 
     <link rel="shortcut icon" href="<?= htmlspecialchars(asset_url('/assets/images/branding/favicon.png')); ?>" type="image/png">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://kit.fontawesome.com/79b279a6c9.js" crossorigin="anonymous"></script>
-
+    <script src="https://kit.fontawesome.com/79b279a6c9.js" crossorigin="anonymous" defer></script>
 </head>
-<body>
+
+<body class="home-v2">
+
 <?php include("common-sections/header.html"); ?>
-<section class="hero">
-    <!-- DESKTOP CURVE -->
-    <div class="custom-shape-divider-bottom-1771138429">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-        </svg>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section class="hv2-hero">
+    <div class="hv2-hero__glow"></div>
+    <div class="hv2-hero__inner">
+        <img
+            src="<?= htmlspecialchars(asset_url('/assets/images/branding/seal.png')); ?>"
+            alt="OrvantaX Global Shipping"
+            class="hv2-hero__logo"
+        >
+        <h1 class="hv2-hero__headline">Shipping Excellence</h1>
+        <p class="hv2-hero__sub">
+            Global logistics. Seamless delivery. Your trusted partner for freight, cargo, and courier services worldwide.
+        </p>
+        <div class="hv2-hero__ctas">
+            <a href="#" class="js-open-support-chat hv2-btn hv2-btn--cyan" data-chat-message="I need help to make a quote.">Get a Quote</a>
+            <a href="/track/" class="hv2-btn hv2-btn--ghost">Track Shipment</a>
+        </div>
+        <form class="hv2-hero__track" action="/track/" method="get">
+            <input type="text" name="id" placeholder="Enter tracking number or InfoNotice®" autocomplete="off">
+            <button type="submit">Track <span class="material-symbols-outlined">chevron_right</span></button>
+        </form>
     </div>
-    <!-- TAB CURVE -->
-    <div class="custom-shape-divider-bottom-1771153755">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-        </svg>
-    </div>
-    <!-- MOBILE CURVE -->
-    <div class="custom-shape-divider-bottom-1771153943">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-        </svg>
-    </div>
-    <div class="swiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide hero-1">
-                <div class="dark-bg"></div>
-                <div class="container">
-                    <div class="heading">
-                        <!-- <p class="pre-heading">Courier & Logistics Solution</p> -->
-                        <h1 class="main-heading">Global Reach. Local Precision. Built for <span class="accent">Modern Commerce.</span> </h1>
-                        <p class="sub-heading">OrvantaX Global Shipping provides secure, fast, and reliable delivery solutions for businesses and individuals with dependable domestic and international coverage.</p>
-                    </div>
-                    <form class="c-t-a" action="/track/" method="get">
-                        <div class="input-box">
-                            <input type="text" name="id" placeholder="Tracking Number or InfoNoticeÂ®">
-                        </div>
-                        <button type="submit" class="pri">Track <span class="material-symbols-outlined">chevron_right</span></button>
-                    </form>
-                </div>
+    <a href="#hv2-stats" class="hv2-hero__scroll" aria-label="Scroll down">
+        <span class="material-symbols-outlined">keyboard_arrow_down</span>
+    </a>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     STATS
+═══════════════════════════════════════════ -->
+<section class="hv2-stats" id="hv2-stats">
+    <div class="container">
+        <div class="hv2-stats__grid">
+            <div class="hv2-stat">
+                <span class="hv2-stat__number">1M+</span>
+                <span class="hv2-stat__label">Shipments Delivered</span>
             </div>
-            <div class="swiper-slide hero-2">
-                <div class="dark-bg"></div>
-                <div class="container">
-                    <div class="heading">
-                        <h1 class="main-heading">Engineered for Precision. <span class="accent">Built for Global Trade.</span></h1>
-                        <p class="sub-heading">A specialized logistics network supporting time-critical freight, eCommerce fulfillment, and cross-border transportation.</p>
-                    </div>
-                    <form class="c-t-a" action="/track/" method="get">
-                        <div class="input-box">
-                            <input type="text" name="id" placeholder="Tracking Number or InfoNoticeÂ®">
-                        </div>
-                        <button type="submit" class="pri">Track<span class="material-symbols-outlined">chevron_right</span></button>
-                    </form>
-                </div>
+            <div class="hv2-stat">
+                <span class="hv2-stat__number">150+</span>
+                <span class="hv2-stat__label">Countries Served</span>
+            </div>
+            <div class="hv2-stat">
+                <span class="hv2-stat__number">99.2%</span>
+                <span class="hv2-stat__label">On-Time Delivery</span>
+            </div>
+            <div class="hv2-stat">
+                <span class="hv2-stat__number">24/7</span>
+                <span class="hv2-stat__label">Customer Support</span>
             </div>
         </div>
     </div>
 </section>
 
 
-
-
-
-<section class="ups-branch-context">
+<!-- ═══════════════════════════════════════════
+     SERVICES
+═══════════════════════════════════════════ -->
+<section class="hv2-services">
     <div class="container">
-        <div class="ups-branch-card">
-            <div class="content">
-                <p class="eyebrow">Global Carrier Network</p>
-                <h2>OrvantaX Global Shipping Operates an EV-Driven Logistics Segment</h2>
-                <p>
-                    OrvantaX Global Shipping runs a dedicated segment focused on electric-mobility logistics standards inspired by high-performance automotive supply-chain models, including Tesla-style operational discipline.
-                </p>
-                <p>
-                    This segment supports day-to-day customer service, shipment processing, and delivery coordination across vetted carrier partners, with emphasis on speed, visibility, and resilient routing.
-                </p>
-                <ul>
-                    <li>EV-forward shipping workflows modeled on modern automotive logistics practices.</li>
-                    <li>Consistent handling, tracking, and transit standards across domestic and global lanes.</li>
-                    <li>Proactive exception management with dedicated support for business-critical shipments.</li>
-                </ul>
+        <div class="hv2-section-header">
+            <p class="hv2-eyebrow">What We Offer</p>
+            <h2>Complete logistics solutions for every shipping need.<br>From air to ocean, we deliver.</h2>
+        </div>
+        <div class="hv2-services__grid">
+            <div class="hv2-service-card">
+                <div class="hv2-service-card__icon">
+                    <i class="fa-solid fa-plane-departure"></i>
+                </div>
+                <h3>Air Freight</h3>
+                <p>Express air cargo solutions for time-sensitive shipments. Global network, priority handling, real-time tracking.</p>
+                <a href="/shipping/create/" class="hv2-card-link">Learn more <span class="material-symbols-outlined">arrow_forward</span></a>
             </div>
-            <div class="visual">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png" alt="Tesla wordmark used as ecosystem reference">
+            <div class="hv2-service-card">
+                <div class="hv2-service-card__icon">
+                    <i class="fa-solid fa-ship"></i>
+                </div>
+                <h3>Ocean Freight</h3>
+                <p>Cost-effective sea freight for large volumes. Full container load (FCL) and less than container load (LCL) options.</p>
+                <a href="/shipping/create/" class="hv2-card-link">Learn more <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+            <div class="hv2-service-card">
+                <div class="hv2-service-card__icon">
+                    <i class="fa-solid fa-truck"></i>
+                </div>
+                <h3>Ground Transport</h3>
+                <p>Reliable road freight and courier services. Local and long-haul delivery with flexible scheduling.</p>
+                <a href="/shipping/create/" class="hv2-card-link">Learn more <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+            <div class="hv2-service-card">
+                <div class="hv2-service-card__icon">
+                    <i class="fa-solid fa-box-open"></i>
+                </div>
+                <h3>Customs Clearance</h3>
+                <p>Streamlined customs brokerage and compliance. Expert handling of documentation and regulations.</p>
+                <a href="/services/" class="hv2-card-link">Learn more <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+            <div class="hv2-service-card">
+                <div class="hv2-service-card__icon">
+                    <i class="fa-solid fa-warehouse"></i>
+                </div>
+                <h3>Warehousing</h3>
+                <p>Secure storage and distribution solutions. Inventory management, order fulfillment, and cross-docking.</p>
+                <a href="/services/" class="hv2-card-link">Learn more <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+            <div class="hv2-service-card">
+                <div class="hv2-service-card__icon">
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <h3>International Shipping</h3>
+                <p>Worldwide reach with door-to-door service. Serving 150+ countries with comprehensive logistics solutions.</p>
+                <a href="/shipping/create/" class="hv2-card-link">Learn more <span class="material-symbols-outlined">arrow_forward</span></a>
             </div>
         </div>
     </div>
 </section>
 
 
-<section class="why-choose-us editing">
+<!-- ═══════════════════════════════════════════
+     WHY CHOOSE US
+═══════════════════════════════════════════ -->
+<section class="hv2-why">
     <div class="container">
-        <div class="heading .heading-1">
+        <div class="hv2-section-header hv2-section-header--light">
+            <p class="hv2-eyebrow hv2-eyebrow--dark">Our Standards</p>
             <h2>Precision in Motion. Deliveries You Can Count On</h2>
-            <p>From urgent parcels to secure government deliveries, OrvantaX Global Shipping handles every shipment with <b>care, speed, and reliability</b>. Our team turns complex logistics into <b>smooth, dependable solutions</b>, so you can focus on what matters most.</p>
+            <p class="hv2-section-header__sub">From urgent parcels to secure government deliveries, OrvantaX handles every shipment with <strong>care, speed, and reliability</strong>.</p>
         </div>
-        <div class="content">
-            <div class="col">
+        <div class="hv2-why__grid">
+            <div class="hv2-why-card">
+                <div class="hv2-why-card__icon"><i class="fa-solid fa-medal"></i></div>
                 <h4>Operational Excellence</h4>
-                <p>Reliability. Every package is delivered efficiently, safely, and on schedule.</p>
+                <p>Every package is delivered efficiently, safely, and on schedule.</p>
             </div>
-            <div class="col">
+            <div class="hv2-why-card">
+                <div class="hv2-why-card__icon"><i class="fa-regular fa-clock"></i></div>
                 <h4>Time-Definite Logistics</h4>
-                <p>Punctuality. Every shipment arrives when expected, no exceptions.</p>
+                <p>Every shipment arrives when expected, no exceptions.</p>
             </div>
-            <div class="col">
+            <div class="hv2-why-card">
+                <div class="hv2-why-card__icon"><i class="fa-solid fa-shield-halved"></i></div>
                 <h4>Chain of Custody</h4>
-                <p>Security. Sensitive documents and valuable parcels are protected throughout every step.</p>
+                <p>Sensitive documents and valuable parcels are protected at every step.</p>
             </div>
-            <div class="col">
+            <div class="hv2-why-card">
+                <div class="hv2-why-card__icon"><i class="fa-solid fa-chart-line"></i></div>
                 <h4>Standardized Reliability</h4>
-                <p>Consistency. Every delivery follows a structured process, guaranteeing dependable results.</p>
+                <p>Every delivery follows a structured process, guaranteeing dependable results.</p>
             </div>
-            <div class="col">
+            <div class="hv2-why-card">
+                <div class="hv2-why-card__icon"><i class="fa-solid fa-network-wired"></i></div>
                 <h4>Network Optimization</h4>
-                <p>Precision. Deliveries follow a controlled, efficient process from pickup to drop-off.</p>
+                <p>Deliveries follow a controlled, efficient process from pickup to drop-off.</p>
             </div>
-            <div class="col">
+            <div class="hv2-why-card">
+                <div class="hv2-why-card__icon"><i class="fa-solid fa-user-tie"></i></div>
                 <h4>Core Operational Mandate</h4>
                 <p>Professionalism. Discipline. Dedication. Safety and efficiency define every operation.</p>
             </div>
-
         </div>
     </div>
 </section>
 
 
-
-
-
-<section class="tools">
+<!-- ═══════════════════════════════════════════
+     BUSINESS vs PERSONAL SERVICES
+═══════════════════════════════════════════ -->
+<section class="hv2-solutions">
     <div class="container">
-        <div class="left"></div>
-        <div class="right">
-            <div class="heading">
-                <h2>Tools for Every Step of The Shipping Process</h2>
-                <img src="<?= htmlspecialchars(asset_url('/assets/images/home/mc5.jpg')); ?>" alt="shipping tools">
-                <p>Explore pricing, send off a batch shipment or change a delivery with our easy-to-use shipping tools.</p>
-                <a href="/shipping">See Shipping Tools<span class="material-symbols-outlined">chevron_right</span></a>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-
-
-<section class="services-alt">
-    <div class="container">
-        <div class="heading">
+        <div class="hv2-section-header">
+            <p class="hv2-eyebrow">Tailored For You</p>
             <h2>Logistics Solutions for Businesses and Individuals</h2>
-            <p>From urgent parcels to freight movements, OrvantaX Global Shipping delivers with speed, security, and transparency across every lane.</p>
-            <div class="toggle">
-                <button href="#" class="btn1 active">Business</button>
-                <button href="#" class="btn2">Personal</button>
-            </div>
+            <p class="hv2-section-header__sub">From urgent parcels to freight movements, OrvantaX delivers with speed, security, and transparency.</p>
         </div>
-        <div class="content">
-            <!-- Business / Government Services -->
-            <div class="g1 active">
-                <div class="col">
+        <div class="hv2-solutions__toggle">
+            <button class="hv2-toggle-btn hv2-toggle-btn--active js-sol-btn" data-target="sol-business">Business</button>
+            <button class="hv2-toggle-btn js-sol-btn" data-target="sol-personal">Personal</button>
+        </div>
+        <div class="hv2-solutions__panel hv2-solutions__panel--active" id="sol-business">
+            <div class="hv2-solutions__grid">
+                <div class="hv2-solution-item">
                     <h3>Government Logistics</h3>
                     <p>Compliance & Security. Time-sensitive and confidential deliveries for government agencies & personnel.</p>
-                    <a href="/shipping">Start Order <span class="material-symbols-outlined">chevron_right</span></a>
+                    <a href="/shipping/create/" class="hv2-card-link">Start Order <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
-                <div class="col">
+                <div class="hv2-solution-item">
                     <h3>Bulk & Scheduled Deliveries</h3>
-                    <p>Efficiency. Large shipments and recurring deliveries for organizations are executed seamlessly.</p>
-                    <a href="/shipping">Book Bulk <span class="material-symbols-outlined">chevron_right</span></a>
+                    <p>Efficiency. Large shipments and recurring deliveries for organizations executed seamlessly.</p>
+                    <a href="/shipping/create/" class="hv2-card-link">Book Bulk <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
-                <div class="col">
+                <div class="hv2-solution-item">
                     <h3>Inter-City & Regional Delivery</h3>
                     <p>Coverage. Shipments reach cities and regions on schedule, supporting official operations.</p>
-                    <a href="/shipping">Ship Route <span class="material-symbols-outlined">chevron_right</span></a>
+                    <a href="/shipping/create/" class="hv2-card-link">Ship Route <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
-                <div class="col">
+                <div class="hv2-solution-item">
                     <h3>Document & Official Parcel Delivery</h3>
-                    <p>Confidentiality. Critical documents and packages are transported securely at every stage.</p>
-                    <a href="/shipping">Send Docs <span class="material-symbols-outlined">chevron_right</span></a>
+                    <p>Confidentiality. Critical documents and packages transported securely at every stage.</p>
+                    <a href="/shipping/create/" class="hv2-card-link">Send Docs <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </div>
-
-            <!-- Personal Services -->
-            <div class="g2">
-                <div class="col">
+        </div>
+        <div class="hv2-solutions__panel" id="sol-personal">
+            <div class="hv2-solutions__grid">
+                <div class="hv2-solution-item">
                     <h3>Same-Day Delivery</h3>
                     <p>Urgency. Critical packages are picked up and delivered the same day.</p>
-                    <a href="/shipping">Ship Today <span class="material-symbols-outlined">chevron_right</span></a>
+                    <a href="/shipping/create/" class="hv2-card-link">Ship Today <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
-                <div class="col">
+                <div class="hv2-solution-item">
                     <h3>Family Parcel Delivery</h3>
-                    <p>Care. Personal packages and parcels are handled safely, ensuring timely arrival to loved ones.</p>
-                    <a href="/shipping">Send Parcel <span class="material-symbols-outlined">chevron_right</span></a>
+                    <p>Care. Personal packages and parcels handled safely, ensuring timely arrival to loved ones.</p>
+                    <a href="/shipping/create/" class="hv2-card-link">Send Parcel <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
-                <div class="col">
+                <div class="hv2-solution-item">
                     <h3>Assisted Pickup & Delivery</h3>
                     <p>Convenience. Assisted pickups and deliveries are supported efficiently.</p>
-                    <a href="/shipping">Book Pickup <span class="material-symbols-outlined">chevron_right</span></a>
+                    <a href="/shipping/create/" class="hv2-card-link">Book Pickup <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
-                <div class="col">
+                <div class="hv2-solution-item">
                     <h3>Event & Specialty Deliveries</h3>
-                    <p>Flexibility. Packages for personal events, celebrations, or special requests are managed with attention to detail.</p>
-                    <a href="/shipping">Ship Event <span class="material-symbols-outlined">chevron_right</span></a>
+                    <p>Flexibility. Packages for personal events, celebrations, or special requests managed with care.</p>
+                    <a href="/shipping/create/" class="hv2-card-link">Ship Event <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 
 
-
-
-<section class="banner-1">
+<!-- ═══════════════════════════════════════════
+     PROMO BANNER
+═══════════════════════════════════════════ -->
+<section class="hv2-banner">
     <div class="container">
-        <div class="left">
-            <h3>Save up to 65%* When You Ship International</h3>
-            <p>Start your discounted international shipment with this link to automatically apply discount code â€œGoIntL2026.â€</p>
-            <a href="#">*
-                <span class="txt">Terms and Conditions apply</span>
-                <span class="material-symbols-outlined icon">open_in_new</span>
+        <div class="hv2-banner__inner">
+            <div class="hv2-banner__text">
+                <h3>Save up to 65% When You Ship International</h3>
+                <p>Use code <strong>GoIntL2026</strong> at checkout to apply your discount automatically.</p>
+            </div>
+            <a href="/shipping?coupon=GoIntL2026" class="hv2-btn hv2-btn--cyan">
+                Ship &amp; Save <span class="material-symbols-outlined">chevron_right</span>
             </a>
         </div>
-        <div class="right">
-            <a href="/shipping?coupon=GoIntL2026">Ship Here to Save<span class="material-symbols-outlined">chevron_right</span></a>
-        </div>
     </div>
 </section>
 
 
-
-
-<section class="cards-container">
+<!-- ═══════════════════════════════════════════
+     IMPORTANT UPDATES
+═══════════════════════════════════════════ -->
+<section class="hv2-updates">
     <div class="container">
-        <div class="heading heading-1-1-1">
-            <h2>World-Class Services You Can Count On</h2>
-            <p>Customer first, people led, innovation driven.</p>
-        </div>
-        <div class="content">
-            <div class="col">
-                <div class="img-wrapper">
-                    <img src="<?= htmlspecialchars(asset_url('/assets/images/home/cd1.jpg')); ?>" alt="Ship and Scale With High Standards">
-                </div>
-                <div class="card-content">
-                    <h4>Ship and Scale With High Standards</h3>
-                    <p>When demand grows, you need the right shipping partner. Luxury brand Anima Iris turned to a major carrier network to deliver around the globe.</p>
-                    <a target="_blank" href="https://about.ups.com/us/en/our-stories/customer-first/see-how-ups-delivers-for-one-luxury-bag-brand-crafted-by-african.html">
-                        <span class="text">See the Success Story</span>
-                        <span class="material-symbols-outlined icon">open_in_new</span>
-                    </a>
-                </div>
-            </div>
-            <div class="col">
-                <div class="img-wrapper">
-                    <img src="<?= htmlspecialchars(asset_url('/assets/images/home/cd2.jpg')); ?>" alt="5 Things Every Business Should Know About Returns">
-                </div>
-                <div class="card-content">
-                    <h4>5 Things Every Business Should Know About Returns</h4>
-                    <p>Yes, shoppers do read your return policy, and having a good one can make or break customer loyalty.</p>
-                    <a target="_blank" href="https://about.ups.com/us/en/our-stories/customer-first/5-things-every-business-should-know-about-returns-in-2025-and-be.html">
-                        <span class="text">Learn How</span>
-                        <span class="material-symbols-outlined icon">open_in_new</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-
-<section class="important-updates">
-    <div class="container">
-        <div class="heading heading-1-1">
+        <div class="hv2-section-header">
+            <p class="hv2-eyebrow">Stay Informed</p>
             <h2>Important Updates</h2>
         </div>
-        <div class="content">
-            <details open>
+        <div class="hv2-updates__list">
+            <details class="hv2-accordion" open>
                 <summary>
-                    Fuel Surcharge
-                    <span class="material-symbols-outlined accordion-icon">keyboard_arrow_down</span>
+                    <span>Fuel Surcharge</span>
+                    <span class="material-symbols-outlined hv2-accordion__icon">add</span>
                 </summary>
-                <div class="inner-content">
+                <div class="hv2-accordion__body">
                     <p>Effective March 2, 2026, the U.S. International Ground Export Import Fuel Surcharge will change.</p>
-                    <a href="https://assets.ups.com/adobe/assets/urn:aaid:aem:13ea22a9-bd18-49ee-a87c-c3b6f761a002/original/as/us-domestic-fuel-flyer.pdf" target="_blank" rel="noopener noreferrer">Read More About the Rate Change <span class="material-symbols-outlined">open_in_new</span></a>
+                    <a href="https://assets.ups.com/adobe/assets/urn:aaid:aem:13ea22a9-bd18-49ee-a87c-c3b6f761a002/original/as/us-domestic-fuel-flyer.pdf" target="_blank" rel="noopener noreferrer" class="hv2-card-link">
+                        Read More About the Rate Change <span class="material-symbols-outlined">open_in_new</span>
+                    </a>
                 </div>
             </details>
-
-            <details>
+            <details class="hv2-accordion">
                 <summary>
-                    Information about Flight 2976 Accident
-                    <span class="material-symbols-outlined accordion-icon">chevron_right</span>
+                    <span>Information about Flight 2976 Accident</span>
+                    <span class="material-symbols-outlined hv2-accordion__icon">add</span>
                 </summary>
-                <div class="inner-content">
+                <div class="hv2-accordion__body">
                     <p>Read more on current network advisories in our support center and shipment alerts.</p>
                 </div>
             </details>
-
-            <details>
+            <details class="hv2-accordion">
                 <summary>
-                    Updated Tariff and Rate and Service Guides
-                    <span class="material-symbols-outlined accordion-icon">chevron_right</span>
+                    <span>Updated Tariff and Rate and Service Guides</span>
+                    <span class="material-symbols-outlined hv2-accordion__icon">add</span>
                 </summary>
-                <div class="inner-content">
+                <div class="hv2-accordion__body">
                     <p>Carrier tariff, service guide, and network terms were updated effective January 26, 2026.</p>
-                    <a href="/support/">View Guides <span class="material-symbols-outlined">chevron_right</span></a>
+                    <a href="/support/" class="hv2-card-link">View Guides <span class="material-symbols-outlined">arrow_forward</span></a>
                 </div>
             </details>
-
-            <details>
+            <details class="hv2-accordion">
                 <summary>
-                    Domestic Fuel Surcharge
-                    <span class="material-symbols-outlined accordion-icon">chevron_right</span>
+                    <span>Domestic Fuel Surcharge</span>
+                    <span class="material-symbols-outlined hv2-accordion__icon">add</span>
                 </summary>
-                <div class="inner-content">
-                    <p>Effective January 5, 2026, the U.S. Ground Domestic and the domestic ground fuel surcharge will change. <a href="https://assets.ups.com/adobe/assets/urn:aaid:aem:13ea22a9-bd18-49ee-a87c-c3b6f761a002/original/as/us-domestic-fuel-flyer.pdf" target="_blank" rel="noopener noreferrer">Read More About the Rate Change <span class="material-symbols-outlined">open_in_new</span></a></p>
+                <div class="hv2-accordion__body">
+                    <p>Effective January 5, 2026, the U.S. Ground Domestic and the domestic ground fuel surcharge will change.</p>
                 </div>
             </details>
-
-            <details>
+            <details class="hv2-accordion">
                 <summary>
-                    Effective January 26, 2026: Large Package and Additional Handling Changes
-                    <span class="material-symbols-outlined accordion-icon">chevron_right</span>
+                    <span>Large Package and Additional Handling Changes</span>
+                    <span class="material-symbols-outlined hv2-accordion__icon">add</span>
                 </summary>
-                <div class="inner-content">
-                    <p>Changes previously scheduled for December 22, 2025, have been delayed until January 26, 2026...</p>
+                <div class="hv2-accordion__body">
+                    <p>Changes previously scheduled for December 22, 2025, have been delayed until January 26, 2026.</p>
                 </div>
             </details>
-
-            <details>
+            <details class="hv2-accordion">
                 <summary>
-                    Demand Surcharge Update
-                    <span class="material-symbols-outlined accordion-icon">chevron_right</span>
+                    <span>Learn More About Recent Trade Policy and Tariff Changes</span>
+                    <span class="material-symbols-outlined hv2-accordion__icon">add</span>
                 </summary>
-                <div class="inner-content">
-                    <p>Updated Demand Surcharge information is now available for review... effective September 28, 2025.</p>
-                    <a href="https://assets.ups.com/adobe/assets/urn:aaid:aem:2c542692-de10-4fa3-b507-3b4f181e0953/original/as/demand-surcharges-us-en.pdf" target="_blank" rel="noopener noreferrer">Read more on applicable Demand Surcharges <span class="material-symbols-outlined">open_in_new</span></a>
-                </div>
-            </details>
-
-            <details>
-                <summary>
-                    Learn More About Recent Trade Policy and Tariff Changes
-                    <span class="material-symbols-outlined accordion-icon">chevron_right</span>
-                </summary>
-                <div class="inner-content">
-                    <p>Weâ€™ll help you stay informed about the <a href="/support/">impacts of the new tariffs <span class="material-symbols-outlined">chevron_right</span></a></p>
+                <div class="hv2-accordion__body">
+                    <p>We'll help you stay informed about the <a href="/support/" class="hv2-card-link">impacts of the new tariffs <span class="material-symbols-outlined">arrow_forward</span></a></p>
                 </div>
             </details>
         </div>
     </div>
 </section>
-
-
-
 
 
 <?php include("common-sections/footer.html"); ?>
 
-
-
-
-
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="/assets/scripts/home.js?v=<?php echo filemtime($_SERVER['DOCUMENT_ROOT'] . '/assets/scripts/home.js'); ?>"></script>
+<script>
+(function () {
+    // Solutions toggle
+    document.querySelectorAll('.js-sol-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.js-sol-btn').forEach(function (b) {
+                b.classList.remove('hv2-toggle-btn--active');
+            });
+            document.querySelectorAll('.hv2-solutions__panel').forEach(function (p) {
+                p.classList.remove('hv2-solutions__panel--active');
+            });
+            btn.classList.add('hv2-toggle-btn--active');
+            var target = document.getElementById(btn.dataset.target);
+            if (target) target.classList.add('hv2-solutions__panel--active');
+        });
+    });
+
+    // Accordion icon swap
+    document.querySelectorAll('.hv2-accordion').forEach(function (el) {
+        el.addEventListener('toggle', function () {
+            var icon = el.querySelector('.hv2-accordion__icon');
+            if (icon) icon.textContent = el.open ? 'remove' : 'add';
+        });
+    });
+})();
+</script>
 </body>
 </html>
