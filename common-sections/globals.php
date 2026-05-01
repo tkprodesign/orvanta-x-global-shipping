@@ -2,7 +2,7 @@
 if (!defined('COMMON_SECTIONS_GLOBALS_LOADED')) {
     define('COMMON_SECTIONS_GLOBALS_LOADED', true);
 
-    $global_db_host = getenv('DB_HOST') ?: "127.0.0.1";
+    $global_db_host = getenv('DB_HOST') ?: "localhost";
     $global_db_user = getenv('DB_USER') ?: "shipping_user";
     $global_db_pass = getenv('DB_PASS') ?: "shipping_pass";
     $global_db_name = getenv('DB_NAME') ?: "shipping_db";
@@ -15,13 +15,22 @@ if (!defined('COMMON_SECTIONS_GLOBALS_LOADED')) {
     } elseif (isset($dbconn) && $dbconn instanceof mysqli && empty($dbconn->connect_error)) {
         $globalConn = $dbconn;
     } else {
+        mysqli_report(MYSQLI_REPORT_OFF);
+
         if ($global_db_socket !== '') {
             $globalConn = new mysqli(null, $global_db_user, $global_db_pass, $global_db_name, null, $global_db_socket);
         } else {
             $globalConn = new mysqli($global_db_host, $global_db_user, $global_db_pass, $global_db_name);
+
+            // Shared hosting environments often accept localhost socket connections
+            // but reject 127.0.0.1 TCP connections.
+            if (!empty($globalConn->connect_error) && $global_db_host === '127.0.0.1') {
+                $globalConn = new mysqli('localhost', $global_db_user, $global_db_pass, $global_db_name);
+            }
         }
+
         if (!empty($globalConn->connect_error)) {
-            die("Connection failed: " . $globalConn->connect_error);
+            die("Connection failed: " . $globalConn->connect_error . ". Verify DB_HOST/DB_USER/DB_PASS/DB_NAME and run install-database.php once connected.");
         }
     }
 
