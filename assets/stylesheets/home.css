@@ -849,3 +849,76 @@ section.services-alt .container .heading .toggle button {
   justify-content: center;
   transition: color 0.2s ease;
 }/*# sourceMappingURL=home.css.map */
+
+/* 2026-05 homepage redesign inspired layout (design only, no generic metrics strip) */
+section.hero .swiper .swiper-wrapper .swiper-slide .container {
+  max-width: 1080px;
+}
+
+section.hero .swiper .swiper-wrapper .swiper-slide .heading {
+  text-align: center;
+  margin: 0 auto;
+}
+
+section.hero .swiper .swiper-wrapper .swiper-slide .heading .main-heading {
+  font-size: clamp(42px, 7vw, 86px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+
+section.hero .swiper .swiper-wrapper .swiper-slide .heading .sub-heading {
+  max-width: 760px;
+  margin: 18px auto 0;
+  font-size: clamp(19px, 2vw, 36px);
+  color: #d8e5ff;
+}
+
+section.hero .swiper .swiper-wrapper .swiper-slide .c-t-a {
+  margin: 28px auto 0;
+  justify-content: center;
+}
+
+section.cards-container {
+  background: #f2f5f9;
+  padding: 92px 0;
+}
+
+section.cards-container .container .heading h2 {
+  font-size: clamp(40px, 5vw, 64px);
+  color: #0d1b3b;
+}
+
+section.cards-container .container .heading p {
+  max-width: 860px;
+  margin: 18px auto 0;
+  color: #5f7396;
+  font-size: 31px;
+}
+
+section.cards-container .container .content .col {
+  background: #fff;
+  border: 1px solid #d9e0ea;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(14, 28, 56, 0.08);
+}
+
+section.cards-container .container .content .col .card-content h4 {
+  color: #071734;
+  font-size: 40px;
+}
+
+section.cards-container .container .content .col .card-content p {
+  color: #4f6488;
+  font-size: 30px;
+  line-height: 1.55;
+}
+
+section.cards-container .container .content .col .card-content a {
+  color: #1093ea;
+  font-weight: 500;
+}
+
+section.cards-container .container .content .col:first-child {
+  background: #e8f0f8;
+}
