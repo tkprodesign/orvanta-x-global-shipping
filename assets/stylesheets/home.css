@@ -922,3 +922,33 @@ section.cards-container .container .content .col .card-content a {
 section.cards-container .container .content .col:first-child {
   background: #e8f0f8;
 }
+
+/* Hero refresh: silver/black/white branding */
+section.hero .swiper .swiper-wrapper .swiper-slide.hero-1 {
+  background-image: linear-gradient(120deg, rgba(10, 10, 10, 0.72), rgba(123, 123, 123, 0.38)), url("/assets/images/home/hero-ev-semi.jpg");
+  background-position: center;
+}
+section.hero .swiper .swiper-wrapper .swiper-slide.hero-2 {
+  background-image: linear-gradient(120deg, rgba(8, 8, 8, 0.7), rgba(153, 153, 153, 0.32)), url("/assets/images/home/hero-modern-delivery.jpg");
+  background-position: center;
+}
+section.hero .swiper .swiper-wrapper .swiper-slide .dark-bg {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.52) 100%);
+}
+section.hero .swiper .swiper-wrapper .swiper-slide .heading,
+section.hero .swiper .swiper-wrapper .swiper-slide .c-t-a,
+section.hero .swiper .swiper-wrapper .swiper-slide .c-t-a input,
+section.hero .swiper .swiper-wrapper .swiper-slide .c-t-a button {
+  font-family: "Inter", sans-serif;
+}
+section.hero .swiper .swiper-wrapper .swiper-slide .heading .main-heading .accent {
+  color: #e5e7eb;
+}
+section.hero .swiper .swiper-wrapper .swiper-slide .c-t-a .pri {
+  color: #fff;
+  background: linear-gradient(135deg, #050505 0%, #444 100%);
+  border: 1px solid #c0c0c0;
+}
+section.hero .swiper .swiper-wrapper .swiper-slide .c-t-a .pri:hover {
+  background: linear-gradient(135deg, #1a1a1a 0%, #666 100%);
+}
