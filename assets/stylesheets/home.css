@@ -37,20 +37,14 @@ body.home-v2 header .left a:not(#logo) {
 body.home-v2 header nav a:hover {
   color: #1d2e6f;
 }
-body.home-v2 header #menuToggleBtn span {
-  background: #1d2433;
-}
-
-/* ── Make both mobile header icon-buttons look identical ── */
-body.home-v2 header .cta .mb,
-body.home-v2 header #menuToggleBtn {
+/* ── Account icon button (light, secondary) ── */
+body.home-v2 header .cta .mb {
   background: #f0f3f8 !important;
   border: 1.5px solid #dde2ec !important;
   color: #1d2433 !important;
   border-radius: 10px !important;
 }
-body.home-v2 header .cta .mb:hover,
-body.home-v2 header #menuToggleBtn:hover {
+body.home-v2 header .cta .mb:hover {
   background: #e3e8f2 !important;
 }
 body.home-v2 header .cta .mb .material-symbols-outlined,
@@ -58,8 +52,18 @@ body.home-v2 header .cta .mb i {
   color: #1d2e6f;
   font-size: 20px;
 }
-body.home-v2 header #menuToggleBtn span {
-  background: #1d2433 !important;
+/* ── Hamburger menu button (teal, primary nav action) ── */
+body.home-v2 header #menuToggleBtn {
+  background: #00c2cb !important;
+  border: none !important;
+  border-radius: 10px !important;
+}
+body.home-v2 header #menuToggleBtn:hover {
+  background: #00a8b0 !important;
+}
+body.home-v2 header #menuToggleBtn .material-symbols-outlined {
+  color: #ffffff !important;
+  font-size: 22px;
 }
 
 /* ════════════════════════════════════════
@@ -670,7 +674,7 @@ body.home-v2 header #menuToggleBtn span {
 ════════════════════════════════════════ */
 @media (max-width: 760px) {
   .hv2-hero {
-    padding: 100px 20px 72px;
+    padding: 0;
   }
   .hv2-hero__logo {
     width: 90px;

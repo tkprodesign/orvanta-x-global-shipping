@@ -340,45 +340,18 @@ header .container .right .l-child .info ul li img {
 }
 header .container .right #menuToggleBtn {
   display: none;
-  width: 20px;
-  height: 16px;
-  position: relative;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
-header .container .right #menuToggleBtn span {
-  display: inline-block;
-  height: 2px;
-  width: 20px;
-  background: #111;
-  position: absolute;
-  opacity: 1;
-  transition: all 0.25s ease;
+header .container .right #menuToggleBtn .close-icon {
+  display: none;
 }
-header .container .right #menuToggleBtn span.l1 {
-  top: 0;
-  left: 0;
+header .container .right #menuToggleBtn.active .menu-icon {
+  display: none;
 }
-header .container .right #menuToggleBtn span.l2 {
-  top: 50%;
-  left: 0;
-  transform: translateY(-1px);
-}
-header .container .right #menuToggleBtn span.l3 {
-  bottom: 0;
-  left: 0;
-}
-header .container .right #menuToggleBtn.active span.l1 {
-  top: 50%;
-  transform: translateY(-50%) rotate(45deg);
-}
-header .container .right #menuToggleBtn.active span.l2 {
-  top: 50%;
-  transform: translateY(-1px);
-  opacity: 0;
-}
-header .container .right #menuToggleBtn.active span.l3 {
-  top: 50%;
-  bottom: auto;
-  transform: translateY(-50%) rotate(-45deg);
+header .container .right #menuToggleBtn.active .close-icon {
+  display: block;
 }
 
 footer {
@@ -540,18 +513,9 @@ footer .footer-bottom .copyright {
     justify-content: center;
     background: rgba(29, 46, 111, 0.08);
   }
-  header .container .right #menuToggleBtn span {
-    width: 18px;
-    left: 11px;
-  }
-  header .container .right #menuToggleBtn span.l1 {
-    top: 13px;
-  }
-  header .container .right #menuToggleBtn span.l2 {
-    top: 19px;
-  }
-  header .container .right #menuToggleBtn span.l3 {
-    top: 25px;
+  header .container .right #menuToggleBtn .material-symbols-outlined {
+    font-size: 22px;
+    line-height: 1;
   }
   body.active-nav {
     overflow: hidden;
@@ -682,10 +646,11 @@ header .container .left nav ul a {
   letter-spacing: 0.01em;
 }
 
-header.is-scrolled .container .left nav ul a,
-header.is-scrolled #menuToggleBtn span {
+header.is-scrolled .container .left nav ul a {
   color: #f8f6f1;
-  background: #f8f6f1;
+}
+header.is-scrolled #menuToggleBtn .material-symbols-outlined {
+  color: #ffffff;
 }
 
 header.is-scrolled .container .right .cta .dtp {

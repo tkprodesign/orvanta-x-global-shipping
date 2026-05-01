@@ -92,18 +92,9 @@ header .container .right #menuToggleBtn {
   background: rgba(29, 46, 111, 0.08);
   position: relative;
 }
-header .container .right #menuToggleBtn span {
-  width: 18px;
-  left: 11px;
-}
-header .container .right #menuToggleBtn span.l1 {
-  top: 13px;
-}
-header .container .right #menuToggleBtn span.l2 {
-  top: 19px;
-}
-header .container .right #menuToggleBtn span.l3 {
-  top: 25px;
+header .container .right #menuToggleBtn .material-symbols-outlined {
+  font-size: 22px;
+  line-height: 1;
 }
 header .container .right #menuToggleBtn a {
   color: #1e1e1e;

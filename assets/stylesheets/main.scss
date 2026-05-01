@@ -757,10 +757,11 @@ header .container .left nav ul a {
     letter-spacing: 0.01em;
 }
 
-header.is-scrolled .container .left nav ul a,
-header.is-scrolled #menuToggleBtn span {
+header.is-scrolled .container .left nav ul a {
     color: #f8f6f1;
-    background: #f8f6f1;
+}
+header.is-scrolled #menuToggleBtn .material-symbols-outlined {
+    color: #ffffff;
 }
 
 header.is-scrolled .container .right .cta .dtp {

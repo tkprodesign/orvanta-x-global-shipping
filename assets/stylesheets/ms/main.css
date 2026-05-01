@@ -44,21 +44,10 @@ header .container .right #menuToggleBtn {
   border-radius: 10px !important;
   background: #00c2cb !important;
 }
-header .container .right #menuToggleBtn span {
-  width: 16px !important;
-  left: 11px !important;
-  background: #ffffff !important;
-}
-header .container .right #menuToggleBtn span.l1 {
-  top: 8px;
-}
-header .container .right #menuToggleBtn span.l2 {
-  top: 18px;
-  transform: none;
-}
-header .container .right #menuToggleBtn span.l3 {
-  top: 28px;
-  bottom: auto;
+header .container .right #menuToggleBtn .material-symbols-outlined {
+  font-size: 22px !important;
+  color: #ffffff !important;
+  line-height: 1;
 }
 
 footer {

@@ -53,24 +53,10 @@ header{
                 border-radius: 10px !important;
                 background: #00c2cb !important;
 
-                span {
-                    width: 16px !important;
-                    left: 11px !important;
-                    background: #ffffff !important;
-
-                    &.l1 {
-                        top: 8px;
-                    }
-
-                    &.l2 {
-                        top: 18px;
-                        transform: none;
-                    }
-
-                    &.l3 {
-                        top: 28px;
-                        bottom: auto;
-                    }
+                .material-symbols-outlined {
+                    font-size: 22px !important;
+                    color: #ffffff !important;
+                    line-height: 1;
                 }
             }
         }
