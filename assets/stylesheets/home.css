@@ -965,3 +965,65 @@ section.banner-1 .container {
 section.banner-1 .container .right a {
   background: linear-gradient(135deg, #f3f4f6, #bec3cb);
 }
+
+/* 2026-05 premium monochrome refresh */
+body.home-premium {
+  --ox-bg: #0a0b0d;
+  --ox-panel: #111317;
+  --ox-panel-2: #171a1f;
+  --ox-border: rgba(222, 227, 235, 0.24);
+  --ox-heading: #ffffff;
+  --ox-copy: #c5ccd6;
+  --ox-copy-soft: #aab3c0;
+  --ox-metal: linear-gradient(135deg, #f7f8fa 0%, #cfd5de 55%, #a7afba 100%);
+}
+body.home-premium main,
+body.home-premium section:not(.hero) {
+  background: var(--ox-bg);
+}
+body.home-premium section:not(.hero) .container .heading h2,
+body.home-premium section:not(.hero) .container .heading-1-1 h2,
+body.home-premium section:not(.hero) .container h3,
+body.home-premium section:not(.hero) .container h4 { color: var(--ox-heading); }
+body.home-premium section:not(.hero) .container p,
+body.home-premium section:not(.hero) .container li { color: var(--ox-copy); }
+body.home-premium section.hero .swiper .swiper-wrapper .swiper-slide .dark-bg {
+  background: radial-gradient(circle at 20% 18%, rgba(246,248,252,0.22), transparent 35%), linear-gradient(140deg, rgba(5,6,8,0.94), rgba(16,18,22,0.96));
+}
+body.home-premium section.hero .swiper .swiper-wrapper .swiper-slide .heading .main-heading,
+body.home-premium section.hero .swiper .swiper-wrapper .swiper-slide .heading .sub-heading { color: var(--ox-heading); }
+body.home-premium section.hero .swiper .swiper-wrapper .swiper-slide .heading .main-heading .accent { color: #dbe1ea; }
+body.home-premium section.hero .swiper .swiper-wrapper .swiper-slide .c-t-a { gap: 14px; }
+body.home-premium section.hero .swiper .swiper-wrapper .swiper-slide .c-t-a .pri {
+  background: var(--ox-metal);
+  color: #0a0b0d;
+  border: 1px solid rgba(255,255,255,0.55);
+}
+body.home-premium section.hero .swiper .swiper-wrapper .swiper-slide .c-t-a .input-box input {
+  background: rgba(255,255,255,0.07);
+  color: #f1f5fb;
+  border: 1px solid var(--ox-border);
+}
+body.home-premium section.hero .swiper .swiper-wrapper .swiper-slide .c-t-a .input-box input::placeholder { color: #bcc6d3; }
+body.home-premium section.ups-branch-context .container .ups-branch-card,
+body.home-premium section.why-choose-us .container .content .col,
+body.home-premium section.services-alt .container .content .g1 .col,
+body.home-premium section.services-alt .container .content .g2 .col,
+body.home-premium section.cards-container .container .content .col {
+  background: linear-gradient(155deg, var(--ox-panel), var(--ox-panel-2));
+  border: 1px solid var(--ox-border);
+  border-radius: 10px;
+  box-shadow: 0 16px 32px rgba(0,0,0,0.4);
+}
+body.home-premium section.services-alt .container .content .g1 .col a,
+body.home-premium section.services-alt .container .content .g2 .col a,
+body.home-premium section.cards-container .container .content .col .card-content a { color: #e6ebf2; }
+body.home-premium section.banner-1 .container {
+  background-image: linear-gradient(130deg, #090a0c, #1b1f25);
+  border: 1px solid var(--ox-border);
+}
+body.home-premium section.banner-1 .container .right a {
+  background: transparent;
+  color: #f6f8fc;
+  border: 1px solid rgba(255,255,255,0.55);
+}

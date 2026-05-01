@@ -266,3 +266,19 @@ section.why-choose-us .container .content .col {
   color: #f2f2f2;
   border: 1px solid rgba(255,255,255,0.12);
 }
+
+/* 2026-05 tablet monochrome harmony */
+body.home-premium section.hero .swiper .swiper-wrapper .swiper-slide .dark-bg {
+  background: radial-gradient(circle at 28% 18%, rgba(246,248,252,0.2), transparent 36%), linear-gradient(145deg, rgba(5,6,8,0.94), rgba(16,18,22,0.97));
+}
+body.home-premium section.hero .swiper .swiper-wrapper .swiper-slide .c-t-a .pri {
+  background: linear-gradient(135deg, #f7f8fa 0%, #cfd5de 58%, #a7afba 100%);
+  color: #0a0b0d;
+  border: 1px solid rgba(255,255,255,0.55);
+}
+body.home-premium section.why-choose-us .container .content .col,
+body.home-premium section.services-alt .container .content .g1 .col,
+body.home-premium section.services-alt .container .content .g2 .col {
+  background: linear-gradient(155deg, #111317, #171a1f);
+  border: 1px solid rgba(222,227,235,0.24);
+}
