@@ -988,7 +988,7 @@ body.home-premium section:not(.hero) .container h4 { color: var(--ox-heading); }
 body.home-premium section:not(.hero) .container p,
 body.home-premium section:not(.hero) .container li { color: var(--ox-copy); }
 body.home-premium section.hero .swiper .swiper-wrapper .swiper-slide .dark-bg {
-  background: radial-gradient(circle at 20% 18%, rgba(246,248,252,0.22), transparent 35%), linear-gradient(140deg, rgba(5,6,8,0.94), rgba(16,18,22,0.96));
+  background: linear-gradient(135deg, rgba(15,22,28,0.92) 0%, rgba(23,28,34,0.76) 48%, rgba(34,40,47,0.60) 100%);
 }
 body.home-premium section.hero .swiper .swiper-wrapper .swiper-slide .heading .main-heading,
 body.home-premium section.hero .swiper .swiper-wrapper .swiper-slide .heading .sub-heading { color: var(--ox-heading); }
@@ -1010,14 +1010,26 @@ body.home-premium section.why-choose-us .container .content .col,
 body.home-premium section.services-alt .container .content .g1 .col,
 body.home-premium section.services-alt .container .content .g2 .col,
 body.home-premium section.cards-container .container .content .col {
-  background: linear-gradient(155deg, var(--ox-panel), var(--ox-panel-2));
-  border: 1px solid var(--ox-border);
+  background: #ffffff;
+  border: 1px solid rgba(20, 33, 68, 0.1);
   border-radius: 10px;
-  box-shadow: 0 16px 32px rgba(0,0,0,0.4);
+  box-shadow: 0 16px 32px rgba(11, 26, 62, 0.08);
+}
+body.home-premium section.ups-branch-context .container .ups-branch-card h2,
+body.home-premium section.why-choose-us .container .content .col h4,
+body.home-premium section.services-alt .container .content .g1 .col h3,
+body.home-premium section.services-alt .container .content .g2 .col h3,
+body.home-premium section.cards-container .container .content .col h3,
+body.home-premium section.ups-branch-context .container .ups-branch-card p,
+body.home-premium section.why-choose-us .container .content .col p,
+body.home-premium section.services-alt .container .content .g1 .col p,
+body.home-premium section.services-alt .container .content .g2 .col p,
+body.home-premium section.cards-container .container .content .col p {
+  color: #0f161c;
 }
 body.home-premium section.services-alt .container .content .g1 .col a,
 body.home-premium section.services-alt .container .content .g2 .col a,
-body.home-premium section.cards-container .container .content .col .card-content a { color: #e6ebf2; }
+body.home-premium section.cards-container .container .content .col .card-content a { color: #1d2e6f; }
 body.home-premium section.banner-1 .container {
   background-image: linear-gradient(130deg, #090a0c, #1b1f25);
   border: 1px solid var(--ox-border);
