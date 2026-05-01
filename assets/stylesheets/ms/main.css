@@ -25,12 +25,13 @@ header .container .right {
   gap: 12px;
 }
 header .container .right .cta .mb {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: #f0f3f8;
-  color: #1d2e6f;
-  border: 1px solid #dde2ec;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 10px !important;
+  background: #f0f3f8 !important;
+  color: #1d2e6f !important;
+  border: 1px solid #dde2ec !important;
+  padding: 0 !important;
 }
 header .container .right .cta .mb .material-symbols-outlined,
 header .container .right .cta .mb i {
@@ -38,24 +39,24 @@ header .container .right .cta .mb i {
   line-height: 1;
 }
 header .container .right #menuToggleBtn {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: #00c2cb;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 10px !important;
+  background: #00c2cb !important;
 }
 header .container .right #menuToggleBtn span {
-  width: 16px;
-  left: 11px;
-  background: #ffffff;
+  width: 16px !important;
+  left: 11px !important;
+  background: #ffffff !important;
 }
 header .container .right #menuToggleBtn span.l1 {
-  top: 12px;
+  top: 12px !important;
 }
 header .container .right #menuToggleBtn span.l2 {
-  top: 19px;
+  top: 19px !important;
 }
 header .container .right #menuToggleBtn span.l3 {
-  top: 26px;
+  top: 26px !important;
 }
 
 footer {

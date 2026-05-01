@@ -3,8 +3,8 @@
  * Handles Service Tabs and Important Updates Accordion
  */
 document.addEventListener('DOMContentLoaded', () => {
-    if (document.querySelector('.swiper') && typeof Swiper === 'function') {
-        new Swiper('.swiper', {
+    if (document.querySelector('.swiper:not(.hv2-swiper)') && typeof Swiper === 'function') {
+        new Swiper('.swiper:not(.hv2-swiper)', {
             loop: true,
             slidesPerView: 1,
             autoplay: {
