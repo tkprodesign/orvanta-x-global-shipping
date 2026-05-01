@@ -59,15 +59,17 @@ header{
                     background: #ffffff !important;
 
                     &.l1 {
-                        top: 12px;
+                        top: 8px;
                     }
 
                     &.l2 {
-                        top: 19px;
+                        top: 18px;
+                        transform: none;
                     }
 
                     &.l3 {
-                        top: 26px;
+                        top: 28px;
+                        bottom: auto;
                     }
                 }
             }

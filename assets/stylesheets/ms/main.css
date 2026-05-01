@@ -50,13 +50,15 @@ header .container .right #menuToggleBtn span {
   background: #ffffff !important;
 }
 header .container .right #menuToggleBtn span.l1 {
-  top: 12px !important;
+  top: 8px;
 }
 header .container .right #menuToggleBtn span.l2 {
-  top: 19px !important;
+  top: 18px;
+  transform: none;
 }
 header .container .right #menuToggleBtn span.l3 {
-  top: 26px !important;
+  top: 28px;
+  bottom: auto;
 }
 
 footer {
