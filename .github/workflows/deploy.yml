@@ -1,4 +1,4 @@
-name: Deploy full site to htdocs
+name: Deploy site to htdocs
 
 on:
   push:
@@ -12,31 +12,139 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
 
-      - name: Full mirror upload to /htdocs
+      - name: Deploy to /htdocs (first run full upload, then changed files only)
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           REMOTE_DIR: /htdocs
+          DEPLOY_MARKER: .deploy-initialized
+          BEFORE_SHA: ${{ github.event.before }}
+          CURRENT_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
 
           curl --silent --show-error --fail --user "$FTP_USERNAME:$FTP_PASSWORD" "ftp://$FTP_SERVER/" > /dev/null
 
-          lftp -e "
-            set ssl:verify-certificate no;
-            set ftp:ssl-allow true;
-            set ftp:passive-mode true;
-            open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
-            mirror -R --delete --verbose \
-              --exclude-glob .git* \
-              --exclude-glob .github/* \
-              --exclude-glob node_modules/* \
-              --exclude-glob AGENTS.md \
-              . $REMOTE_DIR;
-            bye
-          "
+          remote_marker_path="$REMOTE_DIR/$DEPLOY_MARKER"
+          marker_exists="false"
+
+          if lftp -e "set ssl:verify-certificate no; set ftp:ssl-allow true; set ftp:passive-mode true; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; cls $remote_marker_path; bye" >/dev/null 2>&1; then
+            marker_exists="true"
+          fi
+
+          if [ "$marker_exists" = "false" ]; then
+            echo "Initial deployment: uploading full repository to $REMOTE_DIR"
+            echo "initialized $(date -u +%Y-%m-%dT%H:%M:%SZ)" > /tmp/$DEPLOY_MARKER
+            lftp -e "
+              set ssl:verify-certificate no;
+              set ftp:ssl-allow true;
+              set ftp:passive-mode true;
+              open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
+              mirror -R --delete --verbose \
+                --exclude-glob .git* \
+                --exclude-glob .github/* \
+                --exclude-glob node_modules/* \
+                --exclude-glob AGENTS.md \
+                . $REMOTE_DIR;
+              put -O $REMOTE_DIR /tmp/$DEPLOY_MARKER;
+              bye
+            "
+            exit 0
+          fi
+
+          echo "Incremental deployment: uploading only changed files"
+
+          if [ -z "${BEFORE_SHA:-}" ] || [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            echo "Missing BEFORE_SHA for diff; falling back to full mirror."
+            lftp -e "
+              set ssl:verify-certificate no;
+              set ftp:ssl-allow true;
+              set ftp:passive-mode true;
+              open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
+              mirror -R --delete --verbose \
+                --exclude-glob .git* \
+                --exclude-glob .github/* \
+                --exclude-glob node_modules/* \
+                --exclude-glob AGENTS.md \
+                . $REMOTE_DIR;
+              bye
+            "
+            exit 0
+          fi
+
+          mapfile -t changed_entries < <(git diff --name-status "$BEFORE_SHA" "$CURRENT_SHA")
+
+          upload_list=()
+          delete_list=()
+
+          for entry in "${changed_entries[@]}"; do
+            status="${entry%%$'\t'*}"
+            path_part="${entry#*$'\t'}"
+
+            file_path=""
+            if [[ "$status" == R* ]]; then
+              old_path="${path_part%%$'\t'*}"
+              new_path="${path_part#*$'\t'}"
+              delete_list+=("$old_path")
+              file_path="$new_path"
+            elif [[ "$status" == D ]]; then
+              delete_list+=("$path_part")
+              continue
+            else
+              file_path="$path_part"
+            fi
+
+            if [[ "$file_path" == .git* ]] || [[ "$file_path" == .github/* ]] || [[ "$file_path" == node_modules/* ]] || [[ "$file_path" == AGENTS.md ]]; then
+              continue
+            fi
+
+            if [ -f "$file_path" ]; then
+              upload_list+=("$file_path")
+            fi
+          done
+
+          if [ "${#upload_list[@]}" -eq 0 ] && [ "${#delete_list[@]}" -eq 0 ]; then
+            echo "No deployable file changes detected."
+            exit 0
+          fi
+
+          for file_path in "${upload_list[@]}"; do
+            remote_subdir="$(dirname "$file_path")"
+            if [ "$remote_subdir" = "." ]; then
+              remote_target_dir="$REMOTE_DIR"
+            else
+              remote_target_dir="$REMOTE_DIR/$remote_subdir"
+            fi
+
+            lftp -e "
+              set ssl:verify-certificate no;
+              set ftp:ssl-allow true;
+              set ftp:passive-mode true;
+              open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
+              mkdir -p $remote_target_dir;
+              put -O $remote_target_dir $file_path;
+              bye
+            "
+          done
+
+          for file_path in "${delete_list[@]}"; do
+            if [[ "$file_path" == .git* ]] || [[ "$file_path" == .github/* ]] || [[ "$file_path" == node_modules/* ]] || [[ "$file_path" == AGENTS.md ]]; then
+              continue
+            fi
+
+            lftp -e "
+              set ssl:verify-certificate no;
+              set ftp:ssl-allow true;
+              set ftp:passive-mode true;
+              open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
+              rm -f $REMOTE_DIR/$file_path;
+              bye
+            " || true
+          done
