@@ -14,7 +14,7 @@ $recentShipments = $mockData['recent_shipments'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Control Panel Mock Hub | OrvantaX Global Shipping</title>
     <link rel="stylesheet" href="/assets/stylesheets/control-panel-mock.css?v=<?php echo time(); ?>">
-    <link rel="shortcut icon" href="/assets/images/branding/mark-only.png?v=<?php echo time(); ?>" type="image/png">
+    <link rel="shortcut icon" href="/assets/images/branding/favicon.png?v=<?php echo time(); ?>" type="image/png">
 </head>
 <body class="mock-body" data-mock-design="hub">
 <main class="mock-wrap">

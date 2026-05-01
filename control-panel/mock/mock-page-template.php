@@ -21,7 +21,7 @@ $totalChargesDemo = max(0, (float)$summary['shipments'] * 0.01 + 52.25);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($currentDesign['title']) ?> | Control Panel Mock</title>
     <link rel="stylesheet" href="/assets/stylesheets/control-panel-mock.css?v=<?php echo time(); ?>">
-    <link rel="shortcut icon" href="/assets/images/branding/mark-only.png?v=<?php echo time(); ?>" type="image/png">
+    <link rel="shortcut icon" href="/assets/images/branding/favicon.png?v=<?php echo time(); ?>" type="image/png">
 </head>
 <body class="mock-body" data-mock-design="<?= (int)$mockDesignId ?>">
 <main class="mock-wrap">
