@@ -12,7 +12,7 @@ $exception_summary_total_due = $exception_base_amount + $exception_summary_proce
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exception Payment | OrvantaX Global Shipping</title>
-    <link rel="shortcut icon" href="/assets/images/branding/mark-only.png?v=<?php echo time(); ?>" type="image/png">
+    <link rel="shortcut icon" href="/assets/images/branding/favicon.png?v=<?php echo time(); ?>" type="image/png">
     <link rel="stylesheet" href="/assets/stylesheets/main.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="/assets/stylesheets/shipping.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="/assets/stylesheets/tracking.css?v=<?php echo time(); ?>">

@@ -4,7 +4,7 @@
 <title>Your California Privacy Rights | OrvantaX Global Shipping</title>
 <link rel="stylesheet" href="/assets/stylesheets/main.css?v=<?php echo time(); ?>"><link rel="stylesheet" href="/assets/stylesheets/legal.css?v=<?php echo time(); ?>">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<link rel="shortcut icon" href="<?= htmlspecialchars(asset_url('/assets/images/branding/mark-only.png')); ?>" type="image/png"></head><body>
+<link rel="shortcut icon" href="<?= htmlspecialchars(asset_url('/assets/images/branding/favicon.png')); ?>" type="image/png"></head><body>
 <?php include('../../common-sections/header.html'); ?>
 <main class="legal-page"><div class="container">
 <section class="legal-hero"><h1>Your California Privacy Rights</h1><p>California residents may have rights to know, delete, correct, and limit use of sensitive personal information.</p><p class="legal-meta">Effective date: March 27, 2026</p></section>

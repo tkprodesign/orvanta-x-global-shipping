@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/assets/stylesheets/ms/main.css?v=<?php echo time(); ?>" media="screen and (max-width: 760px)">
     <link rel="stylesheet" href="/assets/stylesheets/ms/home.css?v=<?php echo time(); ?>" media="screen and (max-width: 760px)">
 
-    <link rel="shortcut icon" href="/assets/images/branding/mark-only.png?v=<?php echo time(); ?>" type="image/png">
+    <link rel="shortcut icon" href="/assets/images/branding/favicon.png?v=<?php echo time(); ?>" type="image/png">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 

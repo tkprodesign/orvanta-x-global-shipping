@@ -18,7 +18,7 @@ include('./app.php');
     <link rel="stylesheet" href="/assets/stylesheets/ms/main.css?v=<?php echo filemtime($_SERVER['DOCUMENT_ROOT'] . '/assets/stylesheets/ms/main.css'); ?>" media="screen and (max-width: 760px)">
     <link rel="stylesheet" href="/assets/stylesheets/ms/home.css?v=<?php echo filemtime($_SERVER['DOCUMENT_ROOT'] . '/assets/stylesheets/ms/home.css'); ?>" media="screen and (max-width: 760px)">
 
-    <link rel="shortcut icon" href="<?= htmlspecialchars(asset_url('/assets/images/branding/mark-only.png')); ?>" type="image/png">
+    <link rel="shortcut icon" href="<?= htmlspecialchars(asset_url('/assets/images/branding/favicon.png')); ?>" type="image/png">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
@@ -93,21 +93,21 @@ include('./app.php');
         <div class="ups-branch-card">
             <div class="content">
                 <p class="eyebrow">Global Carrier Network</p>
-                <h2>OrvantaX Global Shipping Connects You to a Trusted Global Network</h2>
+                <h2>OrvantaX Global Shipping Operates an EV-Driven Logistics Segment</h2>
                 <p>
-                    OrvantaX Global Shipping provides day-to-day customer support, shipment processing, and delivery coordination across a vetted network of carrier and logistics partners.
+                    OrvantaX Global Shipping runs a dedicated segment focused on electric-mobility logistics standards inspired by high-performance automotive supply-chain models, including Tesla-style operational discipline.
                 </p>
                 <p>
-                    This gives customers dedicated support backed by scalable routing, real-time tracking visibility, and dependable delivery coverage across domestic and international lanes.
+                    This segment supports day-to-day customer service, shipment processing, and delivery coordination across vetted carrier partners, with emphasis on speed, visibility, and resilient routing.
                 </p>
                 <ul>
-                    <li>Dedicated customer assistance for personal and business shipments.</li>
-                    <li>Consistent handling, tracking, and transit workflow standards.</li>
-                    <li>Reliable escalation and proactive exception management when required.</li>
+                    <li>EV-forward shipping workflows modeled on modern automotive logistics practices.</li>
+                    <li>Consistent handling, tracking, and transit standards across domestic and global lanes.</li>
+                    <li>Proactive exception management with dedicated support for business-critical shipments.</li>
                 </ul>
             </div>
             <div class="visual">
-                <img src="<?= htmlspecialchars(asset_url('/assets/images/branding/logo.png')); ?>" alt="OrvantaX Global Shipping">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png" alt="Tesla wordmark used as ecosystem reference">
             </div>
         </div>
     </div>
