@@ -24,12 +24,21 @@ body.home-v2 {
   color: var(--hv2-white);
 }
 
-/* keep header readable on dark bg */
+/* ── Header: solid white on the homepage ── */
 body.home-v2 header {
-  background: rgba(11, 13, 18, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--hv2-border);
+  background: #ffffff;
+  border-bottom: 1px solid #e8edf5;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+body.home-v2 header nav a,
+body.home-v2 header .left a:not(#logo) {
+  color: #1d2433;
+}
+body.home-v2 header nav a:hover {
+  color: #1d2e6f;
+}
+body.home-v2 header #menuToggleBtn span {
+  background: #1d2433;
 }
 
 /* ════════════════════════════════════════
@@ -151,9 +160,11 @@ body.home-v2 header {
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
-  display: flex;
+  display: flex !important;
   align-items: flex-end;
   padding-bottom: 100px;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* Dark gradient overlay — heavier at bottom for text legibility */
@@ -687,5 +698,152 @@ body.home-v2 header {
   .hv2-solutions__toggle {
     width: 100%;
     max-width: 300px;
+  }
+
+  /* ── Mobile hero ── */
+  .hv2-swiper {
+    height: 100svh;
+    min-height: 540px;
+  }
+  .hv2-slide {
+    padding-bottom: 80px;
+    align-items: flex-end;
+  }
+  .hv2-hero__headline {
+    font-size: clamp(2rem, 9vw, 2.8rem);
+  }
+  .hv2-hero__sub {
+    font-size: 0.9rem;
+  }
+  .hv2-hero__actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .hv2-hero__track {
+    width: 100%;
+  }
+  .hv2-hero__track input {
+    min-width: 0;
+  }
+  .hv2-btn.hv2-btn--ghost {
+    width: 100%;
+    justify-content: center;
+  }
+  .hv2-swiper__pagination {
+    padding-left: 20px;
+  }
+}
+
+/* ════════════════════════════════════════
+   FOOTER — homepage override (no logo, redesigned)
+════════════════════════════════════════ */
+
+/* Hide the logo in the footer on the homepage */
+body.home-v2 footer .footer-brand {
+  display: none;
+}
+
+/* Override footer background with a richer dark gradient */
+body.home-v2 footer.footer {
+  background: linear-gradient(160deg, #0b0f1e 0%, #111829 60%, #0d1420 100%);
+  border-top: 1px solid rgba(0, 194, 203, 0.18);
+  position: relative;
+}
+
+/* Cyan accent line at the very top of the footer */
+body.home-v2 footer.footer::before {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 80px;
+  background: var(--hv2-cyan);
+  margin: 0 auto 48px;
+}
+
+/* Tagline inserted via CSS on the footer-container */
+body.home-v2 .footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px 40px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+body.home-v2 footer .footer-heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hv2-cyan);
+  margin-bottom: 16px;
+}
+
+body.home-v2 footer .footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+body.home-v2 footer .footer-links a {
+  color: rgba(255,255,255,0.55);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color var(--hv2-transition);
+}
+
+body.home-v2 footer .footer-links a:hover {
+  color: var(--hv2-cyan);
+}
+
+body.home-v2 .footer-bottom {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+body.home-v2 .footer-bottom .copyright {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.35);
+  margin: 0;
+}
+
+/* Mobile footer */
+@media (max-width: 760px) {
+  body.home-v2 .footer-container {
+    grid-template-columns: 1fr;
+    padding: 0 20px 32px;
+    gap: 0;
+  }
+  body.home-v2 footer .footer-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 0;
+  }
+  body.home-v2 footer .footer-section .footer-links {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  body.home-v2 footer .footer-section.is-active .footer-links {
+    max-height: 300px;
+    padding: 12px 0;
+  }
+  body.home-v2 .footer-bottom {
+    padding: 20px;
   }
 }
