@@ -761,7 +761,7 @@ section.hero .swiper .swiper-wrapper {
 }
 
 section.hero .swiper .swiper-wrapper .swiper-slide .dark-bg {
-    background: linear-gradient(90deg, rgba(6, 16, 40, 0.84) 0%, rgba(6, 16, 40, 0.64) 45%, rgba(6, 16, 40, 0.46) 100%);
+    background: linear-gradient(135deg, rgba(15, 22, 28, 0.92) 0%, rgba(23, 28, 34, 0.76) 48%, rgba(34, 40, 47, 0.60) 100%);
 }
 
 section.hero .swiper .swiper-wrapper .swiper-slide .container {
@@ -863,9 +863,18 @@ section.services-alt .container .heading .toggle::after {
 
 section.services-alt .container .content .g1 .col,
 section.services-alt .container .content .g2 .col {
+    background: #ffffff;
+    color: #0f161c;
     border-radius: 20px;
     border: 1px solid rgba(21, 36, 87, 0.08);
     box-shadow: 0 18px 36px rgba(18, 28, 59, 0.08);
+}
+
+section.services-alt .container .content .g1 .col p,
+section.services-alt .container .content .g2 .col p,
+section.services-alt .container .content .g1 .col h3,
+section.services-alt .container .content .g2 .col h3 {
+    color: #0f161c;
 }
 
 section.banner-1 .container {
