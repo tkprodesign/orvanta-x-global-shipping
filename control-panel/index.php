@@ -3,7 +3,7 @@ session_start();
 
 $allowedAdminEmails = [
     'tkprodesign96@gmail.com',
-    'admin@orvantaxglobalshipping.com'
+    'admin@veteranlogisticsgroup.us'
 ];
 
 $cookieEmailRaw = '';

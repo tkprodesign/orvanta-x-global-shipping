@@ -8,7 +8,7 @@
 <?php include('../../common-sections/header.html'); ?>
 <main class="legal-page"><div class="container">
 <section class="legal-hero"><h1>Do Not Sell or Share My Personal Information</h1><p>Use this page to opt out of the sale or sharing of personal information where applicable.</p><p class="legal-meta">Effective date: March 27, 2026</p></section>
-<section class="legal-section"><h2>Opt-Out Request</h2><p>To submit an opt-out request, email support@orvantaxglobalshipping.com with subject line <strong>Do Not Sell or Share Request</strong> and provide your account email.</p><p>Authorized agents may submit requests on behalf of consumers with signed authorization.</p></section>
+<section class="legal-section"><h2>Opt-Out Request</h2><p>To submit an opt-out request, email support@veteranlogisticsgroup.us with subject line <strong>Do Not Sell or Share Request</strong> and provide your account email.</p><p>Authorized agents may submit requests on behalf of consumers with signed authorization.</p></section>
 <section class="legal-section"><h2>What Happens Next</h2><p>We will verify your request and apply eligible preference changes to your account and device-level identifiers where feasible.</p></section>
 </div></main>
 <?php include('../../common-sections/footer.html'); ?></body></html>

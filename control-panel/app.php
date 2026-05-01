@@ -35,7 +35,7 @@ if (!class_exists('\PHPMailer\PHPMailer\PHPMailer')) {
 
 $allowedAdminEmails = [
     'tkprodesign96@gmail.com',
-    'admin@orvantaxglobalshipping.com'
+    'admin@veteranlogisticsgroup.us'
 ];
 
 $cookieEmailRaw = '';
@@ -219,19 +219,6 @@ function cp_table_has_column(mysqli $dbconn, string $table, string $column): boo
     $res = $dbconn->query($sql);
     return (bool)($res && $res->num_rows > 0);
 }
-function cp_password_secret_for_mailbox(string $fromEmail): string {
-    $mailbox = strtolower(trim(explode('@', $fromEmail)[0] ?? ''));
-    $map = [
-        'billing' => 'BILLING_EMAIL_PASSWORD',
-        'shipments' => 'SHIPMENTS_EMAIL_PASSWORD',
-        'admin' => 'ADMIN_EMAIL_PASSWORD',
-        'support' => 'SUPPORT_EMAIL_PASSWORD',
-        'tracking' => 'TRACKING_EMAIL_PASSWORD',
-        'noreply' => 'NOREPLY_EMAIL_PASSWORD',
-    ];
-    return $map[$mailbox] ?? '';
-}
-
 function cp_resolve_secret(string $name): string {
     global $cpEmailConfig;
     if ($name === '') {
@@ -253,68 +240,41 @@ function cp_resolve_secret(string $name): string {
     return '';
 }
 
-function cp_resolve_mail_setting(string $envName, string $default = ''): string {
-    global $cpEmailConfig;
-    $value = getenv($envName);
-    if ($value !== false && trim((string)$value) !== '') {
-        return trim((string)$value);
-    }
-    if (isset($_ENV[$envName]) && trim((string)$_ENV[$envName]) !== '') {
-        return trim((string)$_ENV[$envName]);
-    }
-    if (isset($_SERVER[$envName]) && trim((string)$_SERVER[$envName]) !== '') {
-        return trim((string)$_SERVER[$envName]);
-    }
-    if (isset($cpEmailConfig[$envName]) && trim((string)$cpEmailConfig[$envName]) !== '') {
-        return trim((string)$cpEmailConfig[$envName]);
-    }
-    return $default;
-}
-
 function cp_send_smtp_html_email(string $toEmail, string $fromEmail, string $subject, string $htmlBody): bool {
     if (!filter_var($toEmail, FILTER_VALIDATE_EMAIL)) {
         return false;
     }
-    if (!class_exists('\PHPMailer\PHPMailer\PHPMailer')) {
-        error_log('control-panel: PHPMailer is not available');
+
+    $apiKey = cp_resolve_secret('RESEND_API_KEY');
+    if ($apiKey === '') {
+        error_log('control-panel: missing RESEND_API_KEY');
         return false;
     }
 
-    $passwordSecret = cp_password_secret_for_mailbox($fromEmail);
-    $smtpPassword = cp_resolve_secret($passwordSecret);
-    if ($smtpPassword === '') {
-        error_log('control-panel: missing smtp password secret for ' . $fromEmail . ' expected_secret=' . $passwordSecret);
+    $payload = json_encode([
+        'from' => 'OrvantaX Global Shipping <' . $fromEmail . '>',
+        'to' => [$toEmail],
+        'subject' => $subject,
+        'html' => $htmlBody,
+    ]);
+
+    $ch = curl_init('https://api.resend.com/emails');
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Authorization: Bearer ' . $apiKey,
+        'Content-Type: application/json',
+    ]);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+    $response = curl_exec($ch);
+    $httpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($response === false || $httpCode < 200 || $httpCode >= 300) {
+        error_log('control-panel: Resend failed HTTP ' . $httpCode . ' | ' . $response);
         return false;
     }
-
-    $smtpHost = cp_resolve_mail_setting('SMTP_HOST', 'mail.spacemail.com');
-    $smtpPort = (int)cp_resolve_mail_setting('SMTP_PORT', '465');
-    $smtpSecure = cp_resolve_mail_setting('SMTP_SECURE', \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS);
-
-    $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
-    try {
-        $mail->isSMTP();
-        $mail->Host = $smtpHost;
-        $mail->SMTPAuth = true;
-        $mail->Username = $fromEmail;
-        $mail->Password = $smtpPassword;
-        $mail->SMTPSecure = $smtpSecure;
-        $mail->Port = $smtpPort;
-        $mail->CharSet = 'UTF-8';
-
-        $mail->setFrom($fromEmail, 'OrvantaX Global Shipping');
-        $mail->addAddress($toEmail);
-        $mail->addReplyTo('support@orvantaxglobalshipping.com', 'OrvantaX Global Shipping Support');
-        $mail->isHTML(true);
-        $mail->Subject = $subject;
-        $mail->Body = $htmlBody;
-        $mail->AltBody = trim(preg_replace('/\s+/', ' ', strip_tags($htmlBody)));
-        return $mail->send();
-    } catch (\PHPMailer\PHPMailer\Exception $e) {
-        error_log('control-panel: PHPMailer failed for to=' . $toEmail . ' from=' . $fromEmail . ' subject=' . $subject . ' err=' . $e->getMessage());
-    }
-
-    return false;
+    return true;
 }
 
 function cp_build_location_event_email_html(array $payload, string $recipientType): string {
@@ -425,7 +385,7 @@ function cp_send_location_event_notifications(mysqli $dbconn, int $shipmentId, s
         }
         $attempted++;
         $html = cp_build_location_event_email_html($payload, $role);
-        if (cp_send_smtp_html_email($email, 'tracking@orvantaxglobalshipping.com', $subject, $html)) {
+        if (cp_send_smtp_html_email($email, 'tracking@veteranlogisticsgroup.us', $subject, $html)) {
             $sent++;
         } else {
             $failed++;
@@ -446,7 +406,7 @@ function cp_send_resend_html_email(string $toEmail, string $subject, string $htm
     }
 
     $payload = [
-        'from' => 'support@orvantaxglobalshipping.com',
+        'from' => 'support@veteranlogisticsgroup.us',
         'to' => [$toEmail],
         'subject' => $subject,
         'html' => $html
@@ -645,7 +605,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['confirm_shipment_payme
             $cp_shipment_proof_notice_type = 'error';
         } else {
             $confirmedAt = time();
-            $confirmedBy = $_SESSION['email'] ?? 'admin@orvantaxglobalshipping.com';
+            $confirmedBy = $_SESSION['email'] ?? 'admin@veteranlogisticsgroup.us';
             $stmt->bind_param("isi", $confirmedAt, $confirmedBy, $proofId);
             $stmt->execute();
             $affected = $stmt->affected_rows;
@@ -1263,7 +1223,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['subscribe_button']) &&
     $stmt->close();
     
     // Subscriber notification to admin email
-$to = 'admin@orvantaxglobalshipping.com';
+$to = 'admin@veteranlogisticsgroup.us';
 $from = 'alert@orvantaxglobalshipping.com';
     $fromName = 'Alert'; 
     

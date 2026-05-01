@@ -9,6 +9,6 @@
 <main class="legal-page"><div class="container">
 <section class="legal-hero"><h1>Your California Privacy Rights</h1><p>California residents may have rights to know, delete, correct, and limit use of sensitive personal information.</p><p class="legal-meta">Effective date: March 27, 2026</p></section>
 <section class="legal-section"><h2>CCPA/CPRA Rights</h2><ul><li>Right to know categories and specific pieces of personal information collected.</li><li>Right to request deletion of personal information, subject to exceptions.</li><li>Right to correct inaccurate personal information.</li><li>Right to opt out of sale or sharing for cross-context behavioral advertising.</li><li>Right to non-discrimination when exercising privacy rights.</li></ul></section>
-<section class="legal-section"><h2>How to Submit Requests</h2><p>Email support@orvantaxglobalshipping.com with subject line <strong>California Privacy Request</strong> and include enough details to verify your identity.</p></section>
+<section class="legal-section"><h2>How to Submit Requests</h2><p>Email support@veteranlogisticsgroup.us with subject line <strong>California Privacy Request</strong> and include enough details to verify your identity.</p></section>
 </div></main>
 <?php include('../../common-sections/footer.html'); ?></body></html>

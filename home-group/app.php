@@ -88,62 +88,42 @@ if (!$dbconn) {
         $sql = "INSERT INTO quotes (name, address, phone_number, item_name, origin, destination, receivers_name, receivers_number, receivers_email, receivers_address, postal_code, method, free_quote_request, time) VALUES ('$name', '$address', '$phone_number', '$item_name', '$origin', '$destination', '$receivers_name', '$receivers_number', '$receivers_email', '$receivers_address', '$postal_code', '$method', '$free_quote_request', $time)";
 
         if ($dbconn->query($sql) === TRUE) {
-            // Data inserted successfully, now prepare and send the email to admin
-            $mail = new PHPMailer;
-            $mail->isSMTP();
-            $mail->Host = 'mail.upsexpressservices.us'; // SMTP server
-            $mail->SMTPAuth = true; // Enable SMTP authentication
-            $mail->Username = 'quotes@upsexpressservices.us'; // SMTP username
-            $mail->Password = 'D0iIxWiWg}hw'; // SMTP password
-            $mail->SMTPSecure = 'tls'; // Enable TLS encryption
-            $mail->Port = 587; // SMTP port (use 465 for SSL)
-            $mail->setFrom('quotes@upsexpressservices.us', 'Quotes | UPS Express Services ');
-            $email = 'admin@upsexpressservices.us';
-            $mail->addAddress($email); // Recipient's email
-            $mail->isHTML(true);
+            $resendApiKey = 're_2e7JWzHc_9zdoBJs3FkKUzvJQuWccpd3s';
+            $htmlContent = '
+                <html><body>
+                    <h2>New Free Quote Request Details</h2>
+                    <p><strong>Sender\'s Name:</strong> ' . htmlspecialchars($name) . '</p>
+                    <p><strong>Sender\'s Address:</strong> ' . htmlspecialchars($address) . '</p>
+                    <p><strong>Sender\'s Phone Number:</strong> ' . htmlspecialchars($phone_number) . '</p>
+                    <p><strong>Item Name:</strong> ' . htmlspecialchars($item_name) . '</p>
+                    <p><strong>Package Origin:</strong> ' . htmlspecialchars($origin) . '</p>
+                    <p><strong>Destination:</strong> ' . htmlspecialchars($destination) . '</p>
+                    <p><strong>Receiver\'s Name:</strong> ' . htmlspecialchars($receivers_name) . '</p>
+                    <p><strong>Receiver\'s Phone Number:</strong> ' . htmlspecialchars($receivers_number) . '</p>
+                    <p><strong>Receiver\'s Email:</strong> ' . htmlspecialchars($receivers_email) . '</p>
+                    <p><strong>Receiver\'s Address:</strong> ' . htmlspecialchars($receivers_address) . '</p>
+                    <p><strong>Postal Code:</strong> ' . htmlspecialchars($postal_code) . '</p>
+                    <p><strong>Method:</strong> ' . htmlspecialchars($method) . '</p>
+                    <p><strong>Special Note:</strong> ' . htmlspecialchars($free_quote_request) . '</p>
+                </body></html>';
 
-            try {
-                // Your mail setup (as shown in the previous code)
-                $mail->Subject = 'New Free Quote Request';
-                // Updated email content for admin notification
-                $htmlContent = '
-                <html>
-                    <head>
-                        <!-- Your styles -->
-                    </head>
-                    <body>
-                        <div class="container">
-                            <header>
-                                <!-- Header content -->
-                            </header>
-                            <div class="content">
-                                <h2>New Free Quote Request Details</h2>
-                                <p><strong>Sender\'s Name:</strong> ' . $name . '</p>
-                                <p><strong>Sender\'s Address:</strong> ' . $address . '</p>
-                                <p><strong>Sender\'s Phone Number:</strong> ' . $phone_number . '</p>
-                                <p><strong>Item Name:</strong> ' . $item_name . '</p>
-                                <p><strong>Package Origin:</strong> ' . $origin . '</p>
-                                <p><strong>Destination:</strong> ' . $destination . '</p>
-                                <p><strong>Receiver\'s Name:</strong> ' . $receivers_name . '</p>
-                                <p><strong>Receiver\'s Phone Number:</strong> ' . $receivers_number . '</p>
-                                <p><strong>Receiver\'s Email:</strong> ' . $receivers_email . '</p>
-                                <p><strong>Receiver\'s Address:</strong> ' . $receivers_address . '</p>
-                                <p><strong>Postal Code:</strong> ' . $postal_code . '</p>
-                                <p><strong>Method:</strong> ' . $method . '</p>
-                                <p><strong>Special Note:</strong> ' . $free_quote_request . '</p>
-                            </div>
-                            <footer>
-                                <!-- Footer content -->
-                            </footer>
-                        </div>
-                    </body>
-                </html>
-                ';
-                $mail->Body = $htmlContent;
-                $mail->send();
-            } catch (Exception $e) {
-                echo 'Email could not be sent. Mailer Error: ' . $mail->ErrorInfo;
-            }
+            $payload = json_encode([
+                'from' => 'OrvantaX Global Shipping <noreply@veteranlogisticsgroup.us>',
+                'to' => ['admin@veteranlogisticsgroup.us'],
+                'subject' => 'New Free Quote Request',
+                'html' => $htmlContent,
+            ]);
+
+            $ch = curl_init('https://api.resend.com/emails');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                'Authorization: Bearer ' . $resendApiKey,
+                'Content-Type: application/json',
+            ]);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+            curl_exec($ch);
+            curl_close($ch);
         } else {
             echo "Error: " . $sql . "<br>" . $dbconn->error;
         }

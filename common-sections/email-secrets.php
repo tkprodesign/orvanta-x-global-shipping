@@ -1,17 +1,10 @@
 <?php
 return [
-    'RESEND_API_KEY' => 're_dBdLwGs9_5BJL4PX8ZePHuz3w9UttrwYd',
-    'NOREPLY_FROM_EMAIL' => 'noreply@orvantaxglobalshipping.com',
-    'SMTP_HOST' => 'mail.spacemail.com',
-    'SMTP_PORT' => '465',
-    'SMTP_SECURE' => 'ssl',
-
-    // Mailbox passwords (used by shipping/create/app.php)
-    'SHIPMENTS_EMAIL_PASSWORD' => '2*,%5?kK%Qsns',
-    'BILLING_EMAIL_PASSWORD' => '2*,%5?kK%Qsns',
-    'ADMIN_EMAIL_PASSWORD' => '2*,%5?kK%Qsns',
-    'SUPPORT_EMAIL_PASSWORD' => '2*,%5?kK%Qsns',
-    'TRACKING_EMAIL_PASSWORD' => '2*,%5?kK%Qsns',
-    'NOREPLY_EMAIL_PASSWORD' => '2*,%5?kK%Qsns',
+    'RESEND_API_KEY' => 're_2e7JWzHc_9zdoBJs3FkKUzvJQuWccpd3s',
+    'NOREPLY_FROM_EMAIL' => 'noreply@veteranlogisticsgroup.us',
+    'TRACKING_FROM_EMAIL' => 'tracking@veteranlogisticsgroup.us',
+    'SHIPMENTS_FROM_EMAIL' => 'shipments@veteranlogisticsgroup.us',
+    'BILLING_FROM_EMAIL' => 'billing@veteranlogisticsgroup.us',
+    'SUPPORT_FROM_EMAIL' => 'support@veteranlogisticsgroup.us',
 ];
 ?>

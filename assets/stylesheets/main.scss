@@ -445,6 +445,17 @@ footer {
     padding: 60px 0 20px;
     width: 100%;
 
+    .footer-brand {
+        max-width: 1200px;
+        margin: 0 auto 40px;
+        padding: 0 40px;
+        a img {
+            height: 44px;
+            width: auto;
+            display: block;
+        }
+    }
+
     .footer-container {
         max-width: 1200px;
         margin: 0 auto;
@@ -627,6 +638,12 @@ footer {
 
     footer {
         padding: 36px 0 16px;
+
+        .footer-brand {
+            padding: 0 16px;
+            margin-bottom: 24px;
+            a img { height: 36px; }
+        }
 
         .footer-container {
             flex-direction: column;

@@ -634,19 +634,6 @@ function shipping_crypto_processing_fee(float $amount): float {
     return 10.00;
 }
 
-function shipping_password_secret_for_mailbox(string $fromEmail): string {
-    $mailbox = strtolower(trim(explode('@', $fromEmail)[0] ?? ''));
-    $map = [
-        'billing' => 'BILLING_EMAIL_PASSWORD',
-        'shipments' => 'SHIPMENTS_EMAIL_PASSWORD',
-        'admin' => 'ADMIN_EMAIL_PASSWORD',
-        'support' => 'SUPPORT_EMAIL_PASSWORD',
-        'tracking' => 'TRACKING_EMAIL_PASSWORD',
-        'noreply' => 'NOREPLY_EMAIL_PASSWORD',
-    ];
-    return $map[$mailbox] ?? '';
-}
-
 function shipping_resolve_secret(string $name): string {
     global $shippingEmailConfig;
     if ($name === '') {
@@ -668,67 +655,41 @@ function shipping_resolve_secret(string $name): string {
     return '';
 }
 
-function shipping_resolve_mail_setting(string $envName, string $default = ''): string {
-    global $shippingEmailConfig;
-    $value = getenv($envName);
-    if ($value !== false && trim((string)$value) !== '') {
-        return trim((string)$value);
-    }
-    if (isset($_ENV[$envName]) && trim((string)$_ENV[$envName]) !== '') {
-        return trim((string)$_ENV[$envName]);
-    }
-    if (isset($_SERVER[$envName]) && trim((string)$_SERVER[$envName]) !== '') {
-        return trim((string)$_SERVER[$envName]);
-    }
-    if (isset($shippingEmailConfig[$envName]) && trim((string)$shippingEmailConfig[$envName]) !== '') {
-        return trim((string)$shippingEmailConfig[$envName]);
-    }
-    return $default;
-}
-
 function shipping_send_html_email(string $toEmail, string $fromEmail, string $subject, string $htmlBody): bool {
     if (!filter_var($toEmail, FILTER_VALIDATE_EMAIL)) {
         return false;
     }
-    if (!class_exists('\PHPMailer\PHPMailer\PHPMailer')) {
-        error_log('shipping-create: PHPMailer is not available');
+
+    $apiKey = shipping_resolve_secret('RESEND_API_KEY');
+    if ($apiKey === '') {
+        error_log('shipping-create: missing RESEND_API_KEY');
         return false;
     }
 
-    $passwordSecret = shipping_password_secret_for_mailbox($fromEmail);
-    $smtpPassword = shipping_resolve_secret($passwordSecret);
-    if ($smtpPassword === '') {
-        error_log('shipping-create: missing smtp password secret for ' . $fromEmail . ' expected_secret=' . $passwordSecret);
+    $payload = json_encode([
+        'from' => 'OrvantaX Global Shipping <' . $fromEmail . '>',
+        'to' => [$toEmail],
+        'subject' => $subject,
+        'html' => $htmlBody,
+    ]);
+
+    $ch = curl_init('https://api.resend.com/emails');
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Authorization: Bearer ' . $apiKey,
+        'Content-Type: application/json',
+    ]);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+    $response = curl_exec($ch);
+    $httpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($response === false || $httpCode < 200 || $httpCode >= 300) {
+        error_log('shipping-create: Resend failed HTTP ' . $httpCode . ' | ' . $response);
         return false;
     }
-
-    $smtpHost = 'mail.spacemail.com';
-    $smtpPort = (int)shipping_resolve_mail_setting('SMTP_PORT', '465');
-    $smtpSecure = shipping_resolve_mail_setting('SMTP_SECURE', \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS);
-
-    $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
-    try {
-        $mail->isSMTP();
-        $mail->Host = $smtpHost;
-        $mail->SMTPAuth = true;
-        $mail->Username = $fromEmail;
-        $mail->Password = $smtpPassword;
-        $mail->SMTPSecure = $smtpSecure;
-        $mail->Port = $smtpPort;
-        $mail->CharSet = 'UTF-8';
-
-        $mail->setFrom($fromEmail, 'OrvantaX Global Shipping');
-        $mail->addAddress($toEmail);
-        $mail->addReplyTo('support@orvantaxglobalshipping.com', 'OrvantaX Global Shipping Support');
-        $mail->isHTML(true);
-        $mail->Subject = $subject;
-        $mail->Body = $htmlBody;
-        $mail->AltBody = trim(preg_replace('/\s+/', ' ', strip_tags($htmlBody)));
-        return $mail->send();
-    } catch (\PHPMailer\PHPMailer\Exception $e) {
-        error_log('shipping-create: PHPMailer failed for to=' . $toEmail . ' from=' . $fromEmail . ' subject=' . $subject . ' err=' . $e->getMessage());
-        }
-    return false;
+    return true;
 }
 
 function shipping_build_customer_shipment_email_html(array $payload): string {
@@ -777,7 +738,7 @@ function shipping_build_customer_shipment_email_html(array $payload): string {
 <a href="' . htmlspecialchars($trackUrl) . '" style="display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:12px 20px;border-radius:6px;font-size:14px;font-weight:bold;margin-right:10px;">Track Shipment</a>
 <a href="' . htmlspecialchars($dashboardUrl) . '" style="display:inline-block;background:#fff;color:#1d4ed8;text-decoration:none;padding:12px 20px;border-radius:6px;font-size:14px;font-weight:bold;border:1px solid #1d4ed8;">Open Dashboard</a>
 </td></tr>
-<tr><td style="padding:0 40px 18px 40px;"><p style="margin:0;font-size:12px;line-height:1.6;color:#6b7280;">Need help? Contact support@orvantaxglobalshipping.com.</p></td></tr>
+<tr><td style="padding:0 40px 18px 40px;"><p style="margin:0;font-size:12px;line-height:1.6;color:#6b7280;">Need help? Contact support@veteranlogisticsgroup.us.</p></td></tr>
 <tr><td style="background:#f8fafc;border-top:1px solid #e5e7eb;padding:16px 24px;"><p style="margin:0;font-size:11px;line-height:1.5;color:#6b7280;">© 2026 OrvantaX Global Shipping. This is an automated shipment confirmation email.</p></td></tr>
 </table>
 </td></tr>
@@ -848,7 +809,7 @@ function shipping_build_customer_invoice_email_html(array $payload): string {
 <tr><td style="padding:0 40px 22px 40px;">
 <a href="' . htmlspecialchars($invoiceUrl) . '" style="display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;padding:12px 20px;border-radius:6px;font-size:14px;font-weight:bold;">View Invoice</a>
 </td></tr>
-<tr><td style="padding:0 40px 8px 40px;"><p style="margin:0;font-size:12px;line-height:1.6;color:#6b7280;">For billing questions, contact billing@orvantaxglobalshipping.com.</p></td></tr>
+<tr><td style="padding:0 40px 8px 40px;"><p style="margin:0;font-size:12px;line-height:1.6;color:#6b7280;">For billing questions, contact billing@veteranlogisticsgroup.us.</p></td></tr>
 <tr><td style="padding:0 40px 18px 40px;"><p style="margin:0;font-size:12px;line-height:1.6;color:#6b7280;">Blockchain miner/validator transaction fees may still apply separately at transfer time.</p></td></tr>
 <tr><td style="background:#f8fafc;border-top:1px solid #e5e7eb;padding:16px 24px;"><p style="margin:0;font-size:11px;line-height:1.5;color:#6b7280;">© 2026 OrvantaX Global Shipping. This is an automated invoice email.</p></td></tr>
 </table>
@@ -875,10 +836,10 @@ function shipping_send_customer_post_create_emails(array $shipmentData): void {
         'invoice_number' => $invoiceNumber
     ]));
 
-    if (!shipping_send_html_email($senderEmail, 'shipments@orvantaxglobalshipping.com', $shipmentSubject, $shipmentHtml)) {
+    if (!shipping_send_html_email($senderEmail, 'shipments@veteranlogisticsgroup.us', $shipmentSubject, $shipmentHtml)) {
         error_log('shipping-create: failed sending shipment confirmation email for tracking ' . $trackingNumber . ' recipient=' . $senderEmail);
     }
-    if (!shipping_send_html_email($senderEmail, 'billing@orvantaxglobalshipping.com', $invoiceSubject, $invoiceHtml)) {
+    if (!shipping_send_html_email($senderEmail, 'billing@veteranlogisticsgroup.us', $invoiceSubject, $invoiceHtml)) {
         error_log('shipping-create: failed sending invoice email for tracking ' . $trackingNumber . ' recipient=' . $senderEmail);
     }
 }

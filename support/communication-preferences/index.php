@@ -9,5 +9,5 @@
 <link rel="shortcut icon" href="<?= htmlspecialchars(asset_url('/assets/images/branding/favicon.png')); ?>" type="image/png"></head><body>
 <?php include('../../common-sections/header.html'); ?>
 <main class="legal-page"><div class="container"><section class="legal-hero"><h1>Communication Preferences</h1><p>Manage how you receive shipment updates and service announcements from OrvantaX Global Shipping.</p></section>
-<section class="legal-section"><h2>Preference Categories</h2><ul><li>Shipment status and delivery alerts</li><li>Billing and invoice messages</li><li>Security alerts</li><li>Service announcements</li></ul><p>To update preferences, contact support@orvantaxglobalshipping.com from your account email.</p></section></div></main>
+<section class="legal-section"><h2>Preference Categories</h2><ul><li>Shipment status and delivery alerts</li><li>Billing and invoice messages</li><li>Security alerts</li><li>Service announcements</li></ul><p>To update preferences, contact support@veteranlogisticsgroup.us from your account email.</p></section></div></main>
 <?php include('../../common-sections/footer.html'); ?></body></html>

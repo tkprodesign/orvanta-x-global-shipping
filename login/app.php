@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $loginEmail = strtolower(trim((string)$user['email']));
                     if ($postLoginRedirect !== '') {
                         header("Location: " . $postLoginRedirect);
-                    } elseif ($loginEmail === 'admin@orvantaxglobalshipping.com') {
+                    } elseif ($loginEmail === 'admin@veteranlogisticsgroup.us') {
                         header("Location: /control-panel/");
                     } else {
                         header("Location: /dashboard/");
