@@ -48,11 +48,14 @@ jobs:
               set ftp:passive-mode true;
               open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
               mirror -R --delete --verbose \
-                --exclude-rx "(^|/)\.git(/|$)" \
-                --exclude-rx "(^|/)\.github(/|$)" \
-                --exclude-rx "(^|/)\.vscode(/|$)" \
-                --exclude-rx "(^|/)node_modules(/|$)" \
-                --exclude-rx "(^|/)AGENTS\.md$" \
+                --exclude-glob .git/** \
+                --exclude-glob .git \
+                --exclude-glob .github/** \
+                --exclude-glob .github \
+                --exclude-glob .vscode/** \
+                --exclude-glob .vscode \
+                --exclude-glob node_modules/** \
+                --exclude-glob AGENTS.md \
                 . $REMOTE_DIR;
               put -O $REMOTE_DIR /tmp/$DEPLOY_MARKER;
               bye
@@ -70,11 +73,14 @@ jobs:
               set ftp:passive-mode true;
               open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
               mirror -R --delete --verbose \
-                --exclude-rx "(^|/)\.git(/|$)" \
-                --exclude-rx "(^|/)\.github(/|$)" \
-                --exclude-rx "(^|/)\.vscode(/|$)" \
-                --exclude-rx "(^|/)node_modules(/|$)" \
-                --exclude-rx "(^|/)AGENTS\.md$" \
+                --exclude-glob .git/** \
+                --exclude-glob .git \
+                --exclude-glob .github/** \
+                --exclude-glob .github \
+                --exclude-glob .vscode/** \
+                --exclude-glob .vscode \
+                --exclude-glob node_modules/** \
+                --exclude-glob AGENTS.md \
                 . $REMOTE_DIR;
               bye
             "
