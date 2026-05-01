@@ -151,7 +151,7 @@ if ($step === 5 && !empty($created_shipment) && is_array($created_shipment)) {
     <title><?= htmlspecialchars($create_page_heading) ?> | OrvantaX Global Shipping</title>
     <link rel="stylesheet" href="/assets/stylesheets/main.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="/assets/stylesheets/shipping.css?v=<?php echo time(); ?>">
-    <link rel="shortcut icon" href="/assets/images/branding/mark-only.png?v=<?php echo time(); ?>" type="image/png">
+    <link rel="shortcut icon" href="/assets/images/branding/favicon.png?v=<?php echo time(); ?>" type="image/png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.3/dist/dotlottie-wc.js" type="module"></script>
     <script src="https://kit.fontawesome.com/79b279a6c9.js" crossorigin="anonymous"></script>
