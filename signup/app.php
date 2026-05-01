@@ -105,7 +105,7 @@ function signup_send_verification_email(string $toEmail, string $recipientName, 
 <tr>
 <td style="background-color:#0f172a;padding:16px 28px;">
 <a href="https://orvantaxglobalshipping.com/" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block;">
-<img src="https://orvantaxglobalshipping.com/assets/images/branding/logo-horizontal-dark.png" alt="OrvantaX Global Shipping" width="220" style="display:block;border:0;max-width:220px;height:auto;">
+<img src="https://orvantaxglobalshipping.com/assets/images/branding/logo.png" alt="OrvantaX Global Shipping" width="220" style="display:block;border:0;max-width:220px;height:auto;">
 </a>
 </td>
 </tr>

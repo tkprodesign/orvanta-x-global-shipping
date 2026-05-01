@@ -107,7 +107,7 @@ include('./app.php');
                 </ul>
             </div>
             <div class="visual">
-                <img src="<?= htmlspecialchars(asset_url('/assets/images/branding/logo-stacked-light.png')); ?>" alt="OrvantaX Global Shipping">
+                <img src="<?= htmlspecialchars(asset_url('/assets/images/branding/logo.png')); ?>" alt="OrvantaX Global Shipping">
             </div>
         </div>
     </div>

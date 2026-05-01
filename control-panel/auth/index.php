@@ -16,7 +16,7 @@
     <form method="post" action="">
         <div class="container">
             <div class="heading">
-                <img src="/assets/images/branding/logo-stacked-light.png" alt="OrvantaX Global Shipping Logo" class="logo">
+                <img src="/assets/images/branding/logo.png" alt="OrvantaX Global Shipping Logo" class="logo">
                 <h2>Control Panel Access</h2>
             </div>
             <?php if (!empty($error)): ?>

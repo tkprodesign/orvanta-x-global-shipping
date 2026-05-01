@@ -154,7 +154,7 @@ function quote_build_admin_email_html(
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="640" style="max-width:640px;background-color:#ffffff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;">
 <tr><td style="background-color:#0f172a;padding:16px 28px;">
 <a href="https://orvantaxglobalshipping.com/" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block;">
-<img src="https://orvantaxglobalshipping.com/assets/images/branding/logo-horizontal-dark.png" alt="OrvantaX Global Shipping" width="220" style="display:block;border:0;max-width:220px;height:auto;">
+<img src="https://orvantaxglobalshipping.com/assets/images/branding/logo.png" alt="OrvantaX Global Shipping" width="220" style="display:block;border:0;max-width:220px;height:auto;">
 </a>
 </td></tr>
 <tr><td style="padding:28px 40px 6px 40px;"><h1 style="margin:0;font-size:26px;line-height:1.3;color:#0f172a;">New service quote request</h1></td></tr>

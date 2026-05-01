@@ -13,7 +13,7 @@
                     
                     <tr>
                         <td align="center" style="padding: 40px 40px 20px 40px;">
-                            <img src="https://orvantaxglobalshipping.com/assets/images/branding/logo-stacked-light.png" alt="OrvantaX Global Shipping" width="60" style="display: block; border: 0;">
+                            <img src="https://orvantaxglobalshipping.com/assets/images/branding/logo.png" alt="OrvantaX Global Shipping" width="60" style="display: block; border: 0;">
                         </td>
                     </tr>
 
